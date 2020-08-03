@@ -297,7 +297,7 @@ public class DataBaseAppRed {
         return tmunicipios;
     }
 
-    // Metodo que se utilizara para regresar el objeto de tipo cct egun el id_CCCT
+    // Metodo que se utilizara para regresar el objeto de tipo cct segun el id_CCT
     public ArrayList<trdd_cct> getCCT(String cctSelect) {
         ArrayList<trdd_cct> trddcct = new ArrayList<>();
         Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_CCT + " WHERE " + COLUMN_NAME_ID_CCT+ " LIKE "+"'"+cctSelect+"'");
@@ -315,6 +315,13 @@ public class DataBaseAppRed {
         }
         close();
         return trddcct;
+    }
+
+    public int getNumerodeEncuestasPorMesyGrado( int id_mes , int id_grado)
+    {
+        Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_ENCUESTA + " WHERE " + COLUMN_NAME_ID_GRADO_ESCOLAR_ENCUESTA + " = " + id_grado + " AND " + COLUMN_NAME_ID_MES_ENCUESTA + " = " + id_mes);
+        // TODO Cambiar el 6 por variable que cambie deacuerdo al numero de indicadores.
+        return dataCursor.getCount()/6;
     }
 
     public Cursor getUltimoRegistro() {

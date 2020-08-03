@@ -105,10 +105,9 @@
 
     <TextView
         android:id="@+id/textView_NumerodeEncuestas_MesEncuesta"
-        android:layout_width="274dp"
-        android:layout_height="23dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="500dp"
-        android:text="Numero de encuestas aplicadas"
         android:textAlignment="center"
         android:textColor="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"

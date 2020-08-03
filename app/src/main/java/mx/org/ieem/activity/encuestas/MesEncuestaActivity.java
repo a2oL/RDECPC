@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,12 +32,15 @@ public class MesEncuestaActivity extends AppCompatActivity implements AdapterVie
     DataBaseAppRed dataSource;                                      // Contiene una instancia de la base de datos para poder hacer consultas.
     Cursor cursor_MesEncuesta;                                      // Contiene el result set de querys realizados por los metodos cargarMeses() o cargarGrados().
     SimpleCursorAdapter simpleCursorAdapter_MesEncuesta;            // Determina la manera en la que seran mostrados los datos del cursor_MesEncuesta.
+    TextView textViewNumerodeEncuestas;                             // Mostrara cuantas encuestas por mes y grado se han realizado.
+    int intNumerodeEncuestas = 0;                                       // Contiene el numero de encuestas realizadas.
 
     static trdd_mes trddmes_actual_final;                           // Contiene el mes que fue elegido por el usuario.
     static trdd_grado_escolar trddgradoescolar_actual_final;        // Contiene el grado seleccionado por el usuario.
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mes_encuesta);
 
@@ -46,11 +50,14 @@ public class MesEncuestaActivity extends AppCompatActivity implements AdapterVie
         btnRegresar = (Button)findViewById(R.id.button_Atras_MesEncuesta);
         spinnerMeses = (Spinner) findViewById(R.id.spinner_Meses_MesEncuesta);
         spinnerGrados = (Spinner) findViewById(R.id.spinner_Grado_MesEncuesta);
+        textViewNumerodeEncuestas = (TextView)findViewById(R.id.textView_NumerodeEncuestas_MesEncuesta);
         intentPreguntas = new Intent(this, PreguntasEncuestaActivity.class);
         intentLogout = new Intent(this, MainActivity.class);
         intentRegresar = new Intent(this, InfoEncuestaActivity.class);
         dataSource = new DataBaseAppRed(getBaseContext());
+        spinnerMeses.setOnItemSelectedListener(this);
         spinnerMeses.setAdapter(cargarMeses());
+        spinnerGrados.setOnItemSelectedListener(this);
         spinnerGrados.setAdapter(cargarGrados());
         // Inicializacion de las variables (BOTTOM)
 
@@ -58,10 +65,6 @@ public class MesEncuestaActivity extends AppCompatActivity implements AdapterVie
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cursor_MesEncuesta = (Cursor)spinnerMeses.getSelectedItem();
-                trddmes_actual_final = new trdd_mes(cursor_MesEncuesta.getInt(cursor_MesEncuesta.getColumnIndexOrThrow("_id")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("nombre")));
-                cursor_MesEncuesta = (Cursor) spinnerGrados.getSelectedItem();
-                trddgradoescolar_actual_final = new trdd_grado_escolar(cursor_MesEncuesta.getInt(cursor_MesEncuesta.getColumnIndexOrThrow("_id")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("nombre")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("siglas")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("grado")));
                 startActivity(intentPreguntas);
             }
         });
@@ -85,6 +88,12 @@ public class MesEncuestaActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // TODO Aqui ira la consulta de encuestas por mes y grado
+        cursor_MesEncuesta = (Cursor)spinnerMeses.getSelectedItem();
+        trddmes_actual_final = new trdd_mes(cursor_MesEncuesta.getInt(cursor_MesEncuesta.getColumnIndexOrThrow("_id")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("nombre")));
+        cursor_MesEncuesta = (Cursor) spinnerGrados.getSelectedItem();
+        trddgradoescolar_actual_final = new trdd_grado_escolar(cursor_MesEncuesta.getInt(cursor_MesEncuesta.getColumnIndexOrThrow("_id")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("nombre")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("siglas")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("grado")));
+
+        textViewNumerodeEncuestas.setText("Se aplicaron " + dataSource.getNumerodeEncuestasPorMesyGrado(trddmes_actual_final.getId_mes(),trddgradoescolar_actual_final.getId_grado_escolar()) + " en el mes de " + trddmes_actual_final.getNombre() + " para el grado " + trddgradoescolar_actual_final.getNombre());
     }
 
     @Override
