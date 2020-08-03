@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subtitle_login">Para ingresar digita tu clave de usuario y contraseña y pulsa "Iniciar"</string>
+    <string name="name_login">Usuario</string>
+    <string name="pass_login">Contraseña</string>
+    <string name="button_iniciar">Iniciar</string>
+    <string name="Forget_pass">Olvide mi usuario y contraseña</string>
+    <string name="button_Pulsa">Pulsa aquí</string>
+    <string name="button_facebook">IEEM@_MX</string>
+    <string name="button_twitter">IEEM@_MX</string>
+    <string name="button_instagram">ieem_mx</string>
+    <string name="button_youtube"> IEEM Oficial</string>
+</resources>

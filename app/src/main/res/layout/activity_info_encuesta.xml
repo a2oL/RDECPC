@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/fondo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/button_Siguiente_InfoEncuesta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="760dp"
+        android:background="@drawable/ic_btn_inicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_Logout_InfoEncuesta"
+        android:layout_width="58dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ic_btn_home"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_Encuesta_InfoEncuesta"
+        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView_InfoEncuesta"
+        android:layout_width="556dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Presentación\n\n
+Por educación Cívica se entiende el aprendizaje de las actitudes, valores y conocimientos necesarios para el ejercicio de la ciudadanía en una democracia. Se concibe como un proceso deliberado de formación de competencias para que la niñez y juventud desempeñe su ciudadanía futura de forma integral.\n\n
+Los indicadores para evaluar la formación cívica que reciben las niñas, niños y adolescentes en sus hogares y en las escuelas son amplios y por lo general, pueden observarse en su desempeño cotidiano: conviviendo de forma armónica con sus semejantes, asumiendo compromisos con su desarrollo personal, familiar y escolar, demostrando sus valores en general.\n\n
+Mediante la Encuesta Infantil y Juvenil del Mes se ofrece una forma sencilla de evaluar la educación cívica y Participación Ciudadana. El objetivo es contar con indicadores básicos que nos permitan identificar algunas áreas de oportunidad para reforzar su formación cívica.\n\n
+"
+                android:textAlignment="gravity" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Indicadores que mide la encuesta"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/tabla"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Caracteristicas de la encuesta"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.	La encuesta consta de 6 preguntas, las cuales cuentan con una opción de respuesta correcta y dos incorrectas.\n
+2.	Las preguntas de la 2 a la 6 atienden a los 5 indicadores que serán medidos cada mes.\n
+3.	Solamente se podrá seleccionar una opción de respuesta por pregunta.\n
+4.	Todas las preguntas requieren respuesta.\n
+5.	No se podrá enviar el cuestionario hasta que todas las preguntas tengan una respuesta.\n
+6.	Al pulsar una respuesta aparecerá un mensaje de confirmación “?Estas seguro/a de tu respuesta?” con las opciones “Si” o “Cambiar”.\n
+7.	Si la respuesta seleccionada y confirmada es incorrecta, como retroalimentación inmediata, aparecerá un mensaje indicando la respuesta correcta.\n
+8.	No se podrá corregir la respuesta, con la finalidad de contar con datos que reflejen intención espontanea.\n
+9.	Las encuestas completas se almacenarán en bases de datos asociadas a la clave CCT de la escuela.\n
+"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView_Encuesta_InfoEncuesta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="124dp"
+        app:layout_constraintEnd_toStartOf="@+id/button_Regresar_InfoEncuesta"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_logo_encuesta_infantil" />
+
+    <Button
+        android:id="@+id/button_Regresar_InfoEncuesta"
+        android:layout_width="58dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_btn_flecha_atras"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

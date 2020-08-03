@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_indicador">
+        <item>Por Indicador</item>
+    </string-array>
+    <string-array name="array_sexo">
+        <item>Por Sexo</item>
+    </string-array>
+    <string-array name="array_grado">
+        <item>Por Grado</item>
+    </string-array>
+    <string-array name="array_nivel">
+        <item>Por Nivel</item>
+    </string-array>
+    <string-array name="array_reactivo">
+        <item>Reactivo</item>
+    </string-array>
+    <string-array name="array_ciclo">
+        <item>Ciclo Escolar</item>
+    </string-array>
+</resources>

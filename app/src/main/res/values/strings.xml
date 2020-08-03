@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Red Digital de Educacion Civica y Participacion Ciudadana</string>
+    <string name="text_offline">Modo Offline</string>
+    <string name="button_logout">Logout</string>
+    <string name="button_enviar">Enviar</string>
+    <string name="radio_1">Respuesta 1</string>
+    <string name="radio_2">Respuesta 2</string>
+    <string name="radio_3">Respuesta 3</string>
+    <string name="radio_si">Si</string>
+    <string name="radio_no">No</string>
+    <string name="button_siguiente">Siguiente</string>
+    <string-array name="questions">
+        <item>1. ¿Pregunta1?</item>
+        <item>2. ¿Pregunta2?</item>
+        <item>3. ¿Pregunta3?</item>
+        <item>4. ¿Pregunta4?</item>
+        <item>5. ¿Pregunta5?</item>
+    </string-array>
+</resources>

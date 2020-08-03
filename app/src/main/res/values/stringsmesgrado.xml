@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="mes_encuesta_aplicadas">Encuestas aplicadas</string>
+    <string name="mes_encuesta_grado">2. Selecciona el grado escolar del grupo a encuestar</string>
+    <string name="mes_encuesta_mes">1. Seleccional el Mes que corresponda</string>
+    <string name="button_iniciar_encuesta">Iniciar Encuesta</string>
+
+</resources>

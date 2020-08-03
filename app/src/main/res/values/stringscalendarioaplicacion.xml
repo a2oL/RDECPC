@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_anios">
+        <item>2020</item>
+        <item>2019</item>
+        <item>2018</item>
+        <item>2017</item>
+        <item>2016</item>
+    </string-array>
+    <string-array name="array_ejercicio">
+        <item>Padre de familia o tutores</item>
+        <item>Docentes</item>
+        <item>Directivos/Admnistrativos</item>
+        <item>Otros</item>
+    </string-array>
+    <string-array name="array_gradoss">
+        <item>1ero de Primaria</item>
+        <item>2do de Primaria</item>
+        <item>3ero de Primaria</item>
+        <item>1ero de Secundaria</item>
+    </string-array>
+</resources>

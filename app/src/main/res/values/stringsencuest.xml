@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_encuesta">Encuesta</string>
+    <string name="button_registro">Registro</string>
+    <string name="text_requiere_internet">Requiere conexion a internet</string>
+    <string name="text_to_load">27 Encuestas aplicadas listas para ser enviadas</string>
+</resources>

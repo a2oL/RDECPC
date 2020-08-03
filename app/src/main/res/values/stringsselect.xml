@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_select">Te damos la bienvenida</string>
+    <string name="subtitle_select">Red digital de Educacion Civica y Participacion Ciudadana</string>
+    <string name="escuela_select">Escuela: </string>
+    <string name="cct_select">Con clave del CCT: </string>
+    <string name="municipio_select">del municipo de: </string>
+    <string name="button_encuesta">Encuesta Infantil y Juvenil del mes</string>
+    <string name="button_ciudad">Ciudadanometro</string>
+    <string name="button_eventos">Eventos y concursos vigentes</string>
+    <string name="content_encuesta">Aplica la encuesta a tus alumnas y alumnos para medir la cultura civica
+    de las escuelas que integran la Red y observe los resultaods por mes o periodo</string>
+    <string name="content_encuesta2">Consulta el protocolo de aplicacion</string>
+    <string name="button_encuesta2">Mediciones de la Cultura Civica de la Red</string>
+    <string name="text_ingresar">Ingresar a: </string>
+    <string-array name="array_select">
+        <item>Encuestas</item>
+        <item>Ciudadanometro</item>
+    </string-array>
+
+</resources>
