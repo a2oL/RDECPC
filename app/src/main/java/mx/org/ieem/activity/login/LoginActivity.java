@@ -12,10 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+
 import mx.org.ieem.R;
 import mx.org.ieem.activity.main.SelectActivity;
 import mx.org.ieem.RESTful.AsyncLogin;
+import mx.org.ieem.data.sqllite.CargarBD;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -58,7 +62,8 @@ public class LoginActivity extends AppCompatActivity {
                     as.get(6000, TimeUnit.MILLISECONDS);
                     if (bolLogeado)
                       { // Si el usuario fue encontrado navega a SelectActivity (TOP)
-                          Toast.makeText(getApplicationContext(), "Bienvenido!!!", Toast.LENGTH_SHORT).show();
+                          //TODO Aqui ira la parte donde se modifican los archivos de texto.
+                          CargarBD  caBD = new CargarBD(getApplicationContext());
                           startActivity(intentUsuarioEncontrado);
                       } // Si el usuario fue encontrado navega a SelectActivity (BOTTOM)
                     else
@@ -74,6 +79,9 @@ public class LoginActivity extends AppCompatActivity {
                 { // Exception lanzada de la anulacion del AsyncLogin o cuando el hilo esta esperando,durmiendo u ocupado o cuando se agota el tiempo de espera(TOP)
                     e.printStackTrace();
                 } // Exception lanzada de la anulacion del AsyncLogin o cuando el hilo esta esperando,durmiendo u ocupado o cuando se agota el tiempo de espera(BOTTOM)
+                catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

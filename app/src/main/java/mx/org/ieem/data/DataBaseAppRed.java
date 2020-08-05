@@ -28,7 +28,7 @@ public class DataBaseAppRed {
     /** --------------------------------- Nombre de Base de Datos -------------------------------------**/
     private static final String DataBaseName = "DPCDataBase";
     /** --------------------------------- Version de Base de Datos ---------------------------------**/
-    private static final int version = 20;
+    private static final int version = 21;
     /** --------------------------------- Tablas y Campos ---------------------------------**/
     private static final String TABLE_NAME = "tmunicipio";
     private static final String COLUMN_NAME_ID = "id_municipio";
@@ -224,7 +224,7 @@ public class DataBaseAppRed {
             "CONSTRAINT trdd_enc_cct_fk FOREIGN KEY (id_nivel_educativo, id_grado_escolar) REFERENCES trdd_nied_gres (id_nivel_educativo, id_grado_escolar));";
 
     /** --------------------------------- Prellenado de bd ----------------------------------**/
-    private static final String CInsertDataMunicipio = "INSERT INTO tmunicipio (id_municipio, nombre) VALUES (1, 'TOLUCA');";
+    //private static final String CInsertDataMunicipio = "INSERT INTO tmunicipio (id_municipio, nombre) VALUES (1, 'TOLUCA');";
     private static final String CInsertDataAnio = "INSERT INTO trdd_anio (id_anio) VALUES('2020');";
     private static final String CInsertDataMes = "INSERT INTO trdd_mes (id_mes, nombre) VALUES (1,'Enero'),(2,'Febrero'),(3,'Marzo'),(4,'Abril'),(5,'Mayo'),(6,'Junio'),(7,'Julio'),(8,'Agosto'),(9,'Septiembre'),(10,'Octubre'),(11,'Noviembre'),(12,'Diciembre');";
     private static final String CInsertDataAnioMes = "INSERT INTO trdd_anio_mes (id_anio, id_mes) VALUES ('2020', 1),('2020', 2),('2020', 3),('2020', 4),('2020', 5),('2020', 6),('2020', 7),('2020', 8),('2020', 9),('2020', 10),('2020', 11),('2020', 12);";
@@ -275,6 +275,16 @@ public class DataBaseAppRed {
         regreso = database.rawQuery(sql,null);
         return regreso;
     }
+
+    public void insertarTMunicipio(int id, String nombre){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID, (id));
+        values.put(COLUMN_NAME_NAME, (nombre));
+        database.insert(TABLE_NAME,null,values);
+        close();
+    }
+
 
     // Query utilizado para insertar los valores de las respuestas a las preguntas de la encuesta.
     public void InsertEncuesta(int insIdE, String insCct, String insAni, int insMes, int insNivE, int insGrE, int insInd, int insRes, int insEsR) {
@@ -413,7 +423,7 @@ public class DataBaseAppRed {
             db.execSQL(CCCTActual);
             db.execSQL(CEncuesta);
             //Llenado de la bd
-            db.execSQL(CInsertDataMunicipio);
+            //db.execSQL(CInsertDataMunicipio);
             db.execSQL(CInsertDataAnio);
             db.execSQL(CInsertDataMes);
             db.execSQL(CInsertDataAnioMes);
@@ -443,6 +453,7 @@ public class DataBaseAppRed {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ESTATUS_RESPUESTA);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PREGUNTA_RESPUESTA);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CCT);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CCT_ACTUAL);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ENCUESTA);
             onCreate(db);
         }
