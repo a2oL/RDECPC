@@ -1,0 +1,18 @@
+[
+    {
+        "id_cct": "1",
+        "nombre": "PRIMARIA AMADO NERVO",
+        "domicilio": "ESQUINA HERIBERTO HENRIQUEZ CON CEBORUCO",
+        "email": "gvaldez@ieem.org.mx",
+        "id_municipio": "1",
+        "id_nivel_educativo": "1"
+    },
+    {
+        "id_cct": "2",
+        "nombre": "SECUNDARIA TÉCNICA #49 SAMUEL RAMOS",
+        "domicilio": "PRIVADA DE TLALOC #100",
+        "email": "gvaldez@ieem.org.mx",
+        "id_municipio": "1",
+        "id_nivel_educativo": "2"
+    }
+]

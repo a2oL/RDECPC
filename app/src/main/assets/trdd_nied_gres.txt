@@ -1,0 +1,38 @@
+[
+    {
+        "id_nivel_educativo": "1",
+        "id_grado_escolar": "1"
+    },
+    {
+        "id_nivel_educativo": "1",
+        "id_grado_escolar": "2"
+    },
+    {
+        "id_nivel_educativo": "1",
+        "id_grado_escolar": "3"
+    },
+    {
+        "id_nivel_educativo": "1",
+        "id_grado_escolar": "4"
+    },
+    {
+        "id_nivel_educativo": "1",
+        "id_grado_escolar": "5"
+    },
+    {
+        "id_nivel_educativo": "1",
+        "id_grado_escolar": "6"
+    },
+    {
+        "id_nivel_educativo": "2",
+        "id_grado_escolar": "1"
+    },
+    {
+        "id_nivel_educativo": "2",
+        "id_grado_escolar": "2"
+    },
+    {
+        "id_nivel_educativo": "2",
+        "id_grado_escolar": "3"
+    }
+]

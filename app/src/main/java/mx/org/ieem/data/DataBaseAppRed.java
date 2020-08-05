@@ -28,7 +28,7 @@ public class DataBaseAppRed {
     /** --------------------------------- Nombre de Base de Datos -------------------------------------**/
     private static final String DataBaseName = "DPCDataBase";
     /** --------------------------------- Version de Base de Datos ---------------------------------**/
-    private static final int version = 16;
+    private static final int version = 20;
     /** --------------------------------- Tablas y Campos ---------------------------------**/
     private static final String TABLE_NAME = "tmunicipio";
     private static final String COLUMN_NAME_ID = "id_municipio";
@@ -88,6 +88,7 @@ public class DataBaseAppRed {
     private static final String COLUMN_NAME_RESPUESTA_PREGUNTA_RESPUESTA = "respuesta";
 
     private static final String TABLE_NAME_CCT = "trdd_cct";
+    private static final String TABLE_NAME_CCT_ACTUAL = "trdd_cct_actual";
     private static final String COLUMN_NAME_ID_CCT = "id_cct";
     private static final String COLUMN_NAME_NOMBRE_CCT = "nombre";
     private static final String COLUMN_NAME_DOMICILIO_CCT = "domicilio";
@@ -197,6 +198,17 @@ public class DataBaseAppRed {
             "CONSTRAINT trdd_cct_mun_fk FOREIGN KEY (id_municipio) REFERENCES tmunicipio (id_municipio)," +
             "CONSTRAINT trdd_cct_niv_edu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_nivel_educativo (id_nivel_educativo));";
 
+    private static final String CCCTActual = "CREATE TABLE " + TABLE_NAME_CCT_ACTUAL + " (" +
+            COLUMN_NAME_ID_CCT + " TEXT NOT NULL, " +
+            COLUMN_NAME_NOMBRE_CCT + " TEXT NOT NULL, " +
+            COLUMN_NAME_DOMICILIO_CCT + " TEXT NOT NULL, " +
+            COLUMN_NAME_EMAIL_CCT + " TEXT NOT NULL," +
+            COLUMN_NAME_ID_MUNICIPIO_CCT + " INTEGER NOT NULL," +
+            COLUMN_NAME_ID_NIVEL_EDUCATIVO_CCT + " INTEGER NOT NULL," +
+            "CONSTRAINT trdd_cct_pk PRIMARY KEY (id_cct)," +
+            "CONSTRAINT trdd_cct_mun_fk FOREIGN KEY (id_municipio) REFERENCES tmunicipio (id_municipio)," +
+            "CONSTRAINT trdd_cct_niv_edu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_nivel_educativo (id_nivel_educativo));";
+
     private static final String CEncuesta = "CREATE TABLE " + TABLE_NAME_ENCUESTA + " (" +
             COLUMN_NAME_ID_ENCUESTA_ENCUESTA + " INTEGER NOT NULL, " +
             COLUMN_NAME_ID_CCT_ENCUESTA + " TEXT NOT NULL, " +
@@ -264,9 +276,6 @@ public class DataBaseAppRed {
         return regreso;
     }
 
-
-
-
     // Query utilizado para insertar los valores de las respuestas a las preguntas de la encuesta.
     public void InsertEncuesta(int insIdE, String insCct, String insAni, int insMes, int insNivE, int insGrE, int insInd, int insRes, int insEsR) {
         open();
@@ -283,6 +292,7 @@ public class DataBaseAppRed {
         database.insert(TABLE_NAME_ENCUESTA,null,values);
         close();
     }
+
     public ArrayList<tmunicipio> getMunicipio() {
         ArrayList<tmunicipio> tmunicipios = new ArrayList<>();
         Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_NAME_ID+ " LIKE "+"'"+actual_final.getId_municipio()+"'");
@@ -322,6 +332,35 @@ public class DataBaseAppRed {
         Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_ENCUESTA + " WHERE " + COLUMN_NAME_ID_GRADO_ESCOLAR_ENCUESTA + " = " + id_grado + " AND " + COLUMN_NAME_ID_MES_ENCUESTA + " = " + id_mes);
         // TODO Cambiar el 6 por variable que cambie deacuerdo al numero de indicadores.
         return dataCursor.getCount()/6;
+    }
+
+    // Regresa el usuario que esta logueado actualmente.
+    public Cursor getUsuarioLogueado() {
+        Cursor dataCursor = querySQL("SELECT * FROM "+ TABLE_NAME_CCT_ACTUAL);
+        return dataCursor;
+    }
+
+    // Inserta un nuevo usuario logueado a la bd.
+    public void insertCctActual(String insCct, String insNom, String insDom, String insMail, int insMun, int insNivE)
+    {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_CCT, (insCct));
+        values.put(COLUMN_NAME_NOMBRE_CCT, (insNom));
+        values.put(COLUMN_NAME_DOMICILIO_CCT, (insDom));
+        values.put(COLUMN_NAME_EMAIL_CCT, (insMail));
+        values.put(COLUMN_NAME_ID_MUNICIPIO_CCT, (insMun));
+        values.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO_CCT, (insNivE));
+        database.insert(TABLE_NAME_CCT_ACTUAL,null,values);
+        close();
+    }
+
+    // Elimina al usuario logueado actualmente.
+    public void logoutUsario()
+    {
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_CCT_ACTUAL);
+        close();
     }
 
     public Cursor getUltimoRegistro() {
@@ -371,6 +410,7 @@ public class DataBaseAppRed {
             db.execSQL(CEstatusRespuesta);
             db.execSQL(CPreguntaRespuesta);
             db.execSQL(CCCT);
+            db.execSQL(CCCTActual);
             db.execSQL(CEncuesta);
             //Llenado de la bd
             db.execSQL(CInsertDataMunicipio);

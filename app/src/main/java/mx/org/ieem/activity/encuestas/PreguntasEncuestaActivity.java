@@ -16,11 +16,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import mx.org.ieem.activity.main.MainActivity;
 import mx.org.ieem.adapters.PreguntasEncuestaAdapter;
 import mx.org.ieem.R;
 import mx.org.ieem.data.DataBaseAppRed;
 
 
+import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 import static mx.org.ieem.activity.encuestas.MesEncuestaActivity.trddgradoescolar_actual_final;
 import static mx.org.ieem.activity.encuestas.MesEncuestaActivity.trddmes_actual_final;
 
@@ -37,6 +39,7 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
     PreguntasEncuestaAdapter customAdapter;                  // Contiene el adaptador para mostrar las preguntas y respuestas de la encuesta.
     Intent intentSalirEncuesta;                              // Intent que navegara desde PreguntasEncuestaActivity hacia MesEncuestaActivity.
     Intent intentSeguirEncuesta;                             // Intent que navegara desde PreguntasEncuestaActivity hacia PreguntasEncuestaActivity.
+    Intent intentLogout;
 
     String message = "";                                     // Mensaje que dira que pregunta no ha sido respondida.
     int ultimoRegistro = 0;                                  // Contiene el numero del ultimo registro de encuesta.
@@ -57,11 +60,23 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
         customAdapter = new PreguntasEncuestaAdapter(getApplicationContext());
         intentSalirEncuesta = new Intent(this, MesEncuestaActivity.class);
         intentSeguirEncuesta = new Intent(this, PreguntasEncuestaActivity.class);
+        intentLogout = new Intent(this, MainActivity.class);
+
         // Inicializacion de las variables (BOTTOM)
 
         cargarNumeroEncuestasRealizadas();
         cargarMesGradoPreguntas();
         cargarGuardar();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (!bolLogeado)
+        { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
+            startActivity(intentLogout);
+        } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
     }
 
     /**

@@ -1,0 +1,10 @@
+[
+    {
+        "id_estatus_respuesta": "1",
+        "nombre": "Correcta"
+    },
+    {
+        "id_estatus_respuesta": "2",
+        "nombre": "Incorrecta"
+    }
+]

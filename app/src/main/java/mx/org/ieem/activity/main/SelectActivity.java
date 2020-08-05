@@ -15,6 +15,7 @@ import mx.org.ieem.activity.ciudadanometro.CiudadanometroActivity;
 import mx.org.ieem.activity.encuestas.EncuestasActivity;
 import mx.org.ieem.data.DataBaseAppRed;
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
+import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 
 
 public class SelectActivity extends AppCompatActivity{
@@ -34,44 +35,56 @@ public class SelectActivity extends AppCompatActivity{
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
+            // Inicializacion de las variables (TOP).
+            btnEncuesta = (Button) findViewById(R.id.button_EntrarEncuesta_Select);
+            btnCiudadanometro = (Button) findViewById(R.id.button_EntrarCiudadanometro_Select);
+            btnLogout = (Button) findViewById(R.id.button_Logout_Select);
+            textViewNombreEscuela = (TextView) findViewById(R.id.textView_Escuela_Select);
+            textViewClaveEscuela = (TextView) findViewById(R.id.textView_Clave_Select);
+            textViewMunicipioEscuela = (TextView) findViewById(R.id.textView_Municipio_Select);
+            intentEncuestas = new Intent(this, EncuestasActivity.class);
+            intentCiudadanometro = new Intent(this, CiudadanometroActivity.class);
+            intentLogout = new Intent(this, MainActivity.class);
+            database = new DataBaseAppRed(getBaseContext());
+            // Inicializacion de las variables (BOTTOM).
 
-        // Inicializacion de las variables (TOP).
-        btnEncuesta = (Button)findViewById(R.id.button_EntrarEncuesta_Select);
-        btnCiudadanometro = (Button)findViewById(R.id.button_EntrarCiudadanometro_Select);
-        btnLogout = (Button)findViewById(R.id.button_Logout_Select);
-        textViewNombreEscuela = (TextView)findViewById(R.id.textView_Escuela_Select);
-        textViewClaveEscuela = (TextView)findViewById(R.id.textView_Clave_Select);
-        textViewMunicipioEscuela = (TextView)findViewById(R.id.textView_Municipio_Select);
-        intentEncuestas = new Intent(this, EncuestasActivity.class);
-        intentCiudadanometro = new Intent(this, CiudadanometroActivity.class);
-        intentLogout = new Intent(this, MainActivity.class);
-        database = new DataBaseAppRed(getBaseContext());
-        // Inicializacion de las variables (BOTTOM).
+            // Obtencion de datos del usuario actual (TOP).
+            textViewNombreEscuela.setText("Escuela: " + actual_final.getNombre());
+            textViewClaveEscuela.setText("Con clave de CCT: " + actual_final.getId_cct());
+            textViewMunicipioEscuela.setText("Del municipio de: " + database.getMunicipio().get(0).getNombre());
+            // Obtencion de datos del usuario actual (BOTTOM).
 
-        // Obtencion de datos del usuario actual (TOP).
-        textViewNombreEscuela.setText("Escuela: "+actual_final.getNombre());
-        textViewClaveEscuela.setText("Con clave de CCT: "+actual_final.getId_cct());
-        textViewMunicipioEscuela.setText("Del municipio de: "+database.getMunicipio().get(0).getNombre());
-        // Obtencion de datos del usuario actual (BOTTOM).
+            // Click listeners de los botones definidos (TOP).
+            btnEncuesta.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(intentEncuestas);
+                }
+            });
+            btnCiudadanometro.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(intentCiudadanometro);
+                }
+            });
+            btnLogout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bolLogeado = false;
+                    database.logoutUsario();
+                    startActivity(intentLogout);
+                }
+            });
+            // Click listeners de los botones definidos (BOTTOM).
+    }
 
-        // Click listeners de los botones definidos (TOP).
-        btnEncuesta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intentEncuestas);
-            }
-        });
-        btnCiudadanometro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { startActivity(intentCiudadanometro);
-            }
-        });
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intentLogout);
-            }
-        });
-        // Click listeners de los botones definidos (BOTTOM).
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (!bolLogeado)
+        { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
+            startActivity(intentLogout);
+        } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
     }
 }

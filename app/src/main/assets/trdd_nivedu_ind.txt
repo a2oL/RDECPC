@@ -1,0 +1,50 @@
+[
+    {
+        "id_nivel_educativo": "1",
+        "id_indicador": "1"
+    },
+    {
+        "id_nivel_educativo": "1",
+        "id_indicador": "2"
+    },
+    {
+        "id_nivel_educativo": "1",
+        "id_indicador": "3"
+    },
+    {
+        "id_nivel_educativo": "1",
+        "id_indicador": "4"
+    },
+    {
+        "id_nivel_educativo": "1",
+        "id_indicador": "5"
+    },
+    {
+        "id_nivel_educativo": "1",
+        "id_indicador": "6"
+    },
+    {
+        "id_nivel_educativo": "2",
+        "id_indicador": "1"
+    },
+    {
+        "id_nivel_educativo": "2",
+        "id_indicador": "2"
+    },
+    {
+        "id_nivel_educativo": "2",
+        "id_indicador": "3"
+    },
+    {
+        "id_nivel_educativo": "2",
+        "id_indicador": "4"
+    },
+    {
+        "id_nivel_educativo": "2",
+        "id_indicador": "5"
+    },
+    {
+        "id_nivel_educativo": "2",
+        "id_indicador": "6"
+    }
+]

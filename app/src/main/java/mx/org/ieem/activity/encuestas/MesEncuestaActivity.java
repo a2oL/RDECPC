@@ -19,6 +19,8 @@ import mx.org.ieem.data.DataBaseAppRed;
 import mx.org.ieem.data.sqllite.trdd_grado_escolar;
 import mx.org.ieem.data.sqllite.trdd_mes;
 
+import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
+
 public class MesEncuestaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     Button btnIniciar;                                              // Aloja el elemento de la UI (button_Iniciar_MesEncuesta) del layout activity_mes_encuesta que acciona el intentPreguntas.
@@ -33,7 +35,6 @@ public class MesEncuestaActivity extends AppCompatActivity implements AdapterVie
     Cursor cursor_MesEncuesta;                                      // Contiene el result set de querys realizados por los metodos cargarMeses() o cargarGrados().
     SimpleCursorAdapter simpleCursorAdapter_MesEncuesta;            // Determina la manera en la que seran mostrados los datos del cursor_MesEncuesta.
     TextView textViewNumerodeEncuestas;                             // Mostrara cuantas encuestas por mes y grado se han realizado.
-    int intNumerodeEncuestas = 0;                                       // Contiene el numero de encuestas realizadas.
 
     static trdd_mes trddmes_actual_final;                           // Contiene el mes que fue elegido por el usuario.
     static trdd_grado_escolar trddgradoescolar_actual_final;        // Contiene el grado seleccionado por el usuario.
@@ -72,6 +73,8 @@ public class MesEncuestaActivity extends AppCompatActivity implements AdapterVie
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bolLogeado = false;
+                dataSource.logoutUsario();
                 startActivity(intentLogout);
             }
         });
@@ -85,6 +88,15 @@ public class MesEncuestaActivity extends AppCompatActivity implements AdapterVie
         // Click listeners de los botones definidos (BOTTOM)
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (!bolLogeado)
+        { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
+            startActivity(intentLogout);
+        } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
+    }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // TODO Aqui ira la consulta de encuestas por mes y grado

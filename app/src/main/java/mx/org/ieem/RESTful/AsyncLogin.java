@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import mx.org.ieem.RESTful.JSONModels.UsuarioJM;
+import mx.org.ieem.data.DataBaseAppRed;
 import mx.org.ieem.data.sqllite.trdd_cct;
 
 import com.google.gson.Gson;
@@ -129,6 +130,8 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
               // TODO Cambiar por los datos recibidos del servidor.
               String response = "{\"id_cct\":\"1\",\"nombre\":\"PRIMARIA AMADO NERVO\",\"domicilio\":\"ESQUINA HERIBERTO HENRIQUEZ CON CEBORUCO\",\"email\":\"gvaldez@ieem.org.mx\",\"id_municipio\":1,\"id_nivel_educativo\":1}";
               actual_final = getCCTUserJSON(response);
+              DataBaseAppRed ds = new DataBaseAppRed(contextActual);                //Instancia de la base de datos.
+              ds.insertCctActual(actual_final.getId_cct(),actual_final.getNombre(),actual_final.getDomicilio(),actual_final.getEmail(),actual_final.getId_municipio(),actual_final.getId_nivel_educativo());
               id_cct_final = actual_final.getId_cct();;
               bolLogeado = true;
           } // Si el Codigo de respuesta es 200 (Si existe el usuario) (BOTTOM)

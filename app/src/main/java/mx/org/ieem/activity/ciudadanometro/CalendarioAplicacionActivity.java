@@ -14,13 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import mx.org.ieem.activity.main.MainActivity;
 import mx.org.ieem.R;
+import mx.org.ieem.data.DataBaseAppRed;
+import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CalendarioAplicacionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-
+public class CalendarioAplicacionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
+{
     Spinner spinnerAnios;                                                                           // Aloja el elemento de la UI (spinner_Anios_CalendarioAplicacion) del layout activity_calendario_aplicacion que contiene los anios de aplicacion.
     Spinner spinnerEjercicio;                                                                       // Aloja el elemento de la UI (spinner_Ejercicios_CalendarioAplicacion) del layout activity_calendario_aplicacion que contiene el publico objetivo.
     Spinner spinnerGrado;                                                                           // Aloja el elemento de la UI (spinner_Grado_CalendarioAplicacion) del layout activity_calendario_aplicacion que contiene los grados disponibles para padres o tutores.
@@ -32,6 +34,9 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
     Intent intentPrimera;                                                                           // Intent que navegara desde CalendarioAplicacionActivity hacie PrimeraCiudadanoActivity.
     Intent intentRegresar;                                                                          // Intent que navegara desde CalendarioAplicacionActivity hacie CiudadanometroActivity.
     Intent intentLogout;                                                                            // Intent que navegara desde CalendarioAplicacionActivity hacie MainActivity.
+
+    DataBaseAppRed database;                                                                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_cct.
+
 
     String[] strAuxiliar;                                                                           // Auxiliar para poder cargar los anios ejercicio y grados a los spinners
     List<String> listAuxiliar = new ArrayList<>();                                                  // Auxiliar para mostrar los datos del strAuxiliar.
@@ -63,6 +68,7 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
         intentPrimera = new Intent(this, PrimeraCiudadanoActivity.class);
         intentRegresar = new Intent(this, CiudadanometroActivity.class);
         intentLogout = new Intent(this, MainActivity.class);
+        database = new DataBaseAppRed(getBaseContext());
         // Inicializacion de las variables (BOTTOM)
 
         // Click listeners de los botones definidos (TOP)
@@ -83,6 +89,8 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bolLogeado = false;
+                database.logoutUsario();
                 startActivity(intentLogout);
             }
         });
@@ -117,6 +125,15 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
         return new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item, listAuxiliar);
     }
     // Adapatadores de los spinners (BOTTOM)
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!bolLogeado)
+        { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
+            startActivity(intentLogout);
+        } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)

@@ -1,0 +1,26 @@
+[
+    {
+        "id_indicador": "1",
+        "nombre": "Determina si es niño o niña"
+    },
+    {
+        "id_indicador": "2",
+        "nombre": "Identificación de los valores cívicos"
+    },
+    {
+        "id_indicador": "3",
+        "nombre": "Actitudes cívicas"
+    },
+    {
+        "id_indicador": "4",
+        "nombre": "Conocimiento del calendario cívico"
+    },
+    {
+        "id_indicador": "5",
+        "nombre": "Identificación de las instituciones"
+    },
+    {
+        "id_indicador": "6",
+        "nombre": "Identificación de los derechos de Niñas"
+    }
+]

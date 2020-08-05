@@ -16,6 +16,9 @@ import mx.org.ieem.R;
 import mx.org.ieem.activity.main.LoadPageActivity;
 import mx.org.ieem.activity.main.MainActivity;
 import mx.org.ieem.activity.main.SelectActivity;
+import mx.org.ieem.data.DataBaseAppRed;
+
+import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 
 
 public class CiudadanometroActivity extends AppCompatActivity
@@ -29,6 +32,8 @@ public class CiudadanometroActivity extends AppCompatActivity
     Intent intentEnviar;                            // Intent que navegara desde CiudadanometroActivity hacia LoadPageActivity.
     Intent intentLogout;                            // Intent que navegara desde CiudadanometroActivity hacia MainActivity.
     Intent intentRegresar;                          // Intent que navegara desde CiudadanometroActivity hacia  SelectActivity.
+    DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_cct.
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -45,6 +50,7 @@ public class CiudadanometroActivity extends AppCompatActivity
         intentEnviar = new Intent(this, LoadPageActivity.class);
         intentLogout = new Intent(this, MainActivity.class);
         intentRegresar = new Intent(this, SelectActivity.class);
+        database = new DataBaseAppRed(getBaseContext());
         // Inicializacion de las variables (BOTTOM)
 
         // Click listeners de los botones definidos (TOP)
@@ -68,6 +74,8 @@ public class CiudadanometroActivity extends AppCompatActivity
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bolLogeado = false;
+                database.logoutUsario();
                 startActivity(intentLogout);
             }
         });
@@ -81,4 +89,12 @@ public class CiudadanometroActivity extends AppCompatActivity
         // Click listeners de los botones definidos (BOTTOM)
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!bolLogeado)
+        { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
+            startActivity(intentLogout);
+        } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
+    }
 }
