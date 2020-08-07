@@ -1,4 +1,4 @@
-package mx.org.ieem.data.sqllite;
+package mx.org.ieem.data.sqllite.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

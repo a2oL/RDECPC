@@ -15,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import mx.org.ieem.activity.main.MainActivity;
 import mx.org.ieem.R;
-import mx.org.ieem.data.DataBaseAppRed;
-import mx.org.ieem.data.sqllite.trdd_grado_escolar;
-import mx.org.ieem.data.sqllite.trdd_mes;
+import mx.org.ieem.data.sqllite.DataBaseAppRed;
+import mx.org.ieem.data.sqllite.models.trdd_grado_escolar;
+import mx.org.ieem.data.sqllite.models.trdd_mes;
 
 import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 

@@ -1,0 +1,524 @@
+{
+    "trdd_parametros_version": [
+        {
+             "id_Parametros": "1",
+             "tabla": "tmunicipio",
+             "version": "version 1.0"
+         }
+     ]
+
+     ,"trdd_cct": [
+         {
+             "id_cct": "1",
+             "nombre": "PRIMARIA AMADO NERVO",
+             "domicilio": "ESQUINA HERIBERTO HENRIQUEZ CON CEBORUCO",
+             "email": "gvaldez@ieem.org.mx",
+             "id_municipio": "1",
+             "id_nivel_educativo": "1"
+         }
+     ]
+
+     ,"tmunicipio": [
+         {
+             "id_municipio": "1",
+             "nombre": "TOLUCA"
+         }
+     ]
+
+
+     ,"trdd_grado_escolar": [
+         {
+             "id_grado_escolar": "1",
+             "nombre": "Primero",
+             "siglas": "1ero",
+             "grado": "1º"
+         },
+         {
+             "id_grado_escolar": "2",
+             "nombre": "Segundo",
+             "siglas": "2do",
+             "grado": "2º"
+         },
+         {
+             "id_grado_escolar": "3",
+             "nombre": "Tercero",
+             "siglas": "3ero",
+             "grado": "3º"
+         },
+         {
+             "id_grado_escolar": "4",
+             "nombre": "Cuarto",
+             "siglas": "4to",
+             "grado": "4º"
+         },
+         {
+             "id_grado_escolar": "5",
+             "nombre": "Quinto",
+             "siglas": "5to",
+             "grado": "5º"
+         },
+         {
+             "id_grado_escolar": "6",
+             "nombre": "Sexto",
+             "siglas": "6to",
+             "grado": "6º"
+         }
+     ]
+
+     ,"trdd_estatus_respuesta": [
+         {
+             "id_estatus_respuesta": "1",
+             "nombre": "Correcta"
+         },
+         {
+             "id_estatus_respuesta": "2",
+             "nombre": "Incorrecta"
+         }
+     ]
+
+     ,"trdd_indicador": [
+         {
+             "id_indicador": "1",
+             "nombre": "Determina si es niño o niña"
+         },
+         {
+             "id_indicador": "2",
+             "nombre": "Identificación de los valores cívicos"
+         },
+         {
+             "id_indicador": "3",
+             "nombre": "Actitudes cívicas"
+         },
+         {
+             "id_indicador": "4",
+             "nombre": "Conocimiento del calendario cívico"
+         },
+         {
+             "id_indicador": "5",
+             "nombre": "Identificación de las instituciones"
+         },
+         {
+             "id_indicador": "6",
+             "nombre": "Identificación de los derechos de Niñas"
+         }
+     ]
+
+     ,"trdd_nivel_educativo": [
+         {
+             "id_nivel_educativo": "1",
+             "nombre": "Primaria"
+         },
+         {
+             "id_nivel_educativo": "2",
+             "nombre": "Secundaria"
+         }
+     ]
+
+     ,"trdd_pregunta_respuesta": [
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "1",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Primis/P1/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "1",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P1/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "1",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P1/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "2",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Primis/P2/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "2",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P2/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "2",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P2/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "3",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Primis/P3/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "3",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P3/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "3",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P3/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "4",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Primis/P4/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "4",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P4/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "4",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P4/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "5",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Primis/P5/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "5",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P5/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "5",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P5/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "6",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Primis/P6/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "6",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P6/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "6",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Primis/P6/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "1",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Secun/P1/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "1",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P1/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "1",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P1/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "2",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Secun/P2/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "2",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P2/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "2",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P2/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "3",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Secun/P3/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "3",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P3/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "3",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P3/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "4",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Secun/P4/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "4",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P4/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "4",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P4/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "5",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Secun/P5/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "5",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P5/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "5",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P5/R3: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "6",
+             "id_respuesta": "1",
+             "id_estatus_respuesta": "1",
+             "respuesta": "Secun/P6/R1: Correcta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "6",
+             "id_respuesta": "2",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P6/R2: Incorrecta"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "6",
+             "id_respuesta": "3",
+             "id_estatus_respuesta": "2",
+             "respuesta": "Secun/P6/R3: Incorrecta"
+         }
+     ]
+
+     ,"trdd_pregunta":
+     [
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "1",
+             "pregunta": "¿Primis - Eres niña o niño?"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "2",
+             "pregunta": "¿Primis - Pregunta 2?"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "3",
+             "pregunta": "¿Primis - Pregunta 3?"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "4",
+             "pregunta": "¿Primis - Pregunta 4?"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "5",
+             "pregunta": "¿Primis - Pregunta 5?"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "1",
+             "id_indicador": "6",
+             "pregunta": "¿Primis - Pregunta 6?"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "1",
+             "pregunta": "¿Secun - Eres niña o niño?"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "2",
+             "pregunta": "¿Secun - Pregunta 2?"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "3",
+             "pregunta": "¿Secun - Pregunta 3?"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "5",
+             "pregunta": "¿Secun - Pregunta 5?"
+         },
+         {
+             "id_anio": "2020",
+             "id_mes": "1",
+             "id_nivel_educativo": "2",
+             "id_indicador": "6",
+             "pregunta": "¿Secun - Pregunta 6?"
+         }
+     ]
+}

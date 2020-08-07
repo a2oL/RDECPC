@@ -16,7 +16,7 @@ import mx.org.ieem.R;
 import mx.org.ieem.activity.main.LoadPageActivity;
 import mx.org.ieem.activity.main.MainActivity;
 import mx.org.ieem.activity.main.SelectActivity;
-import mx.org.ieem.data.DataBaseAppRed;
+import mx.org.ieem.data.sqllite.DataBaseAppRed;
 
 import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 

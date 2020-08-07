@@ -6,10 +6,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import mx.org.ieem.RESTful.JSONModels.UsuarioJM;
-import mx.org.ieem.data.DataBaseAppRed;
-import mx.org.ieem.data.sqllite.trdd_cct;
+import mx.org.ieem.data.sqllite.DataBaseAppRed;
+import mx.org.ieem.data.sqllite.models.trdd_cct;
 
 import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -42,8 +46,9 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
 
     public static String id_cct_final = "";                 // En caso de que exista el usuario en el servidor llenara esta variable con el valor ddel id_cct.
     public static trdd_cct actual_final = null;             // Objeto de tipo trdd_cct que contendra los datos del usuario logueado.
+    DataBaseAppRed database;                                // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_cct.
 
-    public AsyncLogin(Context context) { this.contextActual = context;}
+    public AsyncLogin(Context context) { this.contextActual = context;database = new DataBaseAppRed(context);}
 
     @Override
     protected Boolean doInBackground(String... strings)
@@ -54,15 +59,14 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
           { // Intenta realizar una conexion con el servidor (TOP)
               sendPost(stringEmail,stringContrasenia);
           } // Intenta realizar una conexion con el servidor (BOTTOM)
-        catch (IOException | CertificateException | KeyStoreException | NoSuchAlgorithmException | KeyManagementException e)
+        catch (IOException | CertificateException | KeyStoreException | NoSuchAlgorithmException | KeyManagementException | JSONException e)
           { // Muestra cualquier error relacionado con la conexion (TOP)
               Log.e("Error",e.toString());
           } // Muestra cualquier error relacionado con la conexion (BOTTOM)
         return null;
     } // Hilo en segundo plano (BOTTOM)
 
-    public void sendPost(String id, String contrasenia) throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException
-    { // Metodo sendPOST() (TOP)
+    public void sendPost(String id, String contrasenia) throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, JSONException { // Metodo sendPOST() (TOP)
 
         UsuarioJM usuarioJM = new UsuarioJM(id,contrasenia);                                        // Contiene un objeto de tipo UsuarioJM creado a partir del email y contrasena proporcionado por el usuario.
         CertificateFactory cf = CertificateFactory.getInstance("X.509");                            // Se emplea para generar certificados.
@@ -127,9 +131,8 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         Log.e("CODE",String.valueOf(HttpResult));
         if (HttpResult == 200)
           { // Si el Codigo de respuesta es 200 (Si existe el usuario) (TOP)
-              // TODO Cambiar por los datos recibidos del servidor.
-              String response = "{\"id_cct\":\"1\",\"nombre\":\"PRIMARIA AMADO NERVO\",\"domicilio\":\"ESQUINA HERIBERTO HENRIQUEZ CON CEBORUCO\",\"email\":\"gvaldez@ieem.org.mx\",\"id_municipio\":1,\"id_nivel_educativo\":1}";
-              actual_final = getCCTUserJSON(response);
+              // TODO agregar metodo para editar login.txt por respuesta del servidor.
+              actual_final = cargarRespuestaCCTLogin();
               DataBaseAppRed ds = new DataBaseAppRed(contextActual);                //Instancia de la base de datos.
               ds.insertCctActual(actual_final.getId_cct(),actual_final.getNombre(),actual_final.getDomicilio(),actual_final.getEmail(),actual_final.getId_municipio(),actual_final.getId_nivel_educativo());
               id_cct_final = actual_final.getId_cct();;
@@ -153,9 +156,22 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
      * Método que covierte un string formato JSON a un objeto de tipo trd_dcct
      * @stringToJson se regresa.
      */
-    public trdd_cct getCCTUserJSON(String response) {
-        Gson gson = new Gson();
-        trdd_cct stringToJson = gson.fromJson(response, trdd_cct.class);
-        return stringToJson;
+
+    public trdd_cct cargarRespuestaCCTLogin() throws IOException, JSONException
+    {
+        BufferedReader r = new BufferedReader(new InputStreamReader(contextActual.getAssets().open("login.txt")));
+        StringBuilder total = new StringBuilder();
+        for (String line; (line = r.readLine()) != null; ) {
+            total.append(line).append('\n');
+        }
+        JSONObject respuestaLogin = new JSONObject(total.toString());
+        JSONObject trdd_cct = respuestaLogin.getJSONObject("trdd_cct");
+        String id_cct = trdd_cct.getString("id_cct");
+        String nombre = trdd_cct.getString("nombre");
+        String domicilio = trdd_cct.getString("domicilio");
+        String email = trdd_cct.getString("email");
+        int id_municipio = trdd_cct.getInt("id_municipio");
+        int id_nivel_educativo = trdd_cct.getInt("id_nivel_educativo");
+        return new trdd_cct(id_cct,nombre,domicilio,email,id_municipio,id_nivel_educativo);
     }
 }

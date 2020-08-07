@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                       } // Si el usuario fue encontrado navega a SelectActivity (BOTTOM)
                     else
                       { // Mensaje de Error de usuario no encontrado (TOP)
-                          dialogoUsuarioNoEncontrado.setTitle("Importante").setMessage("El usuario no existe").setCancelable(false).setPositiveButton("Confirmar", new DialogInterface.OnClickListener()
+                          dialogoUsuarioNoEncontrado.setTitle("Importante").setMessage("El usuario no existe").setCancelable(false).setPositiveButton("Aceptar", new DialogInterface.OnClickListener()
                           {
                               @Override
                               public void onClick(DialogInterface dialog, int which) {}

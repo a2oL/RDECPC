@@ -10,10 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import mx.org.ieem.R;
-import mx.org.ieem.activity.ciudadanometro.CalendarioAplicacionActivity;
 import mx.org.ieem.activity.ciudadanometro.CiudadanometroActivity;
 import mx.org.ieem.activity.encuestas.EncuestasActivity;
-import mx.org.ieem.data.DataBaseAppRed;
+import mx.org.ieem.data.sqllite.DataBaseAppRed;
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
 import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 

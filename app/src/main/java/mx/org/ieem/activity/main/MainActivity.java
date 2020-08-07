@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,8 +16,8 @@ import mx.org.ieem.R;
 
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
 import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
-import mx.org.ieem.data.DataBaseAppRed;
-import mx.org.ieem.data.sqllite.trdd_cct;
+import mx.org.ieem.data.sqllite.DataBaseAppRed;
+import mx.org.ieem.data.sqllite.models.trdd_cct;
 
 
 public class MainActivity extends AppCompatActivity {

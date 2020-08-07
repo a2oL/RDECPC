@@ -1,0 +1,34 @@
+{
+    "trdd_parametros_version": [
+        {
+            "id_Parametros": "1",
+             "tabla": "trdd_grado_escolar",
+             "version": "version 1.0"
+         },
+         {
+             "id_Parametros": "2",
+             "tabla": "trdd_pregunta",
+             "version": "version 1.0"
+         },
+         {
+             "id_Parametros": "3",
+             "tabla": "trdd_estatus_respuesta",
+             "version": "version 1.0"
+         },
+         {
+             "id_Parametros": "4",
+             "tabla": "trdd_pregunta_respuesta",
+             "version": "version 1.0"
+         }
+     ]
+
+     ,"trdd_cct":
+     {
+         "id_cct": "1",
+         "nombre": "PRIMARIA AMADO NERVO",
+         "domicilio": "ESQUINA HERIBERTO HENRIQUEZ CON CEBORUCO",
+         "email": "gvaldez@ieem.org.mx",
+         "id_municipio": "1",
+         "id_nivel_educativo": "1"
+     }
+}

@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 
 import mx.org.ieem.R;
-import mx.org.ieem.data.DataBaseAppRed;
+import mx.org.ieem.data.sqllite.DataBaseAppRed;
 
 import static mx.org.ieem.R.layout.list_preguntas_encuesta;
 
