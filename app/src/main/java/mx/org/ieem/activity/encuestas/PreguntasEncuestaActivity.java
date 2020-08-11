@@ -156,8 +156,8 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
                                   Integer.parseInt(PreguntasEncuestaAdapter.selectedEstatus.get(i))
                               );
                          }//Inserta las respuestas en trdd_encuestas (BOTTOM)
-                      dialogo2.setTitle("Importante").setMessage("Tus respuestas fueron Guardadas!!!\n\n");
-                      dialogo2.setPositiveButton("Salir", new DialogInterface.OnClickListener() {
+                      dialogo2.setTitle("Importante").setMessage("Tus respuestas fueron Guardadas!!!\n\nRegresa la tableta al encargado.");
+                      dialogo2.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             startActivity(intentSalirEncuesta);
