@@ -144,7 +144,9 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
                          {//Inserta las respuestas en trdd_encuestas (TOP)
                               dataSource.InsertEncuesta
                               (
-                                  ultimoRegistro+1,id_cct_final,
+                                  id_cct_final,
+                                  "########00/00/00",
+                                  ultimoRegistro+1,
                                   "2020",
                                   trddmes_actual_final.getId_mes(),
                                   actual_final.getId_nivel_educativo(),

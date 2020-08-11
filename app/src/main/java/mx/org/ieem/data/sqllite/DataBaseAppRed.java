@@ -9,7 +9,19 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import mx.org.ieem.data.sqllite.models.tmunicipio;
+import mx.org.ieem.data.sqllite.models.trdd_anio;
+import mx.org.ieem.data.sqllite.models.trdd_anio_mes;
 import mx.org.ieem.data.sqllite.models.trdd_cct;
+import mx.org.ieem.data.sqllite.models.trdd_estatus_respuesta;
+import mx.org.ieem.data.sqllite.models.trdd_grado_escolar;
+import mx.org.ieem.data.sqllite.models.trdd_indicador;
+import mx.org.ieem.data.sqllite.models.trdd_mes;
+import mx.org.ieem.data.sqllite.models.trdd_nied_gres;
+import mx.org.ieem.data.sqllite.models.trdd_nivedu_ind;
+import mx.org.ieem.data.sqllite.models.trdd_nivel_educativo;
+import mx.org.ieem.data.sqllite.models.trdd_parametros_version;
+import mx.org.ieem.data.sqllite.models.trdd_pregunta;
+import mx.org.ieem.data.sqllite.models.trdd_pregunta_respuesta;
 
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
 import static mx.org.ieem.data.sqllite.constants.Constantes.*;
@@ -53,8 +65,8 @@ public class DataBaseAppRed
             "CONSTRAINT trdd_mes_pk PRIMARY KEY (id_mes));";
 
     public static final String CMesesAnios = "CREATE TABLE "+ TABLE_NAME_MES_ANIO + " (" +
-            COLUMN_NAME_ID_MES_ANIO + " INTEGER NOT NULL,"+
-            COLUMN_NAME_NAME_MES_ANIO +" TEXT," +
+            COLUMN_NAME_ID_MES_ANIO + " TEXT NOT NULL,"+
+            COLUMN_NAME_NAME_MES_ANIO +" INTEGER NOT NULL," +
             "CONSTRAINT trdd_anio_mes_pk PRIMARY KEY (id_anio, id_mes)," +
             "CONSTRAINT trdd_anio_fk FOREIGN KEY (id_anio) REFERENCES trdd_anio (id_anio)," +
             "CONSTRAINT trdd_mes_fk FOREIGN KEY (id_mes) REFERENCES trdd_mes (id_mes));";
@@ -75,8 +87,8 @@ public class DataBaseAppRed
             COLUMN_NAME_NE_NIED_GRES + " INTEGER NOT NULL, " +
             COLUMN_NAME_GE_NIED_GRES + " INTEGER NOT NULL," +
             "CONSTRAINT trdd_nege_pk PRIMARY KEY (id_nivel_educativo, id_grado_escolar)," +
-            "CONSTRAINT trpd_nege_nivedu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_nivel_educativo (id_nivel_educativo)," +
-            "CONSTRAINT trpd_nege_graesc_fk FOREIGN KEY (id_grado_escolar) REFERENCES trdd_grado_escolar (id_grado_escolar));";
+            "CONSTRAINT trdd_nege_nivedu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_nivel_educativo (id_nivel_educativo)," +
+            "CONSTRAINT trdd_nege_graesc_fk FOREIGN KEY (id_grado_escolar) REFERENCES trdd_grado_escolar (id_grado_escolar));";
 
     public static final String CIndicador = "CREATE TABLE " + TABLE_NAME_INDICADOR + " (" +
             COLUMN_NAME_ID_INDICADOR + " INTEGER NOT NULL, " +
@@ -131,7 +143,8 @@ public class DataBaseAppRed
 
     public static final String CEncuesta = "CREATE TABLE " + TABLE_NAME_ENCUESTA + " (" +
             COLUMN_NAME_ID_CCT_ENCUESTA + " TEXT NOT NULL, " +
-            COLUMN_NAME_ID_ENCUESTA_ENCUESTA + " TEXT NOT NULL, " +
+            COLUMN_NAME_ID_RANDOM_ENCUESTA + " TEXT NOT NULL, " +
+            COLUMN_NAME_ID_ENCUESTA_ENCUESTA + " INTEGER NOT NULL, " +
             COLUMN_NAME_ID_ANIO_ENCUESTA + " TEXT NOT NULL, " +
             COLUMN_NAME_ID_MES_ENCUESTA + " INTEGER NOT NULL, " +
             COLUMN_NAME_ID_NIVEL_EDUCATIVO_ENCUESTA + " INTEGER NOT NULL," +
@@ -147,36 +160,9 @@ public class DataBaseAppRed
     public static final String CParametros = "CREATE TABLE " + TABLE_NAME_PARAMETROS + " (" +
             COLUMN_NAME_ID_PARAMETROS+ " INTEGER NOT NULL, " +
             COLUMN_NAME_TABLAS_PARAMETROS + " TEXT NOT NULL, " +
-            COLUMN_NAME_VERSION_PARAMETROS + " TEXT NOT NULL, " +
+            COLUMN_NAME_VERSION_PARAMETROS + " INTEGER NOT NULL, " +
             "CONSTRAINT trdd_parametros_version_pk PRIMARY KEY (id_Parametros));";
 
-
-    /** --------------------------------- Prellenado de bd ----------------------------------**/
-    //public static final String CInsertDataMunicipio = "INSERT INTO tmunicipio (id_municipio, nombre) VALUES (1, 'TOLUCA');";
-    public static final String CInsertDataAnio = "INSERT INTO trdd_anio (id_anio) VALUES('2020');";
-    public static final String CInsertDataMes = "INSERT INTO trdd_mes (id_mes, nombre) VALUES (1,'Enero'),(2,'Febrero'),(3,'Marzo'),(4,'Abril'),(5,'Mayo'),(6,'Junio'),(7,'Julio'),(8,'Agosto'),(9,'Septiembre'),(10,'Octubre'),(11,'Noviembre'),(12,'Diciembre');";
-    public static final String CInsertDataAnioMes = "INSERT INTO trdd_anio_mes (id_anio, id_mes) VALUES ('2020', 1),('2020', 2),('2020', 3),('2020', 4),('2020', 5),('2020', 6),('2020', 7),('2020', 8),('2020', 9),('2020', 10),('2020', 11),('2020', 12);";
-    public static final String CInsertDataNivelEducativo = "INSERT INTO trdd_nivel_educativo(id_nivel_educativo, nombre) VALUES(1,'Primaria'),(2,'Secundaria');";
-    public static final String CInsertDataGradoEscolar = "INSERT INTO trdd_grado_escolar (id_grado_escolar, nombre, siglas, grado) VALUES (1,'Primero', '1ero', '1º'),(2,'Segundo', '2do', '2º'),(3,'Tercero', '3ero', '3º'),(4,'Cuarto', '4to', '4º'),(5,'Quinto', '5to', '5º'),(6,'Sexto', '6to', '6º');";
-    public static final String CInsertDataNiedGres = "INSERT INTO trdd_nied_gres (id_nivel_educativo, id_grado_escolar) VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(2,1),(2,2),(2,3);";
-    public static final String CInsertDataIndicador = "INSERT INTO trdd_indicador (id_indicador, nombre) VALUES (1,'Determina si es niño o niña'),(2,'Identificación de los valores cívicos'),(3,'Actitudes cívicas'),(4,'Conocimiento del calendario cívico'),(5,'Identificación de las instituciones'),(6,'Identificación de los derechos de Niñas, Niños y Adolecentes (NNA)');";
-    public static final String CInsertDataNivEdu = "INSERT INTO trdd_nivedu_ind (id_nivel_educativo, id_indicador) VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(2,1),(2,2),(2,3),(2,4),(2,5),(2,6);";
-    public static final String CInsertDataPregunta = "INSERT INTO trdd_pregunta (id_anio, id_mes, id_nivel_educativo, id_indicador, pregunta) VALUES ('2020', 1, 1, 1, '¿Primis - Eres niña o niño?'),('2020', 1, 1, 2, '¿Primis - Pregunta 2?'),('2020', 1, 1, 3, '¿Primis - Pregunta 3?'),('2020', 1, 1, 4, '¿Primis - Pregunta 4?'),('2020', 1, 1, 5, '¿Primis - Pregunta 5?'),('2020', 1, 1, 6, '¿Primis - Pregunta 6?'),('2020', 1, 2, 1, '¿Secun - Eres niña o niño?'),('2020', 1, 2, 2, '¿Secun - Pregunta 2?'),('2020', 1, 2, 3, '¿Secun - Pregunta 3?'),('2020', 1, 2, 5, '¿Secun - Pregunta 5?'),('2020', 1, 2, 6, '¿Secun - Pregunta 6?');";
-    public static final String CInsertDataEstatusRespuesta = "INSERT INTO trdd_estatus_respuesta(id_estatus_respuesta, nombre) VALUES (1,'Correcta'),(2,'Incorrecta');";
-    public static final String CInsertDataPreguntaRespuesta = "INSERT INTO trdd_pregunta_respuesta (id_anio, id_mes, id_nivel_educativo, id_indicador, id_respuesta, id_estatus_respuesta, respuesta) VALUES " +
-            "('2020',1,1,1,1,1,'Primis/P1/R1: Correcta'),('2020',1,1,1,2,2,'Primis/P1/R2: Incorrecta'),('2020',1,1,1,3,2,'Primis/P1/R3: Incorrecta')," +
-            "('2020',1,1,2,1,1,'Primis/P2/R1: Correcta'),('2020',1,1,2,2,2,'Primis/P2/R2: Incorrecta'),('2020',1,1,2,3,2,'Primis/P2/R3: Incorrecta')," +
-            "('2020',1,1,3,1,1,'Primis/P3/R1: Correcta'),('2020',1,1,3,2,2,'Primis/P3/R2: Incorrecta'),('2020',1,1,3,3,2,'Primis/P3/R3: Incorrecta')," +
-            "('2020',1,1,4,1,1,'Primis/P4/R1: Correcta'),('2020',1,1,4,2,2,'Primis/P4/R2: Incorrecta'),('2020',1,1,4,3,2,'Primis/P4/R3: Incorrecta')," +
-            "('2020',1,1,5,1,1,'Primis/P5/R1: Correcta'),('2020',1,1,5,2,2,'Primis/P5/R2: Incorrecta'),('2020',1,1,5,3,2,'Primis/P5/R3: Incorrecta')," +
-            "('2020',1,1,6,1,1,'Primis/P6/R1: Correcta'),('2020',1,1,6,2,2,'Primis/P6/R2: Incorrecta'),('2020',1,1,6,3,2,'Primis/P6/R3: Incorrecta')," +
-            "('2020',1,2,1,1,1,'Secun/P1/R1: Correcta'),('2020',1,2,1,2,2,'Secun/P1/R2: Incorrecta'),('2020',1,2,1,3,2,'Secun/P1/R3: Incorrecta')," +
-            "('2020',1,2,2,1,1,'Secun/P2/R1: Correcta'),('2020',1,2,2,2,2,'Secun/P2/R2: Incorrecta'),('2020',1,2,2,3,2,'Secun/P2/R3: Incorrecta')," +
-            "('2020',1,2,3,1,1,'Secun/P3/R1: Correcta'),('2020',1,2,3,2,2,'Secun/P3/R2: Incorrecta'),('2020',1,2,3,3,2,'Secun/P3/R3: Incorrecta')," +
-            "('2020',1,2,4,1,1,'Secun/P4/R1: Correcta'),('2020',1,2,4,2,2,'Secun/P4/R2: Incorrecta'),('2020',1,2,4,3,2,'Secun/P4/R3: Incorrecta')," +
-            "('2020',1,2,5,1,1,'Secun/P5/R1: Correcta'),('2020',1,2,5,2,2,'Secun/P5/R2: Incorrecta'),('2020',1,2,5,3,2,'Secun/P5/R3: Incorrecta')," +
-            "('2020',1,2,6,1,1,'Secun/P6/R1: Correcta'),('2020',1,2,6,2,2,'Secun/P6/R2: Incorrecta'),('2020',1,2,6,3,2,'Secun/P6/R3: Incorrecta');";
-    public static final String CInsertDataCCT = "INSERT INTO trdd_cct (id_cct, nombre, domicilio, email, id_municipio, id_nivel_educativo) VALUES(1, 'PRIMARIA AMADO NERVO', 'ESQUINA HERIBERTO HENRIQUEZ CON CEBORUCO','gvaldez@ieem.org.mx',1,1),(2, 'SECUNDARIA TÉCNICA #49 SAMUEL RAMOS', 'PRIVADA DE TLALOC #100','gvaldez@ieem.org.mx',1,2);";
 
 
     public Cursor querySQL(String sql) {
@@ -186,29 +172,23 @@ public class DataBaseAppRed
         return regreso;
     }
 
-    public void insertarTMunicipio(int id, String nombre){
-        open();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_NAME_ID_TMUNICIPIO, (id));
-        values.put(COLUMN_NAME_NAME_TMUNICIPIO, (nombre));
-        database.insert(TABLE_NAME_TMUNICIPIO,null,values);
-        close();
-    }
+
 
 
     // Query utilizado para insertar los valores de las respuestas a las preguntas de la encuesta.
-    public void InsertEncuesta(int insIdE, String insCct, String insAni, int insMes, int insNivE, int insGrE, int insInd, int insRes, int insEsR) {
+    public void InsertEncuesta(String insIdCct, String insIdRandom,int insIdEnc, String insIdAni, int insIdMes, int insIdNiE, int insIdGrE, int insIdInd, int insIdRes, int insIdEsR) {
         open();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NAME_ID_ENCUESTA_ENCUESTA, (insIdE));
-        values.put(COLUMN_NAME_ID_CCT_ENCUESTA, (insCct));
-        values.put(COLUMN_NAME_ID_ANIO_ENCUESTA, (insAni));
-        values.put(COLUMN_NAME_ID_MES_ENCUESTA, (insMes));
-        values.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO_ENCUESTA, (insNivE));
-        values.put(COLUMN_NAME_ID_GRADO_ESCOLAR_ENCUESTA, (insGrE));
-        values.put(COLUMN_NAME_ID_INDICADOR_ENCUESTA, (insInd));
-        values.put(COLUMN_NAME_ID_RESPUESTA_ENCUESTA, (insRes));
-        values.put(COLUMN_NAME_ID_ESTATUS_RESPUESTA_ENCUESTA, (insEsR));
+        values.put(COLUMN_NAME_ID_CCT_ENCUESTA, (insIdCct));
+        values.put(COLUMN_NAME_ID_RANDOM_ENCUESTA, (insIdRandom));
+        values.put(COLUMN_NAME_ID_ENCUESTA_ENCUESTA, (insIdEnc));
+        values.put(COLUMN_NAME_ID_ANIO_ENCUESTA, (insIdAni));
+        values.put(COLUMN_NAME_ID_MES_ENCUESTA, (insIdMes));
+        values.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO_ENCUESTA, (insIdNiE));
+        values.put(COLUMN_NAME_ID_GRADO_ESCOLAR_ENCUESTA, (insIdGrE));
+        values.put(COLUMN_NAME_ID_INDICADOR_ENCUESTA, (insIdInd));
+        values.put(COLUMN_NAME_ID_RESPUESTA_ENCUESTA, (insIdRes));
+        values.put(COLUMN_NAME_ID_ESTATUS_RESPUESTA_ENCUESTA, (insIdEsR));
         database.insert(TABLE_NAME_ENCUESTA,null,values);
         close();
     }
@@ -260,19 +240,224 @@ public class DataBaseAppRed
         return dataCursor;
     }
 
-    // Inserta un nuevo usuario logueado a la bd.
-    public void insertCctActual(String insCct, String insNom, String insDom, String insMail, int insMun, int insNivE)
+    public Cursor getVersionPorTabla(String nombreTabla){
+        Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_PARAMETROS + " WHERE tabla like '" + nombreTabla + "'");
+        return dataCursor;
+    }
+
+    // Inserta un nuevo usuario logueado a la bd. (TOP)
+    public void insertCctActual(trdd_cct actual)
     {
         open();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NAME_ID_CCT, (insCct));
-        values.put(COLUMN_NAME_NOMBRE_CCT, (insNom));
-        values.put(COLUMN_NAME_DOMICILIO_CCT, (insDom));
-        values.put(COLUMN_NAME_EMAIL_CCT, (insMail));
-        values.put(COLUMN_NAME_ID_MUNICIPIO_CCT, (insMun));
-        values.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO_CCT, (insNivE));
+        values.put(COLUMN_NAME_ID_CCT, (actual.getId_cct()));
+        values.put(COLUMN_NAME_NOMBRE_CCT, (actual.getNombre()));
+        values.put(COLUMN_NAME_DOMICILIO_CCT, (actual.getDomicilio()));
+        values.put(COLUMN_NAME_EMAIL_CCT, (actual.getEmail()));
+        values.put(COLUMN_NAME_ID_MUNICIPIO_CCT, (actual.getId_municipio()));
+        values.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO_CCT, (actual.getId_nivel_educativo()));
         database.insert(TABLE_NAME_CCT,null,values);
         close();
+    }
+
+    public void insertMunicipioActual(tmunicipio actual)
+    {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_TMUNICIPIO, (actual.getId()));
+        values.put(COLUMN_NAME_NAME_TMUNICIPIO, (actual.getNombre()));
+        database.insert(TABLE_NAME_TMUNICIPIO,null,values);
+        close();
+    }
+
+    public void insertNivelEducativoActual(trdd_nivel_educativo actual)
+    {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO, (actual.getId_nivel_educativo()));
+        values.put(COLUMN_NAME_NAME_NIVEL_EDUCATIVO, (actual.getNombre()));
+        database.insert(TABLE_NAME_NIVEL_EDUCATIVO,null,values);
+        close();
+    }
+
+    public void insertVersiondeTabla(trdd_parametros_version actual)
+    {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_PARAMETROS, (actual.getId_Parametros()));
+        values.put(COLUMN_NAME_TABLAS_PARAMETROS, (actual.getTabla()));
+        values.put(COLUMN_NAME_VERSION_PARAMETROS, (actual.getVersion()));
+        database.insert(TABLE_NAME_PARAMETROS,null,values);
+        close();
+    }
+    // Inserta un nuevo usuario logueado a la bd. (BOTTOM)
+
+    // Inserta nueva bd. (TOP)
+    public void insertAnios(trdd_anio anio){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_ANIOS, (anio.getId_anio()));
+        database.insert(TABLE_NAME_ANIOS,null,values);
+        close();
+    }
+
+    public void insertMeses(trdd_mes mes){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_MES, (mes.getId_mes()));
+        values.put(COLUMN_NAME_NAME_MES, (mes.getNombre()));
+        database.insert(TABLE_NAME_MES,null,values);
+        close();
+    }
+
+    public void insertAniosMeses(trdd_anio_mes anioMes){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_MES_ANIO, (anioMes.getId_anio()));
+        values.put(COLUMN_NAME_NAME_MES_ANIO, (anioMes.getId_mes()));
+        database.insert(TABLE_NAME_MES_ANIO,null,values);
+        close();
+    }
+
+    public void insertGradoEscolar(trdd_grado_escolar gradoEscolar){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_GRADO_ESCOLAR, (gradoEscolar.getId_grado_escolar()));
+        values.put(COLUMN_NAME_NAME_GRADO_ESCOLAR, (gradoEscolar.getNombre()));
+        values.put(COLUMN_NAME_SIGLAS_GRADO_ESCOLAR, (gradoEscolar.getSiglas()));
+        values.put(COLUMN_NAME_GRADO_GRADO_ESCOLAR, (gradoEscolar.getGrado()));
+        database.insert(TABLE_NAME_GRADO_ESCOLAR,null,values);
+        close();
+    }
+
+    public void insertNiedGres(trdd_nied_gres niedGres){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_NE_NIED_GRES, (niedGres.getId_nivel_educativo()));
+        values.put(COLUMN_NAME_GE_NIED_GRES, (niedGres.getId_grado_escolar()));
+        database.insert(TABLE_NAME_NIED_GRES,null,values);
+        close();
+    }
+
+    public void insertIndicador(trdd_indicador indicador){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_INDICADOR, (indicador.getId_indicador()));
+        values.put(COLUMN_NAME_NAME_INDICADOR, (indicador.getNombre()));
+        database.insert(TABLE_NAME_INDICADOR,null,values);
+        close();
+    }
+
+    public void insertNivelIndicador(trdd_nivedu_ind niveduIndicador){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_NE_NIV_IND, (niveduIndicador.getId_nivel_educativo()));
+        values.put(COLUMN_NAME_IN_NIV_IND, (niveduIndicador.getId_indicador()));
+        database.insert(TABLE_NAME_NIV_IND,null,values);
+        close();
+    }
+
+    public void insertPregunta(trdd_pregunta pregunta){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_ANIO_PREGUNTA, (pregunta.getId_anio()));
+        values.put(COLUMN_NAME_ID_MES_PREGUNTA, (pregunta.getId_mes()));
+        values.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO_PREGUNTA, (pregunta.getId_nivel_educativo()));
+        values.put(COLUMN_NAME_ID_INDICADOR_PREGUNTA, (pregunta.getId_indicador()));
+        values.put(COLUMN_NAME_PREGUNTA, (pregunta.getPregunta()));
+        database.insert(TABLE_NAME_PREGUNTA,null,values);
+        close();
+    }
+
+    public void insertEstatusRespuesta(trdd_estatus_respuesta estatusRespuesta){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_ESTATUS_RESPUESTA, (estatusRespuesta.getId_estatus_respuesta()));
+        values.put(COLUMN_NAME_NAME_ESTATUS_RESPUESTA, (estatusRespuesta.getNombre()));
+        database.insert(TABLE_NAME_ESTATUS_RESPUESTA,null,values);
+        close();
+    }
+
+    public void insertPreguntaRespuesta(trdd_pregunta_respuesta preguntaRespuesta){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_ANIO_PREGUNTA_RESPUESTA, (preguntaRespuesta.getId_anio()));
+        values.put(COLUMN_NAME_ID_MES_PREGUNTA_RESPUESTA, (preguntaRespuesta.getId_mes()));
+        values.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO_PREGUNTA_RESPUESTA, (preguntaRespuesta.getId_nivel_educativo()));
+        values.put(COLUMN_NAME_ID_INDICADOR_PREGUNTA_RESPUESTA, (preguntaRespuesta.getId_indicador()));
+        values.put(COLUMN_NAME_ID_RESPUESTA_PREGUNTA_RESPUESTA, (preguntaRespuesta.getId_respuesta()));
+        values.put(COLUMN_NAME_ID_ESTATUS_RESPUESTA_PREGUNTA_RESPUESTA, (preguntaRespuesta.getId_estatus_respuesta()));
+        values.put(COLUMN_NAME_RESPUESTA_PREGUNTA_RESPUESTA, (preguntaRespuesta.getRespuesta()));
+        database.insert(TABLE_NAME_PREGUNTA_RESPUESTA,null,values);
+        close();
+    }
+
+    public void deleteAnios(){
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_ANIOS);
+        close();
+    }
+
+    public void deleteMeses(){
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_MES);
+        close();
+    }
+
+    public void deleteAniosMeses(){
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_MES_ANIO);
+        close();
+    }
+
+    public void deleteGradoEscolar(){
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_GRADO_ESCOLAR);
+        close();
+    }
+
+    public void deleteNiedGres(){
+        open();
+        database.execSQL("DELETE FROM "+ TABLE_NAME_NIED_GRES);
+        close();
+    }
+
+    public void deleteIndicador(){
+        open();
+        database.execSQL("DELETE FROM " + TABLE_NAME_INDICADOR);
+        close();
+    }
+
+    public void deleteNivEduIndicador(){
+        open();
+        database.execSQL("DELETE FROM " + TABLE_NAME_NIV_IND);
+        close();
+    }
+
+    public void deletePreguntas(){
+        open();
+        database.execSQL("DELETE FROM " + TABLE_NAME_PREGUNTA);
+        close();
+    }
+
+    public void deleteEstatusRespuesta(){
+        open();
+        database.execSQL("DELETE FROM " + TABLE_NAME_ESTATUS_RESPUESTA);
+        close();
+    }
+
+    public void deletePreguntaRespuesta(){
+        open();
+        database.execSQL("DELETE FROM " + TABLE_NAME_PREGUNTA_RESPUESTA);
+        close();
+    }
+
+    // Inserta nueva bd. (BOTTOM)
+
+    public Cursor isVersionVacia()
+    {
+        Cursor dataCursor = querySQL("SELECT * FROM trdd_parametros_version");
+        return dataCursor;
     }
 
     // Elimina al usuario logueado actualmente.
@@ -280,11 +465,13 @@ public class DataBaseAppRed
     {
         open();
         database.execSQL("DELETE FROM "+TABLE_NAME_CCT);
+        database.execSQL("DELETE FROM "+TABLE_NAME_NIVEL_EDUCATIVO);
+        database.execSQL("DELETE FROM "+TABLE_NAME_TMUNICIPIO);
         close();
     }
 
     public Cursor getUltimoRegistro() {
-        Cursor dataCursor = querySQL("SELECT max(trdd_encuesta.id_Encuesta) FROM trdd_encuesta");
+        Cursor dataCursor = querySQL("SELECT MAX(id_encuesta) FROM trdd_encuesta");
         return dataCursor;
     }
 

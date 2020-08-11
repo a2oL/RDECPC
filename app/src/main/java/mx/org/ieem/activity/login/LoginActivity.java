@@ -15,9 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 
 import mx.org.ieem.R;
+import mx.org.ieem.activity.main.MainActivity;
 import mx.org.ieem.activity.main.SelectActivity;
 import mx.org.ieem.RESTful.AsyncLogin;
-import mx.org.ieem.data.sqllite.CargarBD;
+
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText editTextContrasenia;                           // Aloja el email escrito por el usuario del elemento (editText_Contrasenia_Login) del layout activity_login
     Intent intentContraseniaOlvidada;                       // Intent que navegara desde LoginActivity hacia RecovPassActivity.
     Intent intentUsuarioEncontrado;                         // Intent que navegara desde LoginActivity hacie SelectActivity.
+    Intent usuarioLogeado;                                  // Intent que navegara desde LoginActivity hacie MainActivity.
     AlertDialog.Builder dialogoUsuarioNoEncontrado;         // Dialogo de alerta de error de autenticacion
 
     @Override
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         dialogoUsuarioNoEncontrado = new AlertDialog.Builder(this);
         intentContraseniaOlvidada = new Intent(this, RecovPassActivity.class);
         intentUsuarioEncontrado = new Intent(this, SelectActivity.class);
+        usuarioLogeado = new Intent(this, MainActivity.class);
         // Inicializacion de las variables (BOTTOM)
 
         // Click listeners de los botones definidos (TOP)
@@ -62,8 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                     as.get(6000, TimeUnit.MILLISECONDS);
                     if (bolLogeado)
                       { // Si el usuario fue encontrado navega a SelectActivity (TOP)
-                          //TODO Aqui ira la parte donde se modifican los archivos de texto.
-                          CargarBD  caBD = new CargarBD(getApplicationContext());
                           startActivity(intentUsuarioEncontrado);
                       } // Si el usuario fue encontrado navega a SelectActivity (BOTTOM)
                     else
@@ -79,9 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 { // Exception lanzada de la anulacion del AsyncLogin o cuando el hilo esta esperando,durmiendo u ocupado o cuando se agota el tiempo de espera(TOP)
                     e.printStackTrace();
                 } // Exception lanzada de la anulacion del AsyncLogin o cuando el hilo esta esperando,durmiendo u ocupado o cuando se agota el tiempo de espera(BOTTOM)
-                catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
+
             }
         });
 
@@ -92,5 +91,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         // Click listeners de los botones definidos (BOTTOM)
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (bolLogeado){
+            startActivity(usuarioLogeado);
+        }
     }
 }

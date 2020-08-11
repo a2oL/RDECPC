@@ -14,7 +14,8 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db)
+    { // Creacion de las tablas de la base de datos DataBaseAppRed (TOP)
         db.execSQL(CMunicipios);
         db.execSQL(CAnios);
         db.execSQL(CMeses);
@@ -30,24 +31,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CCCT);
         db.execSQL(CEncuesta);
         db.execSQL(CParametros);
-        //Llenado de la bd
-        //db.execSQL(CInsertDataMunicipio);
-        db.execSQL(CInsertDataAnio);
-        db.execSQL(CInsertDataMes);
-        db.execSQL(CInsertDataAnioMes);
-        db.execSQL(CInsertDataNivelEducativo);
-        db.execSQL(CInsertDataGradoEscolar);
-        db.execSQL(CInsertDataNiedGres);
-        db.execSQL(CInsertDataIndicador);
-        db.execSQL(CInsertDataNivEdu);
-        db.execSQL(CInsertDataPregunta);
-        db.execSQL(CInsertDataEstatusRespuesta);
-        db.execSQL(CInsertDataPreguntaRespuesta);
-        //db.execSQL(CInsertDataCCT);
-    }
+    } // Creacion de las tablas de la base de datos DataBaseAppRed (TOP)
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    { // CUando cambie la estructura de las tablas de la base de datos (TOP)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_TMUNICIPIO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ANIOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_MES);
@@ -65,5 +53,5 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ENCUESTA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PARAMETROS);
         onCreate(db);
-    }
+    } // CUando cambie la estructura de las tablas de la base de datos (TOP)
 }

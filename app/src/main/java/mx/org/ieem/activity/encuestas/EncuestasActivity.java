@@ -51,10 +51,14 @@ public class EncuestasActivity extends AppCompatActivity {
         intentLogout = new Intent(this, MainActivity.class);
         intentRegresar = new Intent(this, SelectActivity.class);
         database = new DataBaseAppRed(getBaseContext());
+
+        Cursor dataCursor = database.getUltimoRegistro();
+        dataCursor.moveToNext();
         // Inicializacion de las variables (BOTTOM)
 
         // Texto informativo de cuantas encuestas se han realizado
-        textViewNumeroEncuestas.setText("Encuestas Realizadas:" + getNumeroEncuestas());
+        // TODO Agregar una tabla o un metodo para contar encuestas Nota: Hasta que este la version final de la bd.
+        textViewNumeroEncuestas.setText("Encuestas Realizadas: " + dataCursor.getString(0) );
 
         // Click listeners de los botones definidos (TOP)
         btnIniciar.setOnClickListener(new View.OnClickListener() {
@@ -102,23 +106,5 @@ public class EncuestasActivity extends AppCompatActivity {
         } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
     }
 
-    /**
-     * Método que busca si hay alguna encuesta ya realizada en la bd y de ser asi
-     * @ultimoRegistro se modifica para que asi guarde el numero de encuestas existentes en la bd
-     */
-    public int getNumeroEncuestas()
-    {
-        DataBaseAppRed dataSource = new DataBaseAppRed(getApplicationContext());        // Instancia de la base de datos
-        Cursor dataCursor=dataSource.getUltimoRegistro();                               // Cursor que ejecutara la consulta a la bd
-        int ultimoRegistro = 0;                                                         // Registro que guarda el numero de la encuesta
-        if (dataCursor.getCount() > 0)
-          { //Si existen registros de encuestas (TOP)
-               dataCursor.moveToNext();
-               if (dataCursor.getInt(0) != NULL)
-                 { // Si la base de datos en la tabla trdd_encuestas no esta vacia (TOP)
-                     ultimoRegistro = dataCursor.getInt(0);
-                 } // Si la base de datos en la tabla trdd_encuestas no esta vacia (BOTTOM)
-          } //Si existen registros de encuestas (BOTTOM)
-        return ultimoRegistro;
-    }
+
 } // Creacion de la vista (BOTTOM)
