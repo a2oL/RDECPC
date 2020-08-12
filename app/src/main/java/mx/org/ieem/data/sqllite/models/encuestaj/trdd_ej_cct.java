@@ -1,9 +1,9 @@
-package mx.org.ieem.data.sqllite.models;
+package mx.org.ieem.data.sqllite.models.encuestaj;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class trdd_cct implements Parcelable {
+public class trdd_ej_cct implements Parcelable {
     private String id_cct;
     private String nombre;
     private String domicilio;
@@ -11,7 +11,7 @@ public class trdd_cct implements Parcelable {
     private int id_municipio;
     private int id_nivel_educativo;
 
-    public trdd_cct(String id_cct, String nombre, String domicilio, String email, int id_municipio, int id_nivel_educativo) {
+    public trdd_ej_cct(String id_cct, String nombre, String domicilio, String email, int id_municipio, int id_nivel_educativo) {
         this.id_cct = id_cct;
         this.nombre = nombre;
         this.domicilio = domicilio;
@@ -20,7 +20,7 @@ public class trdd_cct implements Parcelable {
         this.id_nivel_educativo = id_nivel_educativo;
     }
 
-    protected trdd_cct(Parcel in) {
+    protected trdd_ej_cct(Parcel in) {
         id_cct = in.readString();
         nombre = in.readString();
         domicilio = in.readString();
@@ -29,15 +29,15 @@ public class trdd_cct implements Parcelable {
         id_nivel_educativo = in.readInt();
     }
 
-    public static final Creator<trdd_cct> CREATOR = new Creator<trdd_cct>() {
+    public static final Creator<trdd_ej_cct> CREATOR = new Creator<trdd_ej_cct>() {
         @Override
-        public trdd_cct createFromParcel(Parcel in) {
-            return new trdd_cct(in);
+        public trdd_ej_cct createFromParcel(Parcel in) {
+            return new trdd_ej_cct(in);
         }
 
         @Override
-        public trdd_cct[] newArray(int size) {
-            return new trdd_cct[size];
+        public trdd_ej_cct[] newArray(int size) {
+            return new trdd_ej_cct[size];
         }
     };
 

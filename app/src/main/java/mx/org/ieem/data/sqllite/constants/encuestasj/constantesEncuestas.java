@@ -1,63 +1,64 @@
-package mx.org.ieem.data.sqllite.constants;
+package mx.org.ieem.data.sqllite.constants.encuestasj;
 
 import mx.org.ieem.data.sqllite.DataBaseAppRed;
 
-public class Constantes {
+public class constantesEncuestas
+{
     public static String TAG = DataBaseAppRed.class.getSimpleName();
     /** --------------------------------- Nombre de Base de Datos -------------------------------------**/
     public static final String DataBaseName = "DPCDataBase";
     /** --------------------------------- Version de Base de Datos ---------------------------------**/
-    public static final int version = 34;
+    public static final int version = 35;
     /** --------------------------------- Tablas y Campos ---------------------------------**/
-    public static final String TABLE_NAME_TMUNICIPIO = "tmunicipio";
+    public static final String TABLE_NAME_TMUNICIPIO = "trdd_ej_municipio";
     public static final String COLUMN_NAME_ID_TMUNICIPIO = "id_municipio";
     public static final String COLUMN_NAME_NAME_TMUNICIPIO = "nombre";
 
-    public static final String TABLE_NAME_ANIOS = "trdd_anio";
+    public static final String TABLE_NAME_ANIOS = "trdd_ej_anio";
     public static final String COLUMN_NAME_ID_ANIOS = "id_anio";
 
-    public static final String TABLE_NAME_MES = "trdd_mes";
+    public static final String TABLE_NAME_MES = "trdd_ej_mes";
     public static final String COLUMN_NAME_ID_MES = "id_mes";
     public static final String COLUMN_NAME_NAME_MES = "nombre";
 
-    public static final String TABLE_NAME_MES_ANIO = "trdd_anio_mes";
+    public static final String TABLE_NAME_MES_ANIO = "trdd_ej_anio_mes";
     public static final String COLUMN_NAME_ID_MES_ANIO = "id_anio";
     public static final String COLUMN_NAME_NAME_MES_ANIO = "id_mes";
 
-    public static final String TABLE_NAME_NIVEL_EDUCATIVO = "trdd_nivel_educativo";
+    public static final String TABLE_NAME_NIVEL_EDUCATIVO = "trdd_ej_nivel_educativo";
     public static final String COLUMN_NAME_ID_NIVEL_EDUCATIVO = "id_nivel_educativo";
     public static final String COLUMN_NAME_NAME_NIVEL_EDUCATIVO = "nombre";
 
-    public static final String TABLE_NAME_GRADO_ESCOLAR = "trdd_grado_escolar";
+    public static final String TABLE_NAME_GRADO_ESCOLAR = "trdd_ej_grado_escolar";
     public static final String COLUMN_NAME_ID_GRADO_ESCOLAR = "id_grado_escolar";
     public static final String COLUMN_NAME_NAME_GRADO_ESCOLAR = "nombre";
     public static final String COLUMN_NAME_SIGLAS_GRADO_ESCOLAR = "siglas";
     public static final String COLUMN_NAME_GRADO_GRADO_ESCOLAR = "grado";
 
-    public static final String TABLE_NAME_NIED_GRES = "trdd_nied_gres";
+    public static final String TABLE_NAME_NIED_GRES = "trdd_ej_nied_gres";
     public static final String COLUMN_NAME_NE_NIED_GRES = "id_nivel_educativo";
     public static final String COLUMN_NAME_GE_NIED_GRES = "id_grado_escolar";
 
-    public static final String TABLE_NAME_INDICADOR = "trdd_indicador";
+    public static final String TABLE_NAME_INDICADOR = "trdd_ej_indicador";
     public static final String COLUMN_NAME_ID_INDICADOR = "id_indicador";
     public static final String COLUMN_NAME_NAME_INDICADOR = "nombre";
 
-    public static final String TABLE_NAME_NIV_IND = "trdd_nivedu_ind";
+    public static final String TABLE_NAME_NIV_IND = "trdd_ej_nivedu_ind";
     public static final String COLUMN_NAME_NE_NIV_IND = "id_nivel_educativo";
     public static final String COLUMN_NAME_IN_NIV_IND = "id_indicador";
 
-    public static final String TABLE_NAME_PREGUNTA = "trdd_pregunta";
+    public static final String TABLE_NAME_PREGUNTA = "trdd_ej_pregunta";
     public static final String COLUMN_NAME_ID_ANIO_PREGUNTA = "id_anio";
     public static final String COLUMN_NAME_ID_MES_PREGUNTA = "id_mes";
     public static final String COLUMN_NAME_ID_NIVEL_EDUCATIVO_PREGUNTA = "id_nivel_educativo";
     public static final String COLUMN_NAME_ID_INDICADOR_PREGUNTA = "id_indicador";
     public static final String COLUMN_NAME_PREGUNTA = "pregunta";
 
-    public static final String TABLE_NAME_ESTATUS_RESPUESTA = "trdd_estatus_respuesta";
+    public static final String TABLE_NAME_ESTATUS_RESPUESTA = "trdd_ej_estatus_respuesta";
     public static final String COLUMN_NAME_ID_ESTATUS_RESPUESTA = "id_estatus_respuesta";
     public static final String COLUMN_NAME_NAME_ESTATUS_RESPUESTA = "nombre";
 
-    public static final String TABLE_NAME_PREGUNTA_RESPUESTA = "trdd_pregunta_respuesta";
+    public static final String TABLE_NAME_PREGUNTA_RESPUESTA = "trdd_ej_pregunta_respuesta";
     public static final String COLUMN_NAME_ID_ANIO_PREGUNTA_RESPUESTA = "id_anio";
     public static final String COLUMN_NAME_ID_MES_PREGUNTA_RESPUESTA = "id_mes";
     public static final String COLUMN_NAME_ID_NIVEL_EDUCATIVO_PREGUNTA_RESPUESTA = "id_nivel_educativo";
@@ -66,7 +67,7 @@ public class Constantes {
     public static final String COLUMN_NAME_ID_ESTATUS_RESPUESTA_PREGUNTA_RESPUESTA = "id_estatus_respuesta ";
     public static final String COLUMN_NAME_RESPUESTA_PREGUNTA_RESPUESTA = "respuesta";
 
-    public static final String TABLE_NAME_CCT = "trdd_cct";
+    public static final String TABLE_NAME_CCT = "trdd_ej_cct";
     public static final String TABLE_NAME_CCT_ACTUAL = "trdd_cct_actual";
     public static final String COLUMN_NAME_ID_CCT = "id_cct";
     public static final String COLUMN_NAME_NOMBRE_CCT = "nombre";
@@ -75,7 +76,9 @@ public class Constantes {
     public static final String COLUMN_NAME_ID_MUNICIPIO_CCT = "id_municipio ";
     public static final String COLUMN_NAME_ID_NIVEL_EDUCATIVO_CCT = "id_nivel_educativo";
 
-    public static final String TABLE_NAME_ENCUESTA = "trdd_encuesta";
+    public static final String TABLE_NAME_ENCUESTA = "trdd_ej_encuesta";
+
+    public static final String TABLE_NAME_DETALLE_ENCUESTA = "trdd_ej_detalle_encuesta";
     public static final String COLUMN_NAME_ID_CCT_ENCUESTA = "id_cct";
     public static final String COLUMN_NAME_ID_RANDOM_ENCUESTA = "id_random";
     public static final String COLUMN_NAME_ID_ENCUESTA_ENCUESTA = "id_encuesta";
@@ -87,14 +90,14 @@ public class Constantes {
     public static final String COLUMN_NAME_ID_RESPUESTA_ENCUESTA = "id_respuesta";
     public static final String COLUMN_NAME_ID_ESTATUS_RESPUESTA_ENCUESTA = "id_estatus_respuesta";
 
-    public static final String TABLE_NAME_PARAMETROS = "trdd_parametros_version";
+    public static final String TABLE_NAME_PARAMETROS = "trdd_ej_parametros_version";
     public static final String COLUMN_NAME_ID_PARAMETROS = "id_parametros";
     public static final String COLUMN_NAME_TABLAS_PARAMETROS = "tabla";
     public static final String COLUMN_NAME_VERSION_PARAMETROS = "version";
 
 
     public static final String RESPUESTA_SIMULADA_A = "{\n" +
-            "     \"trdd_cct\":\n" +
+            "     \"trdd_ej_cct\":\n" +
             "     {\n" +
             "         \"id_cct\": \"1\",\n" +
             "         \"nombre\": \"PRIMARIA AMADO NERVO\",\n" +
@@ -104,67 +107,67 @@ public class Constantes {
             "         \"id_nivel_educativo\": \"1\"\n" +
             "     },\n" +
             "\n" +
-            "     \"trdd_nivel_educativo\":\n" +
+            "     \"trdd_ej_nivel_educativo\":\n" +
             "     {\n" +
             "         \"id_nivel_educativo\": \"1\",\n" +
             "         \"nombre\": \"Primaria\"\n" +
             "     },\n" +
             "\n" +
-            "     \"tmunicipio\":\n" +
+            "     \"trdd_ej_municipio\":\n" +
             "     {\n" +
             "         \"id_municipio\": \"1\",\n" +
             "         \"nombre\": \"TOLUCA\"\n" +
             "     },\n" +
-            "     \"trdd_parametros_version\":\n" +
+            "     \"trdd_ej_parametros_version\":\n" +
             "     [\n" +
             "         {\n" +
-            "             \"id_Parametros\": \"1\",\n" +
-            "             \"tabla\": \"trdd_anio\",\n" +
+            "             \"id_parametros\": \"1\",\n" +
+            "             \"tabla\": \"trdd_ej_anio\",\n" +
             "             \"version\": \"1\"\n" +
             "         },\n" +
             "         {\n" +
-            "             \"id_Parametros\": \"2\",\n" +
-            "             \"tabla\": \"trdd_mes\",\n" +
+            "             \"id_parametros\": \"2\",\n" +
+            "             \"tabla\": \"trdd_ej_mes\",\n" +
             "             \"version\": \"1\"\n" +
             "         },\n" +
             "         {\n" +
-            "             \"id_Parametros\": \"3\",\n" +
-            "             \"tabla\": \"trdd_anio_mes\",\n" +
+            "             \"id_parametros\": \"3\",\n" +
+            "             \"tabla\": \"trdd_ej_anio_mes\",\n" +
             "             \"version\": \"1\"\n" +
             "         },\n" +
             "         {\n" +
-            "             \"id_Parametros\": \"4\",\n" +
-            "             \"tabla\": \"trdd_grado_escolar\",\n" +
+            "             \"id_parametros\": \"4\",\n" +
+            "             \"tabla\": \"trdd_ej_grado_escolar\",\n" +
             "             \"version\": \"1\"\n" +
             "         },\n" +
             "         {\n" +
-            "             \"id_Parametros\": \"5\",\n" +
-            "             \"tabla\": \"trdd_nied_gres\",\n" +
+            "             \"id_parametros\": \"5\",\n" +
+            "             \"tabla\": \"trdd_ej_nied_gres\",\n" +
             "             \"version\": \"1\"\n" +
             "         },\n" +
             "         {\n" +
-            "             \"id_Parametros\": \"6\",\n" +
-            "             \"tabla\": \"trdd_indicador\",\n" +
+            "             \"id_parametros\": \"6\",\n" +
+            "             \"tabla\": \"trdd_ej_indicador\",\n" +
             "             \"version\": \"1\"\n" +
             "         },\n" +
             "         {\n" +
-            "             \"id_Parametros\": \"7\",\n" +
-            "             \"tabla\": \"trdd_nivedu_ind\",\n" +
+            "             \"id_parametros\": \"7\",\n" +
+            "             \"tabla\": \"trdd_ej_nivedu_ind\",\n" +
             "             \"version\": \"1\"\n" +
             "         },\n" +
             "         {\n" +
-            "             \"id_Parametros\": \"8\",\n" +
-            "             \"tabla\": \"trdd_pregunta\",\n" +
+            "             \"id_parametros\": \"8\",\n" +
+            "             \"tabla\": \"trdd_ej_pregunta\",\n" +
             "             \"version\": \"1\"\n" +
             "         },\n" +
             "         {\n" +
-            "             \"id_Parametros\": \"9\",\n" +
-            "             \"tabla\": \"trdd_estatus_respuesta\",\n" +
+            "             \"id_parametros\": \"9\",\n" +
+            "             \"tabla\": \"trdd_ej_estatus_respuesta\",\n" +
             "             \"version\": \"1\"\n" +
             "         },\n" +
             "         {\n" +
-            "             \"id_Parametros\": \"10\",\n" +
-            "             \"tabla\": \"trdd_pregunta_respuesta\",\n" +
+            "             \"id_parametros\": \"10\",\n" +
+            "             \"tabla\": \"trdd_ej_pregunta_respuesta\",\n" +
             "             \"version\": \"1\"\n" +
             "         }\n" +
             "\n" +
@@ -172,14 +175,14 @@ public class Constantes {
             "}";
 
     public static final String RESPUESTA_SIMULADA_VERSIONES = "{\n" +
-            "\t\"trdd_anio\":\n" +
+            "\t\"trdd_ej_anio\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_anio\":\"2020\"\n" +
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_mes\":\n" +
+            "\t\"trdd_ej_mes\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_mes\":\"1\",\n" +
@@ -231,7 +234,7 @@ public class Constantes {
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_anio_mes\":\n" +
+            "\t\"trdd_ej_anio_mes\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_anio\":\"2020\",\n" +
@@ -283,7 +286,7 @@ public class Constantes {
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_nivel_educativo\":\n" +
+            "\t\"trdd_ej_nivel_educativo\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_nivel_educativo\":\"1\",\n" +
@@ -291,7 +294,7 @@ public class Constantes {
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_grado_escolar\":\n" +
+            "\t\"trdd_ej_grado_escolar\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_grado_escolar\":\"1\",\n" +
@@ -331,7 +334,7 @@ public class Constantes {
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_nied_gres\":\n" +
+            "\t\"trdd_ej_nied_gres\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_nivel_educativo\":\"1\",\n" +
@@ -359,7 +362,7 @@ public class Constantes {
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_indicador\":\n" +
+            "\t\"trdd_ej_indicador\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_indicador\":\"1\",\n" +
@@ -387,7 +390,7 @@ public class Constantes {
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_nivedu_ind\":\n" +
+            "\t\"trdd_ej_nivedu_ind\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_nivel_educativo\":\"1\",\n" +
@@ -415,7 +418,7 @@ public class Constantes {
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_pregunta\":\n" +
+            "\t\"trdd_ej_pregunta\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_anio\":\"2020\",\n" +
@@ -461,7 +464,7 @@ public class Constantes {
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_estatus_respuesta\":\n" +
+            "\t\"trdd_ej_estatus_respuesta\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_estatus_respuesta\":\"1\",\n" +
@@ -473,7 +476,7 @@ public class Constantes {
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_pregunta_respuesta\":\n" +
+            "\t\"trdd_ej_pregunta_respuesta\":\n" +
             "\t[\n" +
             "\t\t{\n" +
             "\t\t\t\"id_anio\":\"2020\",\n" +

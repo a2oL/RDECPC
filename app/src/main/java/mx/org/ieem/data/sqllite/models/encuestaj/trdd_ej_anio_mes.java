@@ -1,14 +1,14 @@
-package mx.org.ieem.data.sqllite.models;
+package mx.org.ieem.data.sqllite.models.encuestaj;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class trdd_anio_mes implements Parcelable
+public class trdd_ej_anio_mes implements Parcelable
 {
     private String id_anio;
     private int id_mes;
 
-    public trdd_anio_mes(String id_anio, int id_mes) {
+    public trdd_ej_anio_mes(String id_anio, int id_mes) {
         this.id_anio = id_anio;
         this.id_mes = id_mes;
     }
@@ -29,20 +29,20 @@ public class trdd_anio_mes implements Parcelable
         this.id_mes = id_mes;
     }
 
-    protected trdd_anio_mes(Parcel in) {
+    protected trdd_ej_anio_mes(Parcel in) {
         id_anio = in.readString();
         id_mes = in.readInt();
     }
 
-    public static final Creator<trdd_anio_mes> CREATOR = new Creator<trdd_anio_mes>() {
+    public static final Creator<trdd_ej_anio_mes> CREATOR = new Creator<trdd_ej_anio_mes>() {
         @Override
-        public trdd_anio_mes createFromParcel(Parcel in) {
-            return new trdd_anio_mes(in);
+        public trdd_ej_anio_mes createFromParcel(Parcel in) {
+            return new trdd_ej_anio_mes(in);
         }
 
         @Override
-        public trdd_anio_mes[] newArray(int size) {
-            return new trdd_anio_mes[size];
+        public trdd_ej_anio_mes[] newArray(int size) {
+            return new trdd_ej_anio_mes[size];
         }
     };
 

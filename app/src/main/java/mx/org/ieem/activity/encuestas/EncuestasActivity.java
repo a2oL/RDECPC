@@ -32,7 +32,7 @@ public class EncuestasActivity extends AppCompatActivity {
     Intent intentEnviar;                            // Intent que navegara desde EncuestasActivity hacia LoadPageActivity.
     Intent intentLogout;                            // Intent que navegara desde EncuestasActivity hacia MainActivity.
     Intent intentRegresar;                          // Intent que navegara desde EncuestasActivity hacia  SelectActivity.
-    DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_cct.
+    DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)

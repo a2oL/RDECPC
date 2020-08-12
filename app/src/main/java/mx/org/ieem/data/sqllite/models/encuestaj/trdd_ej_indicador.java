@@ -1,32 +1,32 @@
-package mx.org.ieem.data.sqllite.models;
+package mx.org.ieem.data.sqllite.models.encuestaj;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class trdd_indicador implements Parcelable
+public class trdd_ej_indicador implements Parcelable
 {
     private int id_indicador;
     private String nombre;
 
-    public trdd_indicador(int id_indicador, String nombre) {
+    public trdd_ej_indicador(int id_indicador, String nombre) {
         this.id_indicador = id_indicador;
         this.nombre = nombre;
     }
 
-    protected trdd_indicador(Parcel in) {
+    protected trdd_ej_indicador(Parcel in) {
         id_indicador = in.readInt();
         nombre = in.readString();
     }
 
-    public static final Creator<trdd_indicador> CREATOR = new Creator<trdd_indicador>() {
+    public static final Creator<trdd_ej_indicador> CREATOR = new Creator<trdd_ej_indicador>() {
         @Override
-        public trdd_indicador createFromParcel(Parcel in) {
-            return new trdd_indicador(in);
+        public trdd_ej_indicador createFromParcel(Parcel in) {
+            return new trdd_ej_indicador(in);
         }
 
         @Override
-        public trdd_indicador[] newArray(int size) {
-            return new trdd_indicador[size];
+        public trdd_ej_indicador[] newArray(int size) {
+            return new trdd_ej_indicador[size];
         }
     };
 

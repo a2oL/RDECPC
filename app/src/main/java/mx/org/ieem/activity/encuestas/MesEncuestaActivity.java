@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import mx.org.ieem.activity.main.MainActivity;
 import mx.org.ieem.R;
 import mx.org.ieem.data.sqllite.DataBaseAppRed;
-import mx.org.ieem.data.sqllite.models.trdd_grado_escolar;
-import mx.org.ieem.data.sqllite.models.trdd_mes;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_mes;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_grado_escolar;
 
 import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 
@@ -36,8 +36,8 @@ public class MesEncuestaActivity extends AppCompatActivity implements AdapterVie
     SimpleCursorAdapter simpleCursorAdapter_MesEncuesta;            // Determina la manera en la que seran mostrados los datos del cursor_MesEncuesta.
     TextView textViewNumerodeEncuestas;                             // Mostrara cuantas encuestas por mes y grado se han realizado.
 
-    static trdd_mes trddmes_actual_final;                           // Contiene el mes que fue elegido por el usuario.
-    static trdd_grado_escolar trddgradoescolar_actual_final;        // Contiene el grado seleccionado por el usuario.
+    static trdd_ej_mes trddmes_actual_final;                           // Contiene el mes que fue elegido por el usuario.
+    static trdd_ej_grado_escolar trddgradoescolar_actual_final;        // Contiene el grado seleccionado por el usuario.
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -101,9 +101,9 @@ public class MesEncuestaActivity extends AppCompatActivity implements AdapterVie
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // TODO Aqui ira la consulta de encuestas por mes y grado
         cursor_MesEncuesta = (Cursor)spinnerMeses.getSelectedItem();
-        trddmes_actual_final = new trdd_mes(cursor_MesEncuesta.getInt(cursor_MesEncuesta.getColumnIndexOrThrow("_id")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("nombre")));
+        trddmes_actual_final = new trdd_ej_mes(cursor_MesEncuesta.getInt(cursor_MesEncuesta.getColumnIndexOrThrow("_id")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("nombre")));
         cursor_MesEncuesta = (Cursor) spinnerGrados.getSelectedItem();
-        trddgradoescolar_actual_final = new trdd_grado_escolar(cursor_MesEncuesta.getInt(cursor_MesEncuesta.getColumnIndexOrThrow("_id")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("nombre")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("siglas")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("grado")));
+        trddgradoescolar_actual_final = new trdd_ej_grado_escolar(cursor_MesEncuesta.getInt(cursor_MesEncuesta.getColumnIndexOrThrow("_id")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("nombre")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("siglas")),cursor_MesEncuesta.getString(cursor_MesEncuesta.getColumnIndexOrThrow("grado")));
 
         textViewNumerodeEncuestas.setText("Se aplicaron " + dataSource.getNumerodeEncuestasPorMesyGrado(trddmes_actual_final.getId_mes(),trddgradoescolar_actual_final.getId_grado_escolar()) + " en el mes de " + trddmes_actual_final.getNombre() + " para el grado " + trddgradoescolar_actual_final.getNombre());
     }
@@ -114,19 +114,19 @@ public class MesEncuestaActivity extends AppCompatActivity implements AdapterVie
     }
 
     public SimpleCursorAdapter cargarMeses()
-    { // Regresa los meses que se encuentran el la tabla trdd_mes (TOP)
+    { // Regresa los meses que se encuentran el la tabla trdd_ej_mes (TOP)
         cursor_MesEncuesta=dataSource.getMesesBD();
         simpleCursorAdapter_MesEncuesta =new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor_MesEncuesta, new String[]{"nombre"}, new int[]{android.R.id.text1}, SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         simpleCursorAdapter_MesEncuesta.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return simpleCursorAdapter_MesEncuesta;
-    } // Regresa los meses que se encuentran el la tabla trdd_mes (BOTTOM)
+    } // Regresa los meses que se encuentran el la tabla trdd_ej_mes (BOTTOM)
 
     public SimpleCursorAdapter cargarGrados()
-    { // Regresa los grados que se encuentran en la tabla trdd_grado_escolar (TOP)
+    { // Regresa los grados que se encuentran en la tabla trdd_ej_grado_escolar (TOP)
         cursor_MesEncuesta=dataSource.getGradosBD();
         simpleCursorAdapter_MesEncuesta =new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor_MesEncuesta, new String[]{"nombre"}, new int[]{android.R.id.text1}, SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         simpleCursorAdapter_MesEncuesta.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return simpleCursorAdapter_MesEncuesta;
-    } // Regresa los grados que se encuentran en la tabla trdd_grado_escolar (BOTTOM)
+    } // Regresa los grados que se encuentran en la tabla trdd_ej_grado_escolar (BOTTOM)
 
 }

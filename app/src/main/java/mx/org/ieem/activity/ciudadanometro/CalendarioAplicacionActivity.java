@@ -35,7 +35,7 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
     Intent intentRegresar;                                                                          // Intent que navegara desde CalendarioAplicacionActivity hacie CiudadanometroActivity.
     Intent intentLogout;                                                                            // Intent que navegara desde CalendarioAplicacionActivity hacie MainActivity.
 
-    DataBaseAppRed database;                                                                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_cct.
+    DataBaseAppRed database;                                                                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
 
 
     String[] strAuxiliar;                                                                           // Auxiliar para poder cargar los anios ejercicio y grados a los spinners

@@ -27,7 +27,7 @@ public class SelectActivity extends AppCompatActivity{
     Intent intentEncuestas;                     // Intent que navegara desde  SelectActivity hacia EncuestasActivity.
     Intent intentCiudadanometro;                // Intent que navegara desde  SelectActivity hacia CiudadanometroActivity.
     Intent intentLogout;                        // Intent que navegara desde  SelectActivity hacia MainActivity.
-    DataBaseAppRed database;                    // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_cct.
+    DataBaseAppRed database;                    // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -50,7 +50,7 @@ public class SelectActivity extends AppCompatActivity{
             // Obtencion de datos del usuario actual (TOP).
             textViewNombreEscuela.setText("Escuela: " + actual_final.getNombre());
             textViewClaveEscuela.setText("Con clave de CCT: " + actual_final.getId_cct());
-            textViewMunicipioEscuela.setText("Del municipio de: " + database.getMunicipio().get(0).getNombre());
+            textViewMunicipioEscuela.setText("Del municipio de: " + database.getMunicipio().getNombre());
             // Obtencion de datos del usuario actual (BOTTOM).
 
             // Click listeners de los botones definidos (TOP).

@@ -1,9 +1,9 @@
-package mx.org.ieem.data.sqllite.models;
+package mx.org.ieem.data.sqllite.models.encuestaj;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class trdd_pregunta_respuesta implements Parcelable
+public class trdd_ej_pregunta_respuesta implements Parcelable
 {
     private String id_anio;
     private int id_mes;
@@ -13,7 +13,7 @@ public class trdd_pregunta_respuesta implements Parcelable
     private int id_estatus_respuesta;
     private String respuesta;
 
-    public trdd_pregunta_respuesta(String id_anio, int id_mes, int id_nivel_educativo, int id_indicador, int id_respuesta, int id_estatus_respuesta, String respuesta) {
+    public trdd_ej_pregunta_respuesta(String id_anio, int id_mes, int id_nivel_educativo, int id_indicador, int id_respuesta, int id_estatus_respuesta, String respuesta) {
         this.id_anio = id_anio;
         this.id_mes = id_mes;
         this.id_nivel_educativo = id_nivel_educativo;
@@ -23,7 +23,7 @@ public class trdd_pregunta_respuesta implements Parcelable
         this.respuesta = respuesta;
     }
 
-    protected trdd_pregunta_respuesta(Parcel in) {
+    protected trdd_ej_pregunta_respuesta(Parcel in) {
         id_anio = in.readString();
         id_mes = in.readInt();
         id_nivel_educativo = in.readInt();
@@ -33,15 +33,15 @@ public class trdd_pregunta_respuesta implements Parcelable
         respuesta = in.readString();
     }
 
-    public static final Creator<trdd_pregunta_respuesta> CREATOR = new Creator<trdd_pregunta_respuesta>() {
+    public static final Creator<trdd_ej_pregunta_respuesta> CREATOR = new Creator<trdd_ej_pregunta_respuesta>() {
         @Override
-        public trdd_pregunta_respuesta createFromParcel(Parcel in) {
-            return new trdd_pregunta_respuesta(in);
+        public trdd_ej_pregunta_respuesta createFromParcel(Parcel in) {
+            return new trdd_ej_pregunta_respuesta(in);
         }
 
         @Override
-        public trdd_pregunta_respuesta[] newArray(int size) {
-            return new trdd_pregunta_respuesta[size];
+        public trdd_ej_pregunta_respuesta[] newArray(int size) {
+            return new trdd_ej_pregunta_respuesta[size];
         }
     };
 

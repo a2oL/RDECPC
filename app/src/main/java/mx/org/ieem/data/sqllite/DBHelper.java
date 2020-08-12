@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static mx.org.ieem.data.sqllite.DataBaseAppRed.*;
-import static mx.org.ieem.data.sqllite.constants.Constantes.*;
+import static mx.org.ieem.data.sqllite.constants.encuestasj.constantesEncuestas.*;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -30,6 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CPreguntaRespuesta);
         db.execSQL(CCCT);
         db.execSQL(CEncuesta);
+        db.execSQL(CDetalleEncuesta);
         db.execSQL(CParametros);
     } // Creacion de las tablas de la base de datos DataBaseAppRed (TOP)
 
@@ -51,6 +52,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CCT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CCT_ACTUAL);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ENCUESTA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_DETALLE_ENCUESTA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PARAMETROS);
         onCreate(db);
     } // CUando cambie la estructura de las tablas de la base de datos (TOP)

@@ -17,7 +17,7 @@ import mx.org.ieem.R;
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
 import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 import mx.org.ieem.data.sqllite.DataBaseAppRed;
-import mx.org.ieem.data.sqllite.models.trdd_cct;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_cct;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         if(usuario.getCount() > 0)
         { // Si existe algun registro en la bd (TOP)
             bolLogeado = true;
-            actual_final = new trdd_cct(usuario.getString(0),usuario.getString(1),usuario.getString(2),usuario.getString(3),usuario.getInt(4),usuario.getInt(5));
+            actual_final = new trdd_ej_cct(usuario.getString(0),usuario.getString(1),usuario.getString(2),usuario.getString(3),usuario.getInt(4),usuario.getInt(5));
             return  true;
         } // Si existe algun registro en la bd (BOTTOM)
         else

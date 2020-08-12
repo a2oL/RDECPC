@@ -1,31 +1,31 @@
-package mx.org.ieem.data.sqllite.models;
+package mx.org.ieem.data.sqllite.models.encuestaj;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class trdd_nivel_educativo implements Parcelable{
+public class trdd_ej_nivel_educativo implements Parcelable{
     private int id_nivel_educativo;
     private String nombre;
 
-    public trdd_nivel_educativo(int id_nivel_educativo, String nombre) {
+    public trdd_ej_nivel_educativo(int id_nivel_educativo, String nombre) {
         this.id_nivel_educativo = id_nivel_educativo;
         this.nombre = nombre;
     }
 
-    protected trdd_nivel_educativo(Parcel in) {
+    protected trdd_ej_nivel_educativo(Parcel in) {
         id_nivel_educativo = in.readInt();
         nombre = in.readString();
     }
 
-    public static final Parcelable.Creator<trdd_mes> CREATOR = new Parcelable.Creator<trdd_mes>() {
+    public static final Parcelable.Creator<trdd_ej_mes> CREATOR = new Parcelable.Creator<trdd_ej_mes>() {
         @Override
-        public trdd_mes createFromParcel(Parcel in) {
-            return new trdd_mes(in);
+        public trdd_ej_mes createFromParcel(Parcel in) {
+            return new trdd_ej_mes(in);
         }
 
         @Override
-        public trdd_mes[] newArray(int size) {
-            return new trdd_mes[size];
+        public trdd_ej_mes[] newArray(int size) {
+            return new trdd_ej_mes[size];
         }
     };
 

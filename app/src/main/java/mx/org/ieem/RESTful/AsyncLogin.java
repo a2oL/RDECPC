@@ -8,8 +8,20 @@ import android.util.Log;
 
 import mx.org.ieem.RESTful.JSONModels.UsuarioJM;
 import mx.org.ieem.data.sqllite.DataBaseAppRed;
-import mx.org.ieem.data.sqllite.models.tmunicipio;
-import mx.org.ieem.data.sqllite.models.*;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_anio_mes;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_estatus_respuesta;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_mes;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_municipio;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_anio;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_cct;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_nied_gres;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_nivedu_ind;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_nivel_educativo;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_pregunta;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_grado_escolar;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_indicador;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_ej_pregunta_respuesta;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_parametros_version;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,14 +43,14 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 
 
-import static mx.org.ieem.data.sqllite.constants.Constantes.RESPUESTA_SIMULADA_A;
-import static mx.org.ieem.data.sqllite.constants.Constantes.RESPUESTA_SIMULADA_VERSIONES;
+import static mx.org.ieem.data.sqllite.constants.encuestasj.constantesEncuestas.*;
 
 
 public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
@@ -48,8 +60,9 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
     public static boolean bolLogeado = false;               // Nos dice si el usaurio sigue logueado o no.
     public static Context contextActual;                    // Contexto del activity que ejecuto la tarea en segundo plano (LoginActivity).
     public static String id_cct_final = "";                 // En caso de que exista el usuario en el servidor llenara esta variable con el valor ddel id_cct.
-    public static trdd_cct actual_final = null;             // Objeto de tipo trdd_cct que contendra los datos del usuario logueado.
-    DataBaseAppRed database;                                // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_cct.
+    public static trdd_ej_cct actual_final = null;          // Objeto de tipo trdd_ej_cct que contendra los datos del usuario logueado.
+    public static String id_random_final = "";              // Variable que contiene el id_RANDOM
+    DataBaseAppRed database;                                // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
 
     public AsyncLogin(Context context) { this.contextActual = context;database = new DataBaseAppRed(context);}
 
@@ -133,7 +146,7 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         Log.e("CODE",String.valueOf(HttpResult));
         if (HttpResult == 200)
           { // Si el Codigo de respuesta es 200 (Si existe el usuario) (TOP)
-              // TODO agregar metodo para editar login.txt por respuesta del servidor.
+              //id_random_final = generarIdRandom();
               //actual_final = cargarRespuestaCCTLogin(responseHttp); Es la respuesta real del servidor
               String respuestaSimulada;
               if(id.equals("a"))
@@ -177,33 +190,33 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
 
         JSONObject respuestaLogin = new JSONObject(response);
 
-        JSONObject trdd_cct = respuestaLogin.getJSONObject("trdd_cct");
+        JSONObject trdd_cct = respuestaLogin.getJSONObject(TABLE_NAME_CCT);
         String id_cct = trdd_cct.getString("id_cct");
         String nombre = trdd_cct.getString("nombre");
         String domicilio = trdd_cct.getString("domicilio");
         String email = trdd_cct.getString("email");
         int id_municipio = trdd_cct.getInt("id_municipio");
         int id_nivel_educativo = trdd_cct.getInt("id_nivel_educativo");
-        actual_final = new trdd_cct(id_cct,nombre,domicilio,email,id_municipio,id_nivel_educativo);
+        actual_final = new trdd_ej_cct(id_cct,nombre,domicilio,email,id_municipio,id_nivel_educativo);
 
-        JSONObject tmunicipio = respuestaLogin.getJSONObject("tmunicipio");
+        JSONObject tmunicipio = respuestaLogin.getJSONObject(TABLE_NAME_TMUNICIPIO);
         int id_municipio2 = tmunicipio.getInt("id_municipio");
         String nombre2 = tmunicipio.getString("nombre");
 
-        JSONObject trdd_nivel_educativo = respuestaLogin.getJSONObject("trdd_nivel_educativo");
+        JSONObject trdd_nivel_educativo = respuestaLogin.getJSONObject(TABLE_NAME_NIVEL_EDUCATIVO);
         int id_nivel_educativo3 = trdd_nivel_educativo.getInt("id_nivel_educativo");
         String nombre3 = trdd_nivel_educativo.getString("nombre");
 
 
         ds.insertCctActual(actual_final);
-        ds.insertMunicipioActual(new tmunicipio(id_municipio2,nombre2));
-        ds.insertNivelEducativoActual(new trdd_nivel_educativo(id_nivel_educativo3,nombre3 ));
+        ds.insertMunicipioActual(new trdd_ej_municipio(id_municipio2,nombre2));
+        ds.insertNivelEducativoActual(new trdd_ej_nivel_educativo(id_nivel_educativo3,nombre3 ));
         id_cct_final = actual_final.getId_cct();;
 
         //Aqui se revisa si la tabla de parametros esta vacia de ser asi la llena con las versiones del servidor
         // y le pide al servidor todas las tablas, de no estar vacias revisara cada version de tabla del servidor con la version local.
         Cursor tablaDeParametros = ds.isVersionVacia();
-        JSONArray trdd_parametros_version = respuestaLogin.getJSONArray("trdd_parametros_version");
+        JSONArray trdd_parametros_version = respuestaLogin.getJSONArray(TABLE_NAME_PARAMETROS);
 
         JSONArray porPedir = new JSONArray();
         if (tablaDeParametros.getCount() > 0)
@@ -222,7 +235,7 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
             if(porPedir.length() > 0)
             {
                 JSONObject parametrosPeticionOBJ = new JSONObject();
-                parametrosPeticionOBJ.put("trdd_parametros_version", porPedir);
+                parametrosPeticionOBJ.put(TABLE_NAME_PARAMETROS, porPedir);
                 Log.e("JSON DE PETICION: ",parametrosPeticionOBJ.toString());
                 // TODO HACER LA PETICION CON ESTE JSON para pedir las tablas modificadas
             }
@@ -233,7 +246,7 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
             for (int i = 0; i < trdd_parametros_version.length();i++)
             {
                 JSONObject tabla = trdd_parametros_version.getJSONObject(i);
-                int id_parametros = tabla.getInt("id_Parametros");
+                int id_parametros = tabla.getInt("id_parametros");
                 String tablan = tabla.getString("tabla");
                 int version = tabla.getInt("version");
                 porPedir.put(tabla);
@@ -241,7 +254,7 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
             }
 
             JSONObject parametrosPeticionOBJ = new JSONObject();
-            parametrosPeticionOBJ.put("trdd_parametros_version", porPedir);
+            parametrosPeticionOBJ.put(TABLE_NAME_PARAMETROS, porPedir);
             Log.e("JSON DE PETICION: ",parametrosPeticionOBJ.toString());
             //TODO Solicitar todas las tablas.
             cargarRespuestaVersiones(RESPUESTA_SIMULADA_VERSIONES);
@@ -258,48 +271,48 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
 
         JSONObject respuestaVersiones = new JSONObject(response);
 
-        if (respuestaVersiones.has("trdd_anio"))
+        if (respuestaVersiones.has(TABLE_NAME_ANIOS))
           {
               ds.deleteAnios();
-              JSONArray trdd_anio = respuestaVersiones.getJSONArray("trdd_anio");
+              JSONArray trdd_anio = respuestaVersiones.getJSONArray(TABLE_NAME_ANIOS);
               for (int i = 0 ; i< trdd_anio.length();i++)
               {
                   JSONObject anio = trdd_anio.getJSONObject(i);
                   String id_anio = anio.getString("id_anio");
-                  ds.insertAnios(new trdd_anio(id_anio));
+                  ds.insertAnios(new trdd_ej_anio(id_anio));
               }
           }
 
-        if (respuestaVersiones.has("trdd_mes"))
+        if (respuestaVersiones.has(TABLE_NAME_MES))
         {
             ds.deleteMeses();
-            JSONArray trdd_anio = respuestaVersiones.getJSONArray("trdd_mes");
+            JSONArray trdd_anio = respuestaVersiones.getJSONArray(TABLE_NAME_MES);
             for (int i = 0 ; i< trdd_anio.length();i++)
             {
                 JSONObject mes = trdd_anio.getJSONObject(i);
                 int id_mes = mes.getInt("id_mes");
                 String nombre = mes.getString("nombre");
-                ds.insertMeses(new trdd_mes(id_mes,nombre));
+                ds.insertMeses(new trdd_ej_mes(id_mes,nombre));
             }
         }
 
-        if (respuestaVersiones.has("trdd_anio_mes"))
+        if (respuestaVersiones.has(TABLE_NAME_MES_ANIO))
         {
             ds.deleteAniosMeses();
-            JSONArray trdd_anio = respuestaVersiones.getJSONArray("trdd_anio_mes");
+            JSONArray trdd_anio = respuestaVersiones.getJSONArray(TABLE_NAME_MES_ANIO);
             for (int i = 0 ; i< trdd_anio.length();i++)
             {
                 JSONObject anioMes = trdd_anio.getJSONObject(i);
                 String id_anio = anioMes.getString("id_anio");
                 int id_mes = anioMes.getInt("id_mes");
-                ds.insertAniosMeses(new trdd_anio_mes(id_anio,id_mes));
+                ds.insertAniosMeses(new trdd_ej_anio_mes(id_anio,id_mes));
             }
         }
 
-        if (respuestaVersiones.has("trdd_grado_escolar"))
+        if (respuestaVersiones.has(TABLE_NAME_GRADO_ESCOLAR))
         {
             ds.deleteGradoEscolar();
-            JSONArray trdd_anio = respuestaVersiones.getJSONArray("trdd_grado_escolar");
+            JSONArray trdd_anio = respuestaVersiones.getJSONArray(TABLE_NAME_GRADO_ESCOLAR);
             for (int i = 0 ; i < trdd_anio.length() ; i++)
             {
                 JSONObject gradoEscolar = trdd_anio.getJSONObject(i);
@@ -307,53 +320,53 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
                 String nombre = gradoEscolar.getString("nombre");
                 String siglas = gradoEscolar.getString("siglas");
                 String grado = gradoEscolar.getString("grado");
-                ds.insertGradoEscolar(new trdd_grado_escolar(id_grado_escolar,nombre,siglas,grado));
+                ds.insertGradoEscolar(new trdd_ej_grado_escolar(id_grado_escolar,nombre,siglas,grado));
             }
         }
 
-        if (respuestaVersiones.has("trdd_nied_gres"))
+        if (respuestaVersiones.has(TABLE_NAME_NIED_GRES))
         {
             ds.deleteNiedGres();
-            JSONArray trdd_nied_gres = respuestaVersiones.getJSONArray("trdd_nied_gres");
+            JSONArray trdd_nied_gres = respuestaVersiones.getJSONArray(TABLE_NAME_NIED_GRES);
             for (int i = 0 ; i< trdd_nied_gres.length();i++)
             {
                 JSONObject niedGres = trdd_nied_gres.getJSONObject(i);
                 int id_nivel_educativo = niedGres.getInt("id_nivel_educativo");
                 int id_grado_escolar = niedGres.getInt("id_grado_escolar");
-                ds.insertNiedGres(new trdd_nied_gres(id_nivel_educativo,id_grado_escolar));
+                ds.insertNiedGres(new trdd_ej_nied_gres(id_nivel_educativo,id_grado_escolar));
             }
         }
 
-        if (respuestaVersiones.has("trdd_indicador"))
+        if (respuestaVersiones.has(TABLE_NAME_INDICADOR))
         {
             ds.deleteIndicador();
-            JSONArray trdd_indicador = respuestaVersiones.getJSONArray("trdd_indicador");
+            JSONArray trdd_indicador = respuestaVersiones.getJSONArray(TABLE_NAME_INDICADOR);
             for (int i = 0 ; i< trdd_indicador.length();i++)
             {
                 JSONObject indicador = trdd_indicador.getJSONObject(i);
                 int id_nivel_educativo = indicador.getInt("id_indicador");
                 String nombre = indicador.getString("nombre");
-                ds.insertIndicador(new trdd_indicador(id_nivel_educativo,nombre));
+                ds.insertIndicador(new trdd_ej_indicador(id_nivel_educativo,nombre));
             }
         }
 
-        if (respuestaVersiones.has("trdd_nivedu_ind"))
+        if (respuestaVersiones.has(TABLE_NAME_NIV_IND))
         {
             ds.deleteNivEduIndicador();
-            JSONArray trdd_nivedu_ind = respuestaVersiones.getJSONArray("trdd_nivedu_ind");
+            JSONArray trdd_nivedu_ind = respuestaVersiones.getJSONArray(TABLE_NAME_NIV_IND);
             for (int i = 0 ; i< trdd_nivedu_ind.length();i++)
             {
                 JSONObject indicador = trdd_nivedu_ind.getJSONObject(i);
                 int id_nivel_educativo = indicador.getInt("id_nivel_educativo");
                 int id_indicador = indicador.getInt("id_indicador");
-                ds.insertNivelIndicador(new trdd_nivedu_ind(id_nivel_educativo,id_indicador));
+                ds.insertNivelIndicador(new trdd_ej_nivedu_ind(id_nivel_educativo,id_indicador));
             }
         }
 
-        if (respuestaVersiones.has("trdd_pregunta"))
+        if (respuestaVersiones.has(TABLE_NAME_PREGUNTA))
         {
             ds.deletePreguntas();
-            JSONArray trdd_pregunta = respuestaVersiones.getJSONArray("trdd_pregunta");
+            JSONArray trdd_pregunta = respuestaVersiones.getJSONArray(TABLE_NAME_PREGUNTA);
             for (int i = 0 ; i< trdd_pregunta.length();i++)
             {
                 JSONObject pregunta = trdd_pregunta.getJSONObject(i);
@@ -362,27 +375,27 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
                 int id_nivel_educativo = pregunta.getInt("id_nivel_educativo");
                 int id_indicador = pregunta.getInt("id_indicador");
                 String preguntaC = pregunta.getString("pregunta");
-                ds.insertPregunta(new trdd_pregunta(id_anio,id_mes,id_nivel_educativo,id_indicador,preguntaC));
+                ds.insertPregunta(new trdd_ej_pregunta(id_anio,id_mes,id_nivel_educativo,id_indicador,preguntaC));
             }
         }
 
-        if (respuestaVersiones.has("trdd_estatus_respuesta"))
+        if (respuestaVersiones.has(TABLE_NAME_ESTATUS_RESPUESTA))
         {
             ds.deleteEstatusRespuesta();
-            JSONArray trdd_estatus_respuesta = respuestaVersiones.getJSONArray("trdd_estatus_respuesta");
+            JSONArray trdd_estatus_respuesta = respuestaVersiones.getJSONArray(TABLE_NAME_ESTATUS_RESPUESTA);
             for (int i = 0 ; i< trdd_estatus_respuesta.length();i++)
             {
                 JSONObject indicador = trdd_estatus_respuesta.getJSONObject(i);
                 int id_estatus_respuesta = indicador.getInt("id_estatus_respuesta");
                 String nombre = indicador.getString("nombre");
-                ds.insertEstatusRespuesta(new trdd_estatus_respuesta(id_estatus_respuesta,nombre));
+                ds.insertEstatusRespuesta(new trdd_ej_estatus_respuesta(id_estatus_respuesta,nombre));
             }
         }
 
-        if (respuestaVersiones.has("trdd_pregunta_respuesta"))
+        if (respuestaVersiones.has(TABLE_NAME_PREGUNTA_RESPUESTA))
         {
             ds.deletePreguntaRespuesta();
-            JSONArray trdd_pregunta_respuesta = respuestaVersiones.getJSONArray("trdd_pregunta_respuesta");
+            JSONArray trdd_pregunta_respuesta = respuestaVersiones.getJSONArray(TABLE_NAME_PREGUNTA_RESPUESTA);
             for (int i = 0 ; i< trdd_pregunta_respuesta.length();i++)
             {
                 JSONObject preguntaRespuesta = trdd_pregunta_respuesta.getJSONObject(i);
@@ -393,8 +406,20 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
                 int id_respuesta = preguntaRespuesta.getInt("id_respuesta");
                 int id_estatus_respuesta = preguntaRespuesta.getInt("id_estatus_respuesta");
                 String respuesta = preguntaRespuesta.getString("respuesta");
-                ds.insertPreguntaRespuesta(new trdd_pregunta_respuesta(id_anio,id_mes,id_nivel_educativo,id_indicador,id_respuesta,id_estatus_respuesta,respuesta));
+                ds.insertPreguntaRespuesta(new trdd_ej_pregunta_respuesta(id_anio,id_mes,id_nivel_educativo,id_indicador,id_respuesta,id_estatus_respuesta,respuesta));
             }
         }
+    }
+
+    public String generarIdRandom(){
+        String auxiliar = null;
+        Random rnd = new Random();
+        rnd.setSeed(System.currentTimeMillis());
+        for (int i = 0 ; i < 8 ; i++)
+        {
+            int intAletorio = rnd.nextInt(9);
+            auxiliar = auxiliar + String.valueOf(intAletorio);
+        }
+        return auxiliar;
     }
 }

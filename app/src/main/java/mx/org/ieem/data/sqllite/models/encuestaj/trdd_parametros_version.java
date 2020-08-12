@@ -1,28 +1,28 @@
-package mx.org.ieem.data.sqllite.models;
+package mx.org.ieem.data.sqllite.models.encuestaj;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class trdd_parametros_version implements Parcelable {
-    private int id_Parametros;
+    private int id_parametros;
     private String tabla;
     private int version;
 
-    public trdd_parametros_version(int id_Parametros, String tabla, int version) {
-        this.id_Parametros = id_Parametros;
+    public trdd_parametros_version(int id_parametros, String tabla, int version) {
+        this.id_parametros = id_parametros;
         this.tabla = tabla;
         this.version = version;
     }
 
     protected trdd_parametros_version(Parcel in) {
-        id_Parametros = in.readInt();
+        id_parametros = in.readInt();
         tabla = in.readString();
         version = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id_Parametros);
+        dest.writeInt(id_parametros);
         dest.writeString(tabla);
         dest.writeInt(version);
     }
@@ -45,11 +45,11 @@ public class trdd_parametros_version implements Parcelable {
     };
 
     public int getId_Parametros() {
-        return id_Parametros;
+        return id_parametros;
     }
 
-    public void setId_Parametros(int id_Parametros) {
-        this.id_Parametros = id_Parametros;
+    public void setId_Parametros(int id_parametros) {
+        this.id_parametros = id_parametros;
     }
 
     public String getTabla() {

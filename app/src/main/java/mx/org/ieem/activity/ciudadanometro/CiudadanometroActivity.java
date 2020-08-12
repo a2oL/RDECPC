@@ -32,7 +32,7 @@ public class CiudadanometroActivity extends AppCompatActivity
     Intent intentEnviar;                            // Intent que navegara desde CiudadanometroActivity hacia LoadPageActivity.
     Intent intentLogout;                            // Intent que navegara desde CiudadanometroActivity hacia MainActivity.
     Intent intentRegresar;                          // Intent que navegara desde CiudadanometroActivity hacia  SelectActivity.
-    DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_cct.
+    DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
 
 
     @Override

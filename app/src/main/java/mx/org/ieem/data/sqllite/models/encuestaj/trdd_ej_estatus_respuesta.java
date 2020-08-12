@@ -1,32 +1,32 @@
-package mx.org.ieem.data.sqllite.models;
+package mx.org.ieem.data.sqllite.models.encuestaj;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class trdd_estatus_respuesta implements Parcelable
+public class trdd_ej_estatus_respuesta implements Parcelable
 {
     private int id_estatus_respuesta;
     private String nombre;
 
-    public trdd_estatus_respuesta(int id_estatus_respuesta, String nombre) {
+    public trdd_ej_estatus_respuesta(int id_estatus_respuesta, String nombre) {
         this.id_estatus_respuesta = id_estatus_respuesta;
         this.nombre = nombre;
     }
 
-    protected trdd_estatus_respuesta(Parcel in) {
+    protected trdd_ej_estatus_respuesta(Parcel in) {
         id_estatus_respuesta = in.readInt();
         nombre = in.readString();
     }
 
-    public static final Creator<trdd_estatus_respuesta> CREATOR = new Creator<trdd_estatus_respuesta>() {
+    public static final Creator<trdd_ej_estatus_respuesta> CREATOR = new Creator<trdd_ej_estatus_respuesta>() {
         @Override
-        public trdd_estatus_respuesta createFromParcel(Parcel in) {
-            return new trdd_estatus_respuesta(in);
+        public trdd_ej_estatus_respuesta createFromParcel(Parcel in) {
+            return new trdd_ej_estatus_respuesta(in);
         }
 
         @Override
-        public trdd_estatus_respuesta[] newArray(int size) {
-            return new trdd_estatus_respuesta[size];
+        public trdd_ej_estatus_respuesta[] newArray(int size) {
+            return new trdd_ej_estatus_respuesta[size];
         }
     };
 
