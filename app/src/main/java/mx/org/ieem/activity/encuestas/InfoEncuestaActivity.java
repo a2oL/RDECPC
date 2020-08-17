@@ -22,7 +22,7 @@ public class InfoEncuestaActivity extends AppCompatActivity {
     Intent intentSiguiente;                 // Intent que navegara desde InfoEncuestaActivity hacie MesEncuestaActivity.
     Intent intentLogout;                    // Intent que navegara desde InfoEncuestaActivity hacie MainActivity.
     Intent intentAtras;                     // Intent que navegara desde InfoEncuestaActivity hacie EncuestasActivity.
-    DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
+    DataBaseAppRed database;                // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
 
 
     @Override

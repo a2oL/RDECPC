@@ -1,9 +1,10 @@
-package mx.org.ieem.data.sqllite.models.encuestaj;
+package mx.org.ieem.data.sqllite.models.general;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class trdd_ej_cct implements Parcelable {
+
+public class trdd_cct implements Parcelable {
     private String id_cct;
     private String nombre;
     private String domicilio;
@@ -11,7 +12,7 @@ public class trdd_ej_cct implements Parcelable {
     private int id_municipio;
     private int id_nivel_educativo;
 
-    public trdd_ej_cct(String id_cct, String nombre, String domicilio, String email, int id_municipio, int id_nivel_educativo) {
+    public trdd_cct(String id_cct, String nombre, String domicilio, String email, int id_municipio, int id_nivel_educativo) {
         this.id_cct = id_cct;
         this.nombre = nombre;
         this.domicilio = domicilio;
@@ -20,7 +21,7 @@ public class trdd_ej_cct implements Parcelable {
         this.id_nivel_educativo = id_nivel_educativo;
     }
 
-    protected trdd_ej_cct(Parcel in) {
+    protected trdd_cct(Parcel in) {
         id_cct = in.readString();
         nombre = in.readString();
         domicilio = in.readString();
@@ -29,15 +30,15 @@ public class trdd_ej_cct implements Parcelable {
         id_nivel_educativo = in.readInt();
     }
 
-    public static final Creator<trdd_ej_cct> CREATOR = new Creator<trdd_ej_cct>() {
+    public static final Creator<trdd_cct> CREATOR = new Creator<trdd_cct>() {
         @Override
-        public trdd_ej_cct createFromParcel(Parcel in) {
-            return new trdd_ej_cct(in);
+        public trdd_cct createFromParcel(Parcel in) {
+            return new trdd_cct(in);
         }
 
         @Override
-        public trdd_ej_cct[] newArray(int size) {
-            return new trdd_ej_cct[size];
+        public trdd_cct[] newArray(int size) {
+            return new trdd_cct[size];
         }
     };
 
@@ -95,12 +96,12 @@ public class trdd_ej_cct implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id_cct);
-        dest.writeString(nombre);
-        dest.writeString(domicilio);
-        dest.writeString(email);
-        dest.writeInt(id_municipio);
-        dest.writeInt(id_nivel_educativo);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id_cct);
+        parcel.writeString(nombre);
+        parcel.writeString(domicilio);
+        parcel.writeString(email);
+        parcel.writeInt(id_municipio);
+        parcel.writeInt(id_nivel_educativo);
     }
 }

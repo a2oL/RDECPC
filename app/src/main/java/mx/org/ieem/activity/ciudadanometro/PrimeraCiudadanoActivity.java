@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import mx.org.ieem.adapters.FirstCiudadanoAdapter;
+import mx.org.ieem.adapters.PrimeraCiudadanoAdapter;
 import mx.org.ieem.R;
 
 import static mx.org.ieem.activity.ciudadanometro.CalendarioAplicacionActivity.anio_final_ciudadanometro;
@@ -24,14 +24,13 @@ import static mx.org.ieem.activity.ciudadanometro.CalendarioAplicacionActivity.g
 
 public class PrimeraCiudadanoActivity extends AppCompatActivity {
 
-    String[] stringArrayPreguntas;                  // Contiene las preguntas del ciudadanometro.
     ListView listViewPreguntas;                     // Sirve para desplegar las preguntas con su respectiva respuesta.
     TextView textViewAnio;                          // Contiene el anio que se selecciono para el ciudadanometro.
     TextView textViewEjercicio;                     // Contiene el publico objetivo del ciudadanometro.
     TextView textViewGrado;                         // En caso de que el ejercicio sea realizado por padres de familia o tutores sera el grtado seleccionado.
     TextView textViewGradoText;                     // Sirve para desaparecer el texview de grado en caso de que no sea realizado por padre de familia o tutores.
     Button btnGuardar;                              // Aloja el elemento de la UI (button_siguiente_first_ciudadano) del layout activity_primera_ciudadano que acciona el intentSiguiente.
-    FirstCiudadanoAdapter customAdapter;            // Adapatador de las preguntas y respuestas del ciudadanometro
+    PrimeraCiudadanoAdapter customAdapter;            // Adapatador de las preguntas y respuestas del ciudadanometro
     AlertDialog.Builder dialogoAuxiliar;            // Dialogo utilizado para informar si faltan preguntas por responder.
     Intent intentSiguiente;                         // Intent que navegara desde PrimeraCiudadanoActivity hacia SegundaCiudadanoActivity.
     Intent intentSalir;                             // Intent que navegara desde PrimeraCiudadanoActivity hacia CiudadanometroActivity.
@@ -43,10 +42,7 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_primera_ciudadano);
         cargarAnioEjercicioGrado();
-        //TODO Regresar preguntas de bd.
-        stringArrayPreguntas =  new String[]{"1.\tPregunta (Se modifica cada año)  ", "2.\tPregunta (Se modifica cada año)  ","3.\tPregunta (Se modifica cada año)"
-                ,"4.\tPregunta (Se modifica cada año)","5.\tPregunta (Se modifica cada año)","6.\tPregunta (Se modifica cada año)","7.\tPregunta (Se modifica cada año)","8.\tPregunta (Se modifica cada año)"};
-        customAdapter = new FirstCiudadanoAdapter(getApplicationContext(), stringArrayPreguntas);
+        customAdapter = new PrimeraCiudadanoAdapter(getApplicationContext());
         cargarPreguntas();
     }
 
@@ -78,11 +74,11 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
         // Inicializacion de las variables (BOTTOM)
 
         // Poner en pantalla el anio, Publico objetivo y segun el caso el grado (TOP)
-        textViewAnio.setText(anio_final_ciudadanometro);
-        textViewEjercicio.setText(ejercicio_final_ciudadanometro);
-        if (ejercicio_final_ciudadanometro.equals("1.- Padres de familio o tutores"))
+        textViewAnio.setText(anio_final_ciudadanometro.getId_anio());
+        textViewEjercicio.setText(ejercicio_final_ciudadanometro.getNombre());
+        if (ejercicio_final_ciudadanometro.getNombre().equals("Padres de familia o tutores"))
         { // Si el ejercicio es aplicado a padres de familia o tutores (TOP)
-            textViewGrado.setText(grado_final_ciudadanometro);
+            textViewGrado.setText(grado_final_ciudadanometro.getNombre());
         } // Si el ejercicio es aplicado a padres de familia o tutores (BOTTOM)
         else
         { // Sino el grado desaparece (TOP)
@@ -113,9 +109,9 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String mensajeRespuestasError = "Tus respuestas:";                      // string que contendra el mensaje con las respuestas seleccionadas o la pregunta no respondida.
                 boolean boolTodasLasPreguntasRespondidas = true;                        // Dice si todas las preguntas ya fueron respondidas.
-                for (int i = 0; i < FirstCiudadanoAdapter.selectedAnswersCiudada.size(); i++)
+                for (int i = 0; i < PrimeraCiudadanoAdapter.selectedRespuesta.size(); i++)
                 { // Revisa las respuestas selecciondas (TOP)
-                    if (FirstCiudadanoAdapter.selectedAnswersCiudada.get(i).matches("Not Attempted"))
+                    if (PrimeraCiudadanoAdapter.selectedRespuesta.get(i).matches("Not Attempted"))
                       { // Si encuentra alguna que no ha sido respondida (TOP)
                           mensajeRespuestasError = "La pregunta: " + (i + 1) + " No fue respondida";
                           boolTodasLasPreguntasRespondidas = false;
@@ -123,7 +119,7 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
                       } // Si encuentra alguna que no ha sido respondida (BOTTOM)
                     else
                       { // Concatena las respuestas obtenidas (TOP)
-                          mensajeRespuestasError = mensajeRespuestasError + "\n" + (i + 1) + " " + FirstCiudadanoAdapter.selectedAnswersCiudada.get(i);
+                          mensajeRespuestasError = mensajeRespuestasError + "\n" + (i + 1) + " " + PrimeraCiudadanoAdapter.selectedRespuesta.get(i);
                       } // Concatena las respuestas obtenidas (BOTTOM)
                 } // Revisa las respuestas selecciondas (BOTTOM)
                 if (boolTodasLasPreguntasRespondidas)

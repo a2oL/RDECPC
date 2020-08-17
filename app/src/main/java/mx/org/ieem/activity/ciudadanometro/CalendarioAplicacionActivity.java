@@ -1,11 +1,12 @@
 package mx.org.ieem.activity.ciudadanometro;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -15,10 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import mx.org.ieem.activity.main.MainActivity;
 import mx.org.ieem.R;
 import mx.org.ieem.data.sqllite.DataBaseAppRed;
+import mx.org.ieem.data.sqllite.models.ciudadanometro.trdd_c_anio;
+import mx.org.ieem.data.sqllite.models.ciudadanometro.trdd_c_grado_escolar;
+import mx.org.ieem.data.sqllite.models.ciudadanometro.trdd_c_realizador;
+
 import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class CalendarioAplicacionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
@@ -35,15 +39,19 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
     Intent intentRegresar;                                                                          // Intent que navegara desde CalendarioAplicacionActivity hacie CiudadanometroActivity.
     Intent intentLogout;                                                                            // Intent que navegara desde CalendarioAplicacionActivity hacie MainActivity.
 
+    Cursor cursor_AnioEjercicioGrado;                                      // Contiene el result set de querys realizados por los metodos cargarMeses() o cargarGrados().
+    SimpleCursorAdapter simpleCursorAdapter_AnioEjercicioGrado;            // Determina la manera en la que seran mostrados los datos del cursor_MesEncuesta.
+
+
     DataBaseAppRed database;                                                                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
 
 
     String[] strAuxiliar;                                                                           // Auxiliar para poder cargar los anios ejercicio y grados a los spinners
     List<String> listAuxiliar = new ArrayList<>();                                                  // Auxiliar para mostrar los datos del strAuxiliar.
 
-    static String anio_final_ciudadanometro = "";                                                   // Contiene el anio de aplicacion del ciudadanometro.
-    static String ejercicio_final_ciudadanometro = "1.- Padres de familio o tutores";               // Contiene a quien sera aplicado el ciudadanometro.
-    static String grado_final_ciudadanometro = "";                                                  // Contierne el grado al que sera aplicado el ciudadanometro.
+    public static trdd_c_anio anio_final_ciudadanometro;                                                   // Contiene el anio de aplicacion del ciudadanometro.
+    public static trdd_c_realizador ejercicio_final_ciudadanometro;               // Contiene a quien sera aplicado el ciudadanometro.
+    public static trdd_c_grado_escolar grado_final_ciudadanometro;                                                  // Contierne el grado al que sera aplicado el ciudadanometro.
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -59,16 +67,17 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
         btnIniciar = (Button)findViewById(R.id.button_Iniciar_CalendarioAplicacion);
         btnRegresar = (Button)findViewById(R.id.button_Regresar_CalendarioAplicacion);
         btnLogout = (Button)findViewById(R.id.button_Logout_CalendarioAplicacion);
+        database = new DataBaseAppRed(getBaseContext());
         spinnerAnios.setOnItemSelectedListener(this);
-        spinnerAnios.setAdapter(spinAnios());
+        spinnerAnios.setAdapter(cargarAnios());
         spinnerEjercicio.setOnItemSelectedListener(this);
-        spinnerEjercicio.setAdapter(spinEjercicio());
+        spinnerEjercicio.setAdapter(cargarRealizador());
         spinnerGrado.setOnItemSelectedListener(this);
-        spinnerGrado.setAdapter(spinGrado());
+        spinnerGrado.setAdapter(cargarGrado());
         intentPrimera = new Intent(this, PrimeraCiudadanoActivity.class);
         intentRegresar = new Intent(this, CiudadanometroActivity.class);
         intentLogout = new Intent(this, MainActivity.class);
-        database = new DataBaseAppRed(getBaseContext());
+
         // Inicializacion de las variables (BOTTOM)
 
         // Click listeners de los botones definidos (TOP)
@@ -99,31 +108,31 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
     }
 
     // Adapatadores de los spinners (TOP)
-    public ArrayAdapter<String> spinAnios()
-    {
-        // TODO Cambiar por la bd de Ciudadanometro
-        strAuxiliar = new String[] {"2020", "2021", "2022", "2023", "2024"};
-        Collections.addAll(listAuxiliar, strAuxiliar);
-        return new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item, listAuxiliar);
-    }
 
-    public ArrayAdapter<String> spinEjercicio()
-    {
-        // TODO Cambiar por la bd de Ciudadanometro
-        listAuxiliar = new ArrayList<>();
-        strAuxiliar = new String[] {"1.- Padres de familio o tutores", "2.- Docentes", "3.- Directivos/Administrativos", "4.- Otros"};
-        Collections.addAll(listAuxiliar, strAuxiliar);
-        return new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item, listAuxiliar);
-    }
+    public SimpleCursorAdapter cargarAnios()
+    { // Regresa los meses que se encuentran el la tabla trdd_c_anio (TOP)
+        cursor_AnioEjercicioGrado=database.getAniosCiudadanometroBD();
+        simpleCursorAdapter_AnioEjercicioGrado =new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor_AnioEjercicioGrado, new String[]{"_id"}, new int[]{android.R.id.text1}, SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        simpleCursorAdapter_AnioEjercicioGrado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        return simpleCursorAdapter_AnioEjercicioGrado;
+    } // Regresa los meses que se encuentran el la tabla trdd_c_anio (BOTTOM)
 
-    public ArrayAdapter<String> spinGrado()
-    {
-        // TODO Cambiar por la bd de Ciudadanometro
-        listAuxiliar = new ArrayList<>();
-        strAuxiliar = new String[] {"1 ero de Secundaria", "2 do de Secundaria", "3 ero de Secundaria"};
-        Collections.addAll(listAuxiliar, strAuxiliar);
-        return new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item, listAuxiliar);
-    }
+    public SimpleCursorAdapter cargarRealizador()
+    { // Regresa los meses que se encuentran el la tabla trdd_c_realizador (TOP)
+        cursor_AnioEjercicioGrado=database.getRealizadorCiudadanometroBD();
+        simpleCursorAdapter_AnioEjercicioGrado =new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor_AnioEjercicioGrado, new String[]{"nombre"}, new int[]{android.R.id.text1}, SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        simpleCursorAdapter_AnioEjercicioGrado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        return simpleCursorAdapter_AnioEjercicioGrado;
+    } // Regresa los meses que se encuentran el la tabla trdd_c_realizador (BOTTOM)
+
+    public SimpleCursorAdapter cargarGrado()
+    { // Regresa los meses que se encuentran el la tabla trdd_c_grado_escolar (TOP)
+        cursor_AnioEjercicioGrado=database.getGradosCiudadanometroBD();
+        simpleCursorAdapter_AnioEjercicioGrado =new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor_AnioEjercicioGrado, new String[]{"nombre"}, new int[]{android.R.id.text1}, SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        simpleCursorAdapter_AnioEjercicioGrado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        return simpleCursorAdapter_AnioEjercicioGrado;
+    } // Regresa los meses que se encuentran el la tabla trdd_c_grado_escolar (BOTTOM)
+
     // Adapatadores de los spinners (BOTTOM)
 
     @Override
@@ -138,11 +147,14 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-        anio_final_ciudadanometro = spinnerAnios.getSelectedItem().toString();
-        ejercicio_final_ciudadanometro = spinnerEjercicio.getSelectedItem().toString();
-        grado_final_ciudadanometro = spinnerGrado.getSelectedItem().toString();
+        cursor_AnioEjercicioGrado = (Cursor) spinnerAnios.getSelectedItem();
+        anio_final_ciudadanometro = new trdd_c_anio(cursor_AnioEjercicioGrado.getString(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("_id")));
+        cursor_AnioEjercicioGrado = (Cursor) spinnerEjercicio.getSelectedItem();
+        ejercicio_final_ciudadanometro = new trdd_c_realizador(cursor_AnioEjercicioGrado.getInt(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("_id")),cursor_AnioEjercicioGrado.getString(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("nombre")));
+        cursor_AnioEjercicioGrado = (Cursor) spinnerGrado.getSelectedItem();
+        grado_final_ciudadanometro = new trdd_c_grado_escolar(cursor_AnioEjercicioGrado.getInt(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("_id")),cursor_AnioEjercicioGrado.getString(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("nombre")),cursor_AnioEjercicioGrado.getString(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("siglas")),cursor_AnioEjercicioGrado.getString(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("grado")));
 
-        if (!ejercicio_final_ciudadanometro.contentEquals("1.- Padres de familio o tutores"))
+        if (!ejercicio_final_ciudadanometro.getNombre().contentEquals("Padres de familia o tutores"))
           {
               spinnerGrado.setVisibility(View.GONE);
               textViewGrado.setVisibility(View.GONE);

@@ -1,14 +1,18 @@
 package mx.org.ieem.activity.ciudadanometro;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -27,6 +31,7 @@ public class CiudadanometroActivity extends AppCompatActivity
     Button btnEnviar;                               // Aloja el elemento de la UI (button_Enviar_Ciudadanometro) del layout activity_Ciudadanometro que acciona el intentEnviar.
     Button btnLogout;                               // Aloja el elemento de la UI (button_Logout_Ciudadanometro) del layout activity_Ciudadanometro que acciona el intentLogout.
     Button btnRegresar;                             // Aloja el elemento de la UI (button_Regresar_Ciudadanometro) del layout activity_Ciudadanometro que acciona el intentRegresar.
+    TextView texto;
 
     Intent intentIniciar;                           // Intent que navegara desde CiudadanometroActivity hacia CalendarioAplicacionActivity.
     Intent intentEnviar;                            // Intent que navegara desde CiudadanometroActivity hacia LoadPageActivity.
@@ -34,6 +39,7 @@ public class CiudadanometroActivity extends AppCompatActivity
     Intent intentRegresar;                          // Intent que navegara desde CiudadanometroActivity hacia  SelectActivity.
     DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
 
+    int ultimoRegistro = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -46,12 +52,24 @@ public class CiudadanometroActivity extends AppCompatActivity
         btnEnviar = (Button)findViewById(R.id.button_Enviar_Ciudadanometro);
         btnLogout = (Button)findViewById(R.id.button_Logout_Ciudadanometro);
         btnRegresar = (Button)findViewById(R.id.button_Regresar_Ciudadanometro);
+        texto = (TextView)findViewById(R.id.textView_NumerodeCiudadanometro_Ciudadanometro);
         intentIniciar = new Intent(this, CalendarioAplicacionActivity.class);
         intentEnviar = new Intent(this, LoadPageActivity.class);
         intentLogout = new Intent(this, MainActivity.class);
         intentRegresar = new Intent(this, SelectActivity.class);
+        final AlertDialog.Builder dialogo2 = new AlertDialog.Builder(this);
         database = new DataBaseAppRed(getBaseContext());
         // Inicializacion de las variables (BOTTOM)
+
+
+        Cursor dataCursor = database.getUltimoRegistroCiudadanometro();
+        dataCursor.moveToNext();
+        if(dataCursor.getCount() > 0)
+        {
+            ultimoRegistro = dataCursor.getInt(0);
+        }
+
+        texto.setText("Ciudadanometros Realizados: " +  ultimoRegistro);
 
         // Click listeners de los botones definidos (TOP)
         btnIniciar.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +85,21 @@ public class CiudadanometroActivity extends AppCompatActivity
                 Bundle parametros = new Bundle();               // Ocupada para enviar valor al LoadPageActivity.
                 parametros.putString("enviadode", "2");
                 intentEnviar.putExtras(parametros);
-                startActivity(intentEnviar);
+                dialogo2.setTitle("Importante").setMessage("Estas por enviar los Ciudadanometros realizados!!!\n\nEsto requiere conexión a internet.");
+                dialogo2.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(intentEnviar);
+                    }
+                });
+                dialogo2.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                dialogo2.show();
+
+
             }
         });
 

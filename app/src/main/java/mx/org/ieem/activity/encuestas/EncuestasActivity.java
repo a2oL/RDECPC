@@ -1,5 +1,6 @@
 package mx.org.ieem.activity.encuestas;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import mx.org.ieem.activity.main.LoadPageActivity;
@@ -34,6 +36,7 @@ public class EncuestasActivity extends AppCompatActivity {
     Intent intentRegresar;                          // Intent que navegara desde EncuestasActivity hacia  SelectActivity.
     DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
 
+    int ultimoRegistro = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     { // Creacion de la vista (TOP)
@@ -50,15 +53,20 @@ public class EncuestasActivity extends AppCompatActivity {
         intentEnviar = new Intent(this, LoadPageActivity.class);
         intentLogout = new Intent(this, MainActivity.class);
         intentRegresar = new Intent(this, SelectActivity.class);
+        final AlertDialog.Builder dialogo2 = new AlertDialog.Builder(this);
         database = new DataBaseAppRed(getBaseContext());
 
         Cursor dataCursor = database.getUltimoRegistro();
         dataCursor.moveToNext();
+        if(dataCursor.getCount() > 0)
+        {
+            ultimoRegistro = dataCursor.getInt(0);
+        }
         // Inicializacion de las variables (BOTTOM)
 
         // Texto informativo de cuantas encuestas se han realizado
         // TODO Agregar una tabla o un metodo para contar encuestas Nota: Hasta que este la version final de la bd.
-        textViewNumeroEncuestas.setText("Encuestas Realizadas: " + dataCursor.getString(0) );
+        textViewNumeroEncuestas.setText("Encuestas Realizadas: " + ultimoRegistro );
 
         // Click listeners de los botones definidos (TOP)
         btnIniciar.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +82,19 @@ public class EncuestasActivity extends AppCompatActivity {
                 Bundle parametros = new Bundle();               // Ocupada para enviar valor al LoadPageActivity.
                 parametros.putString("enviadode", "1");
                 intentEnviar.putExtras(parametros);
-                startActivity(intentEnviar);
+                    dialogo2.setTitle("Importante").setMessage("Estas por enviar las Encuestas realizadas!!!\n\nEsto requiere conexión a internet.");
+                    dialogo2.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(intentEnviar);
+                        }
+                    });
+                    dialogo2.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    dialogo2.show();
             }
             });
 

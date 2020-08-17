@@ -1,20 +1,20 @@
-package mx.org.ieem.data.sqllite.models.encuestaj;
+package mx.org.ieem.data.sqllite.models.general;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class trdd_parametros_version implements Parcelable {
+public class trdd_version_tabla implements Parcelable {
     private int id_parametros;
     private String tabla;
     private int version;
 
-    public trdd_parametros_version(int id_parametros, String tabla, int version) {
+    public trdd_version_tabla(int id_parametros, String tabla, int version) {
         this.id_parametros = id_parametros;
         this.tabla = tabla;
         this.version = version;
     }
 
-    protected trdd_parametros_version(Parcel in) {
+    protected trdd_version_tabla(Parcel in) {
         id_parametros = in.readInt();
         tabla = in.readString();
         version = in.readInt();
@@ -32,15 +32,15 @@ public class trdd_parametros_version implements Parcelable {
         return 0;
     }
 
-    public static final Creator<trdd_parametros_version> CREATOR = new Creator<trdd_parametros_version>() {
+    public static final Creator<trdd_version_tabla> CREATOR = new Creator<trdd_version_tabla>() {
         @Override
-        public trdd_parametros_version createFromParcel(Parcel in) {
-            return new trdd_parametros_version(in);
+        public trdd_version_tabla createFromParcel(Parcel in) {
+            return new trdd_version_tabla(in);
         }
 
         @Override
-        public trdd_parametros_version[] newArray(int size) {
-            return new trdd_parametros_version[size];
+        public trdd_version_tabla[] newArray(int size) {
+            return new trdd_version_tabla[size];
         }
     };
 
