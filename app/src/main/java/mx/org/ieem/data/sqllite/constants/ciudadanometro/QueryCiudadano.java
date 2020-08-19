@@ -85,7 +85,7 @@ public class QueryCiudadano
             COLUMN_NAME_ID_REALIZADOREDAD_ENCUESTA_CIUDADANOMETRO + " INTEGER NOT NULL," +
             COLUMN_NAME_ID_REALIZADORGENERO_ENCUESTA_CIUDADANOMETRO + " INTEGER NOT NULL," +
             COLUMN_NAME_ID_REALIZADORESCOLARIDAD_ENCUESTA_CIUDADANOMETRO + " INTEGER NOT NULL," +
-            "CONSTRAINT trdd_c_enc_cctramenc_pk PRIMARY KEY (id_cct, id_random)," +
+            "CONSTRAINT trdd_c_enc_cctramenc_pk PRIMARY KEY (id_cct, id_random, id_encuesta)," +
             "CONSTRAINT trdd_c_enc_cct_fk FOREIGN KEY (id_cct) REFERENCES trdd_cct (id_cct)," +
             "CONSTRAINT trdd_c_enc_realizador_fk FOREIGN KEY (id_realizador) REFERENCES trdd_c_realizador (id_realizador)," +
             "CONSTRAINT trdd_c_enc_rea_nivedugraest_fk FOREIGN KEY (id_realizador_niv_edu, id_realizador_grad_esc) REFERENCES trdd_c_nied_gres (id_nivel_educativo, id_grado_escolar)," +

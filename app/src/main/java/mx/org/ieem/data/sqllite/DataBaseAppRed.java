@@ -23,7 +23,7 @@ public class DataBaseAppRed
     /** --------------------------------- Nombre de Base de Datos -------------------------------------**/
     public static final String DataBaseName = "DPCDataBase";
     /** --------------------------------- Version de Base de Datos ---------------------------------**/
-    public static final int version = 40;
+    public static final int version = 42;
 
     /** --------------------------------- Variables y Helpers ----------------------------------**/
     public DBHelper helper;

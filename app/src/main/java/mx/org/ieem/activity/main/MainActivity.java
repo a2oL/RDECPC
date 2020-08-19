@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import mx.org.ieem.activity.eventos.EventosActivity;
 import mx.org.ieem.activity.login.LoginActivity;
 
 import mx.org.ieem.R;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnDpc;                          // Aloja el elemento de la UI (button_Dpc_Main) del layout activity_main contendra enlace a minisitio DPC.
     Intent intentLogin;                     // Intent que navegara desde el MainActivity a el LoginActivity.
     Intent intentSelect;                    // Intent que navegara desde el MainActivity a el SelectActivity.
+    Intent intentEventos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +49,20 @@ public class MainActivity extends AppCompatActivity {
         btnDpc = (Button)findViewById(R.id.button_Dpc_Main);
         intentLogin = new Intent(this, LoginActivity.class);
         intentSelect = new Intent(this, SelectActivity.class);
+        intentEventos = new Intent(this, EventosActivity.class);
         // Inicializacion de las variables (BOTTOM)
 
         // Click listeners de los botones definidos (TOP)
-            btnEncuestasCiudadano.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(usuarioExiste()){
-                        startActivity(intentSelect);
-                    }else {
-                        startActivity(intentLogin);
-                    }
+        btnEncuestasCiudadano.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(usuarioExiste()){
+                    startActivity(intentSelect);
+                }else {
+                    startActivity(intentLogin);
                 }
-            });
+            }
+        });
 
         btnFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnEventos.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { Toast.makeText(getApplicationContext(), "Pagina de eventos y concursos", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                startActivity(intentEventos);
             }
         });
 
