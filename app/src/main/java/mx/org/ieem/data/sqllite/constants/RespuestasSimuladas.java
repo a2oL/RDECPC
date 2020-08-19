@@ -5,167 +5,23 @@ public class RespuestasSimuladas {
     public static final String RESPUESTA_SIMULADA_A = "{\n" +
             "     \"trdd_cct\":\n" +
             "     {\n" +
-            "         \"id_cct\": \"1\",\n" +
+            "         \"id_cct\": \"a\",\n" +
             "         \"nombre\": \"PRIMARIA AMADO NERVO\",\n" +
             "         \"domicilio\": \"ESQUINA HERIBERTO HENRIQUEZ CON CEBORUCO\",\n" +
             "         \"email\": \"gvaldez@ieem.org.mx\",\n" +
-            "         \"id_municipio\": \"1\",\n" +
-            "         \"id_nivel_educativo\": \"1\"\n" +
+            "         \"trdd_municipio\":\n" +
+            "     \t  {\n" +
+            "         \t \"id_municipio\": \"1\",\n" +
+            "    \t \t \"nombre\": \"TOLUCA\"\n" +
+            "   \t\t  },\n" +
+            "         \"trdd_nivel_educativo\":\n" +
+            " \t\t  {\n" +
+            "         \t \"id_nivel_educativo\": \"1\",\n" +
+            "         \t \"nombre\": \"Primaria\"\n" +
+            "     \t  },\n" +
+            "     \t  \"contrasenia\":\"a\"\n" +
             "     },\n" +
             "\n" +
-            "     \"trdd_ej_nivel_educativo\":\n" +
-            "     {\n" +
-            "         \"id_nivel_educativo\": \"1\",\n" +
-            "         \"nombre\": \"Primaria\"\n" +
-            "     },\n" +
-            "\n" +
-            "     \"trdd_c_nivel_educativo\":\n" +
-            "     {\n" +
-            "         \"id_nivel_educativo\": \"1\",\n" +
-            "         \"nombre\": \"Primaria\"\n" +
-            "     },\n" +
-            "\n" +
-            "     \"trdd_ej_municipio\":\n" +
-            "     {\n" +
-            "         \"id_municipio\": \"1\",\n" +
-            "         \"nombre\": \"TOLUCA\"\n" +
-            "     },\n" +
-            "\n" +
-            "     \"trdd_c_municipio\":\n" +
-            "     {\n" +
-            "         \"id_municipio\": \"1\",\n" +
-            "         \"nombre\": \"TOLUCA\"\n" +
-            "     },\n" +
-            "\n" +
-            "     \"trdd_tipo_sistema_apk\":\n" +
-            "     [\n" +
-            "        {\n" +
-            "            \"id_sistema_apk\":\"1\",\n" +
-            "            \"nombre\":\"Encuesta Juvenil\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"id_sistema_apk\":\"2\",\n" +
-            "            \"nombre\":\"Ciudadan�metro\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"id_sistema_apk\":\"3\",\n" +
-            "            \"nombre\":\"Encuesta y Ciudadan�metro\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"id_sistema_apk\":\"4\",\n" +
-            "            \"nombre\":\"Eventos y concursos vigentes\"\n" +
-            "        }\n" +
-            "     ],\n" +
-            "     \n" +
-            "\n" +
-            "     \"trdd_version_tabla\": \n" +
-            "     [\n" +
-            "         {\n" +
-            "             \"id_sistema_apk\": \"1\",\n" +
-            "             \"id_tabla\": \"trdd_ej_anio\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "             \"id_sistema_apk\": \"1\",\n" +
-            "             \"id_tabla\": \"trdd_ej_mes\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "             \"id_sistema_apk\": \"1\",\n" +
-            "             \"id_tabla\": \"trdd_ej_anio_mes\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "             \"id_sistema_apk\": \"1\",\n" +
-            "             \"id_tabla\": \"trdd_ej_grado_escolar\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "             \"id_sistema_apk\": \"1\",\n" +
-            "             \"id_tabla\": \"trdd_ej_nied_gres\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "             \"id_sistema_apk\": \"1\",\n" +
-            "             \"id_tabla\": \"trdd_ej_indicador\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "             \"id_sistema_apk\": \"1\",\n" +
-            "             \"id_tabla\": \"trdd_ej_nivedu_ind\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "             \"id_sistema_apk\": \"1\",\n" +
-            "             \"id_tabla\": \"trdd_ej_pregunta\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "             \"id_sistema_apk\": \"1\",\n" +
-            "             \"id_tabla\": \"trdd_ej_estatus_respuesta\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "             \"id_sistema_apk\": \"1\",\n" +
-            "             \"id_tabla\": \"trdd_ej_pregunta_respuesta\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "            \"id_sistema_apk\": \"2\",\n" +
-            "             \"id_tabla\": \"trdd_c_grado_escolar\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "            \"id_sistema_apk\": \"2\",\n" +
-            "             \"id_tabla\": \"trdd_c_nied_gres\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "\n" +
-            "         {\n" +
-            "            \"id_sistema_apk\": \"2\",\n" +
-            "             \"id_tabla\": \"trdd_c_realizador\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "            \"id_sistema_apk\": \"2\",\n" +
-            "             \"id_tabla\": \"trdd_c_anio\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "            \"id_sistema_apk\": \"2\",\n" +
-            "             \"id_tabla\": \"trdd_c_pregunta\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "            \"id_sistema_apk\": \"2\",\n" +
-            "             \"id_tabla\": \"trdd_c_estatus_respuesta\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "            \"id_sistema_apk\": \"2\",\n" +
-            "             \"id_tabla\": \"trdd_c_pregunta_respuesta\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "            \"id_sistema_apk\": \"2\",\n" +
-            "             \"id_tabla\": \"trdd_c_realicador_edad\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "            \"id_sistema_apk\": \"2\",\n" +
-            "             \"id_tabla\": \"trdd_c_realicador_genero\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "            \"id_sistema_apk\": \"2\",\n" +
-            "             \"id_tabla\": \"trdd_c_realicador_escolaridad\",\n" +
-            "             \"version\": \"1\"\n" +
-            "         }\n" +
-            "\n" +
-            "     ]\n" +
-            "}";
-
-    public static final String RESPUESTA_SIMULADA_VERSIONES = "{\n" +
             "\t\"trdd_ej_anio\":\n" +
             "\t[\n" +
             "\t\t{\n" +
@@ -277,13 +133,6 @@ public class RespuestasSimuladas {
             "\t\t}\n" +
             "\t],\n" +
             "\n" +
-            "\t\"trdd_ej_nivel_educativo\":\n" +
-            "\t[\n" +
-            "\t\t{\n" +
-            "\t\t\t\"id_nivel_educativo\":\"1\",\n" +
-            "\t\t\t\"nombre\":\"Primaria\"\n" +
-            "\t\t}\n" +
-            "\t],\n" +
             "\n" +
             "\t\"trdd_ej_grado_escolar\":\n" +
             "\t[\n" +
@@ -948,4 +797,5 @@ public class RespuestasSimuladas {
             "\t]\n" +
             "\n" +
             "}";
+
 }

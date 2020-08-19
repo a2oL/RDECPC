@@ -9,7 +9,7 @@ import mx.org.ieem.data.sqllite.models.ciudadanometro.*;
 import mx.org.ieem.data.sqllite.models.encuestaj.*;
 import mx.org.ieem.data.sqllite.models.general.trdd_tipo_sistema_apk;
 import mx.org.ieem.data.sqllite.models.general.trdd_version_tabla;
-import mx.org.ieem.data.sqllite.models.general.trdd_cct;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
 
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
 import static mx.org.ieem.data.sqllite.constants.ciudadanometro.CamposyTablasCiudadano.*;
@@ -23,7 +23,7 @@ public class DataBaseAppRed
     /** --------------------------------- Nombre de Base de Datos -------------------------------------**/
     public static final String DataBaseName = "DPCDataBase";
     /** --------------------------------- Version de Base de Datos ---------------------------------**/
-    public static final int version = 42;
+    public static final int version = 45;
 
     /** --------------------------------- Variables y Helpers ----------------------------------**/
     public DBHelper helper;
@@ -117,18 +117,18 @@ public class DataBaseAppRed
         close();
     }
 
-    public trdd_ej_municipio getMunicipio() {
-        trdd_ej_municipio trdd_ej_municipios = null;
+    public trdd_municipio getMunicipio() {
+        trdd_municipio trdd__municipios = null;
         Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_TMUNICIPIO + " WHERE " + COLUMN_NAME_ID_TMUNICIPIO+ " LIKE "+"'"+actual_final.getId_municipio()+"'");
         if (dataCursor != null && dataCursor.getCount() > 0){
             for (dataCursor.moveToFirst() ; !dataCursor.isAfterLast() ; dataCursor.moveToNext()){
                 int id = dataCursor.getInt(dataCursor.getColumnIndex(COLUMN_NAME_ID_TMUNICIPIO));
                 String name = dataCursor.getString(dataCursor.getColumnIndex(COLUMN_NAME_NAME_TMUNICIPIO));
-                trdd_ej_municipios = new trdd_ej_municipio(id,name);
+                trdd__municipios = new trdd_municipio(id,name);
             }
         }
         close();
-        return trdd_ej_municipios;
+        return trdd__municipios;
     }
 
     // Metodo que se utilizara para regresar el objeto de tipo cct segun el id_CCT
@@ -163,38 +163,35 @@ public class DataBaseAppRed
         values.put(COLUMN_NAME_EMAIL_CCT_GENERAL, (actual.getEmail()));
         values.put(COLUMN_NAME_ID_MUNICIPIO_CCT_GENERAL, (actual.getId_municipio()));
         values.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO_CCT_GENERAL, (actual.getId_nivel_educativo()));
+        values.put(COLUMN_NAME_CONTRASENIA_CCT_GENERAL, (actual.getContrasenia()));
         database.insert(TABLE_NAME_CCT_GENERAL,null,values);
         close();
     }
 
-    public void insertMunicipioActual(trdd_ej_municipio actual, trdd_c_municipio actual2)
+    public void insertMunicipioActual(trdd_municipio actual)
     {
         open();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME_ID_TMUNICIPIO, (actual.getId()));
         values.put(COLUMN_NAME_NAME_TMUNICIPIO, (actual.getNombre()));
-        ContentValues values2 = new ContentValues();
-        values2.put(COLUMN_NAME_ID_TMUNICIPIO_CIUDADANOMETRO, (actual2.getId_municipio()));
-        values2.put(COLUMN_NAME_NAME_TMUNICIPIO_CIUDADANOMETRO, (actual2.getNombre()));
         database.insert(TABLE_NAME_TMUNICIPIO,null,values);
-        database.insert(TABLE_NAME_TMUNICIPIO_CIUDADANOMETRO,null,values2);
         close();
     }
 
-    public void insertNivelEducativoActual(trdd_ej_nivel_educativo actual, trdd_c_nivel_educativo actual2)
+    public void insertNivelEducativoActual(trdd_nivel_educativo actual)
     {
         open();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO, (actual.getId_nivel_educativo()));
         values.put(COLUMN_NAME_NAME_NIVEL_EDUCATIVO, (actual.getNombre()));
         database.insert(TABLE_NAME_NIVEL_EDUCATIVO,null,values);
-
-        ContentValues values2 = new ContentValues();
-        values2.put(COLUMN_NAME_ID_NIVEL_EDUCATIVO_CIUDADANOMETRO, (actual2.getId_nivel_educativo()));
-        values2.put(COLUMN_NAME_NAME_NIVEL_EDUCATIVO_CIUDADANOMETRO, (actual2.getNombre()));
-        database.insert(TABLE_NAME_NIVEL_EDUCATIVO_CIUDADANOMETRO,null,values2);
         close();
     }
+
+    public boolean checkTablas(){
+        return true;
+    }
+
 
     public void insertVersiondeTabla(trdd_version_tabla actual)
     {

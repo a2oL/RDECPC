@@ -5,7 +5,7 @@ import mx.org.ieem.data.sqllite.DataBaseAppRed;
 public class CamposyTablasEncuestas
 {
     /** --------------------------------- Tablas y Campos ---------------------------------**/
-    public static final String TABLE_NAME_TMUNICIPIO = "trdd_ej_municipio";
+    public static final String TABLE_NAME_TMUNICIPIO = "trdd_municipio";
     public static final String COLUMN_NAME_ID_TMUNICIPIO = "id_municipio";
     public static final String COLUMN_NAME_NAME_TMUNICIPIO = "nombre";
 
@@ -20,7 +20,7 @@ public class CamposyTablasEncuestas
     public static final String COLUMN_NAME_ID_MES_ANIO = "id_anio";
     public static final String COLUMN_NAME_NAME_MES_ANIO = "id_mes";
 
-    public static final String TABLE_NAME_NIVEL_EDUCATIVO = "trdd_ej_nivel_educativo";
+    public static final String TABLE_NAME_NIVEL_EDUCATIVO = "trdd_nivel_educativo";
     public static final String COLUMN_NAME_ID_NIVEL_EDUCATIVO = "id_nivel_educativo";
     public static final String COLUMN_NAME_NAME_NIVEL_EDUCATIVO = "nombre";
 
@@ -69,6 +69,7 @@ public class CamposyTablasEncuestas
     public static final String COLUMN_NAME_EMAIL_CCT_GENERAL = "email";
     public static final String COLUMN_NAME_ID_MUNICIPIO_CCT_GENERAL = "id_municipio ";
     public static final String COLUMN_NAME_ID_NIVEL_EDUCATIVO_CCT_GENERAL = "id_nivel_educativo";
+    public static final String COLUMN_NAME_CONTRASENIA_CCT_GENERAL = "contrasenia";
 
     public static final String TABLE_NAME_ENCUESTA = "trdd_ej_encuesta";
     public static final String TABLE_NAME_DETALLE_ENCUESTA = "trdd_ej_detalle_encuesta";

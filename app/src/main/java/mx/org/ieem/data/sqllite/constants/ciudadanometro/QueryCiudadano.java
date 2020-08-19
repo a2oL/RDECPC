@@ -5,15 +5,6 @@ import static mx.org.ieem.data.sqllite.constants.ciudadanometro.CamposyTablasCiu
 
 public class QueryCiudadano
 {
-    public static final String CiuMunicipio = "CREATE TABLE " + TABLE_NAME_TMUNICIPIO_CIUDADANOMETRO + " (" +
-            COLUMN_NAME_ID_TMUNICIPIO_CIUDADANOMETRO + " INTEGER NOT NULL, " +
-            COLUMN_NAME_NAME_TMUNICIPIO_CIUDADANOMETRO + " TEXT NOT NULL," +
-            "CONSTRAINT trdd_c_municipio_pk PRIMARY KEY (id_municipio));";
-
-    public static final String CiuNivelEducativo = "CREATE TABLE " + TABLE_NAME_NIVEL_EDUCATIVO_CIUDADANOMETRO + " (" +
-            COLUMN_NAME_ID_NIVEL_EDUCATIVO_CIUDADANOMETRO + " INTEGER NOT NULL, " +
-            COLUMN_NAME_NAME_NIVEL_EDUCATIVO_CIUDADANOMETRO + " TEXT NOT NULL," +
-            "CONSTRAINT trdd_c_nivel_educativo_pk PRIMARY KEY (id_nivel_educativo));";
 
     public static final String CiuGradoEscolar = "CREATE TABLE " + TABLE_NAME_GRADO_ESCOLAR_CIUDADANOMETRO+ " (" +
             COLUMN_NAME_ID_GRADO_ESCOLAR_CIUDADANOMETRO + " INTEGER NOT NULL, " +
@@ -26,7 +17,7 @@ public class QueryCiudadano
             COLUMN_NAME_NE_NIED_GRES_CIUDADANOMETRO + " INTEGER NOT NULL, " +
             COLUMN_NAME_GE_NIED_GRES_CIUDADANOMETRO + " INTEGER NOT NULL," +
             "CONSTRAINT trdd_c_nege_pk PRIMARY KEY (id_nivel_educativo, id_grado_escolar)," +
-            "CONSTRAINT trpd_c_nege_nivedu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_c_nivel_educativo (id_nivel_educativo)," +
+            "CONSTRAINT trpd_c_nege_nivedu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_nivel_educativo (id_nivel_educativo)," +
             "CONSTRAINT trpd_c_nege_graesc_fk FOREIGN KEY (id_grado_escolar) REFERENCES trdd_c_grado_escolar (id_grado_escolar));";
 
     public static final String CiuRealizador = "CREATE TABLE " + TABLE_NAME_REALIZADOR_CIUDADANOMETRO + " (" +

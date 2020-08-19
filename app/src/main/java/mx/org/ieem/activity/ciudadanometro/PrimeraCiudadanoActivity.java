@@ -124,7 +124,7 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
                 } // Revisa las respuestas selecciondas (BOTTOM)
                 if (boolTodasLasPreguntasRespondidas)
                   { // Si todas las preguntas fueron respondidas (TOP)
-                      Toast.makeText(getApplicationContext(), mensajeRespuestasError, Toast.LENGTH_LONG).show();
+                      //Toast.makeText(getApplicationContext(), mensajeRespuestasError, Toast.LENGTH_LONG).show();
                       startActivity(intentSiguiente);
                   } // Si todas las preguntas fueron respondidas (BOTTOM)
                 else

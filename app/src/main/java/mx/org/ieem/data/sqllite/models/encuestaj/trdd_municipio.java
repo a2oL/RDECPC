@@ -4,29 +4,29 @@ package mx.org.ieem.data.sqllite.models.encuestaj;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class trdd_ej_municipio implements Parcelable {
+public class trdd_municipio implements Parcelable {
     private int id;
     private String nombre;
 
-    public trdd_ej_municipio(int id, String nombre) {
+    public trdd_municipio(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    protected trdd_ej_municipio(Parcel in) {
+    protected trdd_municipio(Parcel in) {
         id = in.readInt();
         nombre = in.readString();
     }
 
-    public static final Creator<trdd_ej_municipio> CREATOR = new Creator<trdd_ej_municipio>() {
+    public static final Creator<trdd_municipio> CREATOR = new Creator<trdd_municipio>() {
         @Override
-        public trdd_ej_municipio createFromParcel(Parcel in) {
-            return new trdd_ej_municipio(in);
+        public trdd_municipio createFromParcel(Parcel in) {
+            return new trdd_municipio(in);
         }
 
         @Override
-        public trdd_ej_municipio[] newArray(int size) {
-            return new trdd_ej_municipio[size];
+        public trdd_municipio[] newArray(int size) {
+            return new trdd_municipio[size];
         }
     };
 

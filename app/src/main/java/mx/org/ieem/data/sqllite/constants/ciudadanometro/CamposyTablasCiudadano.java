@@ -3,14 +3,6 @@ package mx.org.ieem.data.sqllite.constants.ciudadanometro;
 public class CamposyTablasCiudadano
 {
     /** --------------------------------- Tablas y Campos ---------------------------------**/
-    public static final String TABLE_NAME_TMUNICIPIO_CIUDADANOMETRO = "trdd_c_municipio";
-    public static final String COLUMN_NAME_ID_TMUNICIPIO_CIUDADANOMETRO = "id_municipio";
-    public static final String COLUMN_NAME_NAME_TMUNICIPIO_CIUDADANOMETRO = "nombre";
-
-    public static final String TABLE_NAME_NIVEL_EDUCATIVO_CIUDADANOMETRO = "trdd_c_nivel_educativo";
-    public static final String COLUMN_NAME_ID_NIVEL_EDUCATIVO_CIUDADANOMETRO = "id_nivel_educativo";
-    public static final String COLUMN_NAME_NAME_NIVEL_EDUCATIVO_CIUDADANOMETRO = "nombre";
-
     public static final String TABLE_NAME_GRADO_ESCOLAR_CIUDADANOMETRO = "trdd_c_grado_escolar";
     public static final String COLUMN_NAME_ID_GRADO_ESCOLAR_CIUDADANOMETRO = "id_grado_escolar";
     public static final String COLUMN_NAME_NAME_GRADO_ESCOLAR_CIUDADANOMETRO = "nombre";

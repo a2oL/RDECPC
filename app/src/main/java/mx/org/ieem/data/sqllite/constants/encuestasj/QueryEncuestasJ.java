@@ -8,7 +8,7 @@ public class QueryEncuestasJ
     public static final String CMunicipios = "CREATE TABLE " + TABLE_NAME_TMUNICIPIO + " (" +
             COLUMN_NAME_ID_TMUNICIPIO + " INTEGER NOT NULL, " +
             COLUMN_NAME_NAME_TMUNICIPIO + " TEXT NOT NULL," +
-            "CONSTRAINT trdd_ej_municipio_pk PRIMARY KEY (id_municipio));";
+            "CONSTRAINT trdd_municipio_pk PRIMARY KEY (id_municipio));";
 
     public static final String CAnios = "CREATE TABLE " + TABLE_NAME_ANIOS + " (" +
             COLUMN_NAME_ID_ANIOS + " TEXT NOT NULL," +
@@ -29,7 +29,7 @@ public class QueryEncuestasJ
     public static final String CNivelEducativo = "CREATE TABLE " + TABLE_NAME_NIVEL_EDUCATIVO + " (" +
             COLUMN_NAME_ID_NIVEL_EDUCATIVO + " INTEGER NOT NULL, " +
             COLUMN_NAME_NAME_NIVEL_EDUCATIVO + " TEXT NOT NULL," +
-            "CONSTRAINT trdd_ej_nivel_educativo_pk PRIMARY KEY (id_nivel_educativo));";
+            "CONSTRAINT trdd_nivel_educativo_pk PRIMARY KEY (id_nivel_educativo));";
 
     public static final String CGradoEscolar = "CREATE TABLE " + TABLE_NAME_GRADO_ESCOLAR + " (" +
             COLUMN_NAME_ID_GRADO_ESCOLAR + " INTEGER NOT NULL, " +
@@ -42,7 +42,7 @@ public class QueryEncuestasJ
             COLUMN_NAME_NE_NIED_GRES + " INTEGER NOT NULL, " +
             COLUMN_NAME_GE_NIED_GRES + " INTEGER NOT NULL," +
             "CONSTRAINT trdd_ej_nege_pk PRIMARY KEY (id_nivel_educativo, id_grado_escolar)," +
-            "CONSTRAINT trpd_ej_nege_nivedu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_ej_nivel_educativo (id_nivel_educativo)," +
+            "CONSTRAINT trpd_ej_nege_nivedu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_nivel_educativo (id_nivel_educativo)," +
             "CONSTRAINT trpd_ej_nege_graesc_fk FOREIGN KEY (id_grado_escolar) REFERENCES trdd_ej_grado_escolar (id_grado_escolar));";
 
     public static final String CIndicador = "CREATE TABLE " + TABLE_NAME_INDICADOR + " (" +
@@ -54,7 +54,7 @@ public class QueryEncuestasJ
             COLUMN_NAME_NE_NIV_IND + " INTEGER NOT NULL, " +
             COLUMN_NAME_IN_NIV_IND + " INTEGER NOT NULL," +
             "CONSTRAINT trdd_ej_nei_nei_pk PRIMARY KEY (id_nivel_educativo, id_indicador)," +
-            "CONSTRAINT trdd_ej_nei_nivedu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_ej_nivel_educativo (id_nivel_educativo)," +
+            "CONSTRAINT trdd_ej_nei_nivedu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_nivel_educativo (id_nivel_educativo)," +
             "CONSTRAINT trdd_ej_nei_indicador_fk FOREIGN KEY (id_indicador) REFERENCES trdd_ej_indicador (id_indicador));";
 
     public static final String CPregunta = "CREATE TABLE " + TABLE_NAME_PREGUNTA + " (" +
@@ -91,9 +91,10 @@ public class QueryEncuestasJ
             COLUMN_NAME_EMAIL_CCT_GENERAL + " TEXT NOT NULL," +
             COLUMN_NAME_ID_MUNICIPIO_CCT_GENERAL + " INTEGER NOT NULL," +
             COLUMN_NAME_ID_NIVEL_EDUCATIVO_CCT_GENERAL + " INTEGER NOT NULL," +
-            "CONSTRAINT trdd_ej_cct_pk PRIMARY KEY (id_cct)," +
-            "CONSTRAINT trdd_ej_cct_mun_fk FOREIGN KEY (id_municipio) REFERENCES trdd_ej_municipio (id_municipio)," +
-            "CONSTRAINT trdd_ej_cct_niv_edu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_ej_nivel_educativo (id_nivel_educativo));";
+            COLUMN_NAME_CONTRASENIA_CCT_GENERAL + " TEXT NOT NULL," +
+            "CONSTRAINT trdd_cct_pk PRIMARY KEY (id_cct)," +
+            "CONSTRAINT trdd_cct_mun_fk FOREIGN KEY (id_municipio) REFERENCES trdd_municipio (id_municipio)," +
+            "CONSTRAINT trdd_cct_niv_edu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_nivel_educativo (id_nivel_educativo));";
 
     public static final String CEncuesta = "CREATE TABLE " + TABLE_NAME_ENCUESTA + " (" +
             COLUMN_NAME_ID_CCT_ENCUESTA + " TEXT NOT NULL, " +

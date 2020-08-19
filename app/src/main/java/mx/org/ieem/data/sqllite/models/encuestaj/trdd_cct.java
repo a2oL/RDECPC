@@ -1,4 +1,4 @@
-package mx.org.ieem.data.sqllite.models.general;
+package mx.org.ieem.data.sqllite.models.encuestaj;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -11,14 +11,16 @@ public class trdd_cct implements Parcelable {
     private String email;
     private int id_municipio;
     private int id_nivel_educativo;
+    private String contrasenia;
 
-    public trdd_cct(String id_cct, String nombre, String domicilio, String email, int id_municipio, int id_nivel_educativo) {
+    public trdd_cct(String id_cct, String nombre, String domicilio, String email, int id_municipio, int id_nivel_educativo, String contrasenia) {
         this.id_cct = id_cct;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.email = email;
         this.id_municipio = id_municipio;
         this.id_nivel_educativo = id_nivel_educativo;
+        this.contrasenia = contrasenia;
     }
 
     protected trdd_cct(Parcel in) {
@@ -28,6 +30,7 @@ public class trdd_cct implements Parcelable {
         email = in.readString();
         id_municipio = in.readInt();
         id_nivel_educativo = in.readInt();
+        contrasenia = in.readString();
     }
 
     public static final Creator<trdd_cct> CREATOR = new Creator<trdd_cct>() {
@@ -90,6 +93,14 @@ public class trdd_cct implements Parcelable {
         this.id_nivel_educativo = id_nivel_educativo;
     }
 
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -103,5 +114,6 @@ public class trdd_cct implements Parcelable {
         parcel.writeString(email);
         parcel.writeInt(id_municipio);
         parcel.writeInt(id_nivel_educativo);
+        parcel.writeString(contrasenia);
     }
 }
