@@ -18,6 +18,9 @@ public class UsuarioJM implements Serializable
     @SerializedName("id")
     @Expose
     private String id;
+    @SerializedName("obtenerCatalogos")
+    @Expose
+    private String obtenerCatalogos;
     private final static long serialVersionUID = 8683430536036435598L;
 
     /**
@@ -30,11 +33,13 @@ public class UsuarioJM implements Serializable
     /**
      * @param id
      * @param contrasenia
+     * @param obtenerCatalogos
      *
      */
-    public UsuarioJM(String id, String contrasenia) {
+    public UsuarioJM(String id, String contrasenia, String obtenerCatalogos) {
         this.id = id;
         this.contrasenia = contrasenia;
+        this.obtenerCatalogos = obtenerCatalogos;
     }
 
     public String getId() {
@@ -53,8 +58,16 @@ public class UsuarioJM implements Serializable
         this.contrasenia = contrasenia;
     }
 
+    public String isObtenerCatalogos() {
+        return obtenerCatalogos;
+    }
+
+    public void setObtenerCatalogos(String obtenerCatalogos) {
+        this.obtenerCatalogos = obtenerCatalogos;
+    }
+
     @Override
     public String toString() {
-        return "{\"id\":\""+id+"\",\"contrasenia\":\""+contrasenia+"\"}";
+        return "{\"id\":\""+id+"\",\"contrasenia\":\""+contrasenia+"\",\"obtenerCatalogos\":\""+obtenerCatalogos+"\"}";
     }
 }

@@ -78,7 +78,8 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
 
     public void sendPost(String id, String contrasenia) throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, JSONException { // Metodo sendPOST() (TOP)
 
-        UsuarioJM usuarioJM = new UsuarioJM(id,contrasenia);                                        // Contiene un objeto de tipo UsuarioJM creado a partir del email y contrasena proporcionado por el usuario.
+        String obtenerCatalogos = "true";
+        UsuarioJM usuarioJM = new UsuarioJM(id,contrasenia,obtenerCatalogos);                                        // Contiene un objeto de tipo UsuarioJM creado a partir del email y contrasena proporcionado por el usuario.
         CertificateFactory cf = CertificateFactory.getInstance("X.509");                            // Se emplea para generar certificados.
         InputStream caInput = contextActual.getAssets().open("load-der.crt");              // Aloja el certificado que se encuentra dentro de el directorio Assets.
         Certificate ca;                                                                             // Certificado creado a partir de load-der.crt.
@@ -116,7 +117,7 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         // Creacion de un SSLContext que usara nuestra TrustManager (BOTTOM)
 
         // Configuracion de la conexion (TOP)
-        url = new URL("https://registro.ieem.org.mx:8443/redDigitalDpc/reddigitaldpc/obtenerUsuario");
+        url = new URL("https://registro.ieem.org.mx:8443/redDigitalDpc/login");
         HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
         urlConnection.setRequestMethod("POST");
         urlConnection.setDoInput(true);
@@ -134,6 +135,7 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         //if(ds.checkTablas()){
 
         //}
+        Log.e("ENVIO",usuarioJM.toString());
         out.write(usuarioJM.toString());
         out.close();
         // POST
@@ -141,19 +143,20 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
 
         HttpResult =urlConnection.getResponseCode();
         responseHttp = respuestaServidor(urlConnection); // Se carga la respuesta del servidor
+        Log.e("RESPUESTA",responseHttp);
         Log.e("CODE",String.valueOf(HttpResult));
         if (HttpResult == 200)
           { // Si el Codigo de respuesta es 200 (Si existe el usuario) (TOP)
               //id_random_final = generarIdRandom();
               //actual_final = cargarRespuestaCCTLogin(responseHttp); Es la respuesta real del servidor
-              String respuestaSimulada;
-              if(id.equals("a"))
-              {
-                  respuestaSimulada = RESPUESTA_SIMULADA_A;
-              }else{
-                  respuestaSimulada = "";
-              }
-              cargarVersionYCctLogin(respuestaSimulada);
+              //String respuestaSimulada;
+              //if(id.equals("a"))
+              //{
+                //  respuestaSimulada = RESPUESTA_SIMULADA_A;
+              //}else{
+                //  respuestaSimulada = "";
+              //}
+              cargarVersionYCctLogin(responseHttp);
               bolLogeado = true;
           } // Si el Codigo de respuesta es 200 (Si existe el usuario) (BOTTOM)
         else
@@ -194,20 +197,21 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         String domicilio = trdd_cct_res.getString("domicilio");
         String email = trdd_cct_res.getString("email");
 
-        JSONObject trdd_municipio = trdd_cct_res.getJSONObject(TABLE_NAME_TMUNICIPIO);
-        int id_municipio = trdd_municipio.getInt("id_municipio");
-        String nombre_municipio = trdd_municipio.getString("nombre");
+        //JSONObject trdd_municipio = trdd_cct_res.getJSONObject(TABLE_NAME_TMUNICIPIO);
+        int id_municipio = trdd_cct_res.getInt("id_municipio");
+        //String nombre_municipio = trdd_municipio.getString("nombre");
 
-        JSONObject trdd_nivel_educativo = trdd_cct_res.getJSONObject(TABLE_NAME_NIVEL_EDUCATIVO);
-        int id_nivel_educativo = trdd_nivel_educativo.getInt("id_nivel_educativo");
-        String nombre_nivel_educativo = trdd_nivel_educativo.getString("nombre");
+        //JSONObject trdd_nivel_educativo = trdd_cct_res.getJSONObject(TABLE_NAME_NIVEL_EDUCATIVO);
+        int id_nivel_educativo = trdd_cct_res.getInt("id_nivel_educativo");
+        //String nombre_nivel_educativo = trdd_nivel_educativo.getString("nombre");
 
-        String contrasenia = trdd_cct_res.getString("contrasenia");
+        //String contrasenia = trdd_cct_res.getString("contrasenia");
+        String contrasenia = "";
         actual_final = new trdd_cct(id_cct,nombre,domicilio,email,id_municipio,id_nivel_educativo,contrasenia);
 
         ds.insertCctActual(actual_final);
-        ds.insertMunicipioActual(new trdd_municipio(id_municipio,nombre_municipio));
-        ds.insertNivelEducativoActual(new trdd_nivel_educativo(id_nivel_educativo,nombre_nivel_educativo));
+        //ds.insertMunicipioActual(new trdd_municipio(id_municipio,nombre_municipio));
+        //ds.insertNivelEducativoActual(new trdd_nivel_educativo(id_nivel_educativo,nombre_nivel_educativo));
         id_cct_final = actual_final.getId_cct();;
 
         if(ds.checkTablas()){

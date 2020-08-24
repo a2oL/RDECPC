@@ -24,6 +24,31 @@ public class DataBaseFillAndUpdate {
 
         JSONObject respuestaVersiones = new JSONObject(response);
 
+
+        if (respuestaVersiones.has(TABLE_NAME_TMUNICIPIO))
+        {
+            JSONArray trdd_anio = respuestaVersiones.getJSONArray(TABLE_NAME_TMUNICIPIO);
+            for (int i = 0 ; i< trdd_anio.length();i++)
+            {
+                JSONObject mes = trdd_anio.getJSONObject(i);
+                int id_municipio = mes.getInt("id_municipio");
+                String nombre = mes.getString("nombre");
+                ds.insertMunicipioActual(new trdd_municipio(id_municipio,nombre));
+            }
+        }
+
+        if (respuestaVersiones.has(TABLE_NAME_NIVEL_EDUCATIVO))
+        {
+            JSONArray trdd_anio = respuestaVersiones.getJSONArray(TABLE_NAME_NIVEL_EDUCATIVO);
+            for (int i = 0 ; i< trdd_anio.length();i++)
+            {
+                JSONObject mes = trdd_anio.getJSONObject(i);
+                int id_nivel_educativo = mes.getInt("id_nivel_educativo");
+                String nombre = mes.getString("nombre");
+                ds.insertNivelEducativoActual(new trdd_nivel_educativo(id_nivel_educativo,nombre));
+            }
+        }
+
         if (respuestaVersiones.has(TABLE_NAME_ANIOS))
         {
             ds.deleteAnios();
