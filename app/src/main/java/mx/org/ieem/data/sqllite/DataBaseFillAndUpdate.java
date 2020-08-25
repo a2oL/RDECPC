@@ -27,6 +27,7 @@ public class DataBaseFillAndUpdate {
 
         if (respuestaVersiones.has(TABLE_NAME_TMUNICIPIO))
         {
+            ds.deleteMunicipio();
             JSONArray trdd_anio = respuestaVersiones.getJSONArray(TABLE_NAME_TMUNICIPIO);
             for (int i = 0 ; i< trdd_anio.length();i++)
             {
@@ -39,6 +40,7 @@ public class DataBaseFillAndUpdate {
 
         if (respuestaVersiones.has(TABLE_NAME_NIVEL_EDUCATIVO))
         {
+            ds.deleteNivelEducativo();
             JSONArray trdd_anio = respuestaVersiones.getJSONArray(TABLE_NAME_NIVEL_EDUCATIVO);
             for (int i = 0 ; i< trdd_anio.length();i++)
             {

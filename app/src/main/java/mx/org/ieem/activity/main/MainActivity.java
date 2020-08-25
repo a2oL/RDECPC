@@ -16,6 +16,7 @@ import mx.org.ieem.activity.login.LoginActivity;
 import mx.org.ieem.R;
 
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
+import static mx.org.ieem.RESTful.AsyncLogin.id_cct_final;
 import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
 import mx.org.ieem.data.sqllite.DataBaseAppRed;
 import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         { // Si existe algun registro en la bd (TOP)
             bolLogeado = true;
             actual_final = new trdd_cct(usuario.getString(0),usuario.getString(1),usuario.getString(2),usuario.getString(3),usuario.getInt(4),usuario.getInt(5),usuario.getString(6));
+            id_cct_final = actual_final.getId_cct();
             return  true;
         } // Si existe algun registro en la bd (BOTTOM)
         else

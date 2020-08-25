@@ -14,7 +14,6 @@ import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
 import static mx.org.ieem.data.sqllite.constants.ciudadanometro.CamposyTablasCiudadano.*;
 import static mx.org.ieem.data.sqllite.constants.encuestasj.CamposyTablasEncuestas.*;
-import static mx.org.ieem.data.sqllite.constants.general.CamposyTablasGeneral.*;
 
 
 public class DataBaseAppRed
@@ -147,10 +146,7 @@ public class DataBaseAppRed
         return dataCursor;
     }
 
-    public Cursor getVersionPorTabla(String nombreTabla){
-        Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_PARAMETROS + " WHERE tabla like '" + nombreTabla + "'");
-        return dataCursor;
-    }
+
 
     // Inserta un nuevo usuario logueado a la bd. (TOP)
     public void insertCctActual(trdd_cct actual)
@@ -192,27 +188,6 @@ public class DataBaseAppRed
         return true;
     }
 
-
-    public void insertVersiondeTabla(trdd_version_tabla actual)
-    {
-        open();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_NAME_ID_PARAMETROS, (actual.getId_Parametros()));
-        values.put(COLUMN_NAME_TABLAS_PARAMETROS, (actual.getTabla()));
-        values.put(COLUMN_NAME_VERSION_PARAMETROS, (actual.getVersion()));
-        database.insert(TABLE_NAME_PARAMETROS,null,values);
-        close();
-    }
-
-    public void inserttipodetabla(trdd_tipo_sistema_apk actual)
-    {
-        open();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_NAME_ID_TIPOSISTEMA, (actual.getId_sistema_apk()));
-        values.put(COLUMN_NAME_NOMBRE_TIPOSISTEMA, (actual.getNombre()));
-        database.insert(TABLE_NAME_TIPOSISTEMA,null,values);
-        close();
-    }
     // Inserta un nuevo usuario logueado a la bd. (BOTTOM)
 
     // Inserta nueva bd. (TOP)
@@ -416,6 +391,18 @@ public class DataBaseAppRed
         close();
     }
 
+    public void deleteMunicipio(){
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_TMUNICIPIO);
+        close();
+    }
+
+    public void deleteNivelEducativo(){
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_NIVEL_EDUCATIVO);
+        close();
+    }
+
     public void deleteAniosCiudadanometro(){
         open();
         database.execSQL("DELETE FROM "+TABLE_NAME_ANIOS_CIUDADANOMETRO);
@@ -494,12 +481,6 @@ public class DataBaseAppRed
         close();
     }
 
-    public void deleteTipodeTabla(){
-        open();
-        database.execSQL("DELETE FROM " + TABLE_NAME_TIPOSISTEMA);
-        close();
-    }
-
     public void deleteRealicadorEdadCiudadanometro(){
         open();
         database.execSQL("DELETE FROM " + TABLE_NAME_REALICADOREDAD_CIUDADANOMETRO);
@@ -538,20 +519,23 @@ public class DataBaseAppRed
 
     // Inserta nueva bd. (BOTTOM)
 
-    public Cursor isVersionVacia()
-    {
-        Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_PARAMETROS);
-        return dataCursor;
-    }
 
     // Elimina al usuario logueado actualmente.
     public void logoutUsario()
     {
         open();
         database.execSQL("DELETE FROM "+TABLE_NAME_CCT_GENERAL);
-        database.execSQL("DELETE FROM "+TABLE_NAME_NIVEL_EDUCATIVO);
-        database.execSQL("DELETE FROM "+TABLE_NAME_TMUNICIPIO);
         close();
+    }
+
+    public Cursor getEncuestasJuvenilesBD(){
+        Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_ENCUESTA);
+        return dataCursor;
+    }
+
+    public Cursor getDetallesEncuestasBD(int id_encuesta){
+        Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_DETALLE_ENCUESTA + " WHERE trdd_ej_detalle_encuesta.id_encuesta = "+id_encuesta);
+        return dataCursor;
     }
 
     public Cursor getUltimoRegistro() {

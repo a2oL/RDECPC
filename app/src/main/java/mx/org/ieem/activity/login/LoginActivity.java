@@ -6,21 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.json.JSONException;
 
 import mx.org.ieem.R;
 import mx.org.ieem.activity.main.MainActivity;
 import mx.org.ieem.activity.main.SelectActivity;
 import mx.org.ieem.RESTful.AsyncLogin;
 
-
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;

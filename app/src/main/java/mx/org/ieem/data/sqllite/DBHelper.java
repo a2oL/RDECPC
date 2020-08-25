@@ -10,12 +10,6 @@ import static mx.org.ieem.data.sqllite.constants.ciudadanometro.QueryCiudadano.*
 import static mx.org.ieem.data.sqllite.constants.encuestasj.QueryEncuestasJ.*;
 import static mx.org.ieem.data.sqllite.constants.encuestasj.CamposyTablasEncuestas.*;
 
-import static mx.org.ieem.data.sqllite.constants.general.CamposyTablasGeneral.TABLE_NAME_PARAMETROS;
-
-import static mx.org.ieem.data.sqllite.constants.general.CamposyTablasGeneral.TABLE_NAME_TIPOSISTEMA;
-import static mx.org.ieem.data.sqllite.constants.general.QueryGeneral.CParametros;
-import static mx.org.ieem.data.sqllite.constants.general.QueryGeneral.CTipodeSistema;
-
 public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
@@ -56,8 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CiuEncuesta);
         db.execSQL(CiuDetalleEncuesta);
 
-        db.execSQL(CTipodeSistema);
-        db.execSQL(CParametros);
+
     }
 
     @Override
@@ -92,8 +85,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_DETALLEENCUESTA_CIUDADANOMETRO);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CCT_GENERAL);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PARAMETROS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_TIPOSISTEMA);
+
 
 
         onCreate(db);

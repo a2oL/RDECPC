@@ -2,7 +2,6 @@ package mx.org.ieem.RESTful;
 
 
 import android.content.Context;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,9 +9,6 @@ import mx.org.ieem.RESTful.JSONModels.UsuarioJM;
 import mx.org.ieem.data.sqllite.DataBaseAppRed;
 
 import mx.org.ieem.data.sqllite.DataBaseFillAndUpdate;
-import mx.org.ieem.data.sqllite.models.encuestaj.trdd_municipio;
-
-import mx.org.ieem.data.sqllite.models.encuestaj.trdd_nivel_educativo;
 
 import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
 
@@ -41,8 +37,6 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 
-
-import static mx.org.ieem.data.sqllite.constants.RespuestasSimuladas.RESPUESTA_SIMULADA_A;
 import static mx.org.ieem.data.sqllite.constants.encuestasj.CamposyTablasEncuestas.*;
 
 
@@ -147,15 +141,6 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         Log.e("CODE",String.valueOf(HttpResult));
         if (HttpResult == 200)
           { // Si el Codigo de respuesta es 200 (Si existe el usuario) (TOP)
-              //id_random_final = generarIdRandom();
-              //actual_final = cargarRespuestaCCTLogin(responseHttp); Es la respuesta real del servidor
-              //String respuestaSimulada;
-              //if(id.equals("a"))
-              //{
-                //  respuestaSimulada = RESPUESTA_SIMULADA_A;
-              //}else{
-                //  respuestaSimulada = "";
-              //}
               cargarVersionYCctLogin(responseHttp);
               bolLogeado = true;
           } // Si el Codigo de respuesta es 200 (Si existe el usuario) (BOTTOM)
@@ -188,33 +173,21 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
     public void cargarVersionYCctLogin(String response) throws IOException, JSONException
     {
         DataBaseAppRed ds = new DataBaseAppRed(contextActual);                //Instancia de la base de datos.
-
         JSONObject respuestaLogin = new JSONObject(response);
-
         JSONObject trdd_cct_res = respuestaLogin.getJSONObject(TABLE_NAME_CCT_GENERAL);
         String id_cct = trdd_cct_res.getString("id_cct");
         String nombre = trdd_cct_res.getString("nombre");
         String domicilio = trdd_cct_res.getString("domicilio");
         String email = trdd_cct_res.getString("email");
-
-        //JSONObject trdd_municipio = trdd_cct_res.getJSONObject(TABLE_NAME_TMUNICIPIO);
         int id_municipio = trdd_cct_res.getInt("id_municipio");
-        //String nombre_municipio = trdd_municipio.getString("nombre");
-
-        //JSONObject trdd_nivel_educativo = trdd_cct_res.getJSONObject(TABLE_NAME_NIVEL_EDUCATIVO);
         int id_nivel_educativo = trdd_cct_res.getInt("id_nivel_educativo");
-        //String nombre_nivel_educativo = trdd_nivel_educativo.getString("nombre");
-
-        //String contrasenia = trdd_cct_res.getString("contrasenia");
         String contrasenia = "";
         actual_final = new trdd_cct(id_cct,nombre,domicilio,email,id_municipio,id_nivel_educativo,contrasenia);
-
         ds.insertCctActual(actual_final);
-        //ds.insertMunicipioActual(new trdd_municipio(id_municipio,nombre_municipio));
-        //ds.insertNivelEducativoActual(new trdd_nivel_educativo(id_nivel_educativo,nombre_nivel_educativo));
         id_cct_final = actual_final.getId_cct();;
 
-        if(ds.checkTablas()){
+        if(ds.checkTablas())
+        {
             new DataBaseFillAndUpdate(response,contextActual);
         }
     }
