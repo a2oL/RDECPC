@@ -145,7 +145,7 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
                               dataSource.InsertDetalleEncuesta
                               (
                                   id_cct_final,
-                                  "########00/00/00",
+                                  "123654",
                                   ultimoRegistro+1,
                                   "2020",
                                   trddmes_actual_final.getId_mes(),
@@ -159,7 +159,7 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
                       dataSource.InsertEncuesta
                           (
                                   id_cct_final,
-                                  "########00/00/00",
+                                  "123654",
                                   ultimoRegistro+1,
                                   actual_final.getId_nivel_educativo(),
                                   trddgradoescolar_actual_final.getId_grado_escolar()

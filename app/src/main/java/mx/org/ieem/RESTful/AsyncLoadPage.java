@@ -55,8 +55,9 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         database = new DataBaseAppRed(context);
         if (enviadode.equals("1")){
             // TODO Cambiar la url para la insercion por metodo post.
-            //sendPost(new URL("https://registro.ieem.org.mx:8443/redDigitalDpc/login"),getEncuestasJuveniles());
             Log.e("JSON ENVIAR ENCUESTAS",getEncuestasJuveniles());
+
+
         }else{
             Log.e("JSON ENVIAR CIUDADANO","AQUI VA");
         }
@@ -69,6 +70,21 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         if(enviadode.equals("1"))
         {
             //Url de insercion de encuestas juveniles
+            try {
+                sendPost(new URL("https://registro.ieem.org.mx:8443/redDigitalDpc/encuesta-juvenil/encuestas"),getEncuestasJuveniles());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (CertificateException e) {
+                e.printStackTrace();
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             for (; count <= params[0]; count++)
             {
                 try {
@@ -129,7 +145,7 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
             encuestaRealizada.put("id_cct",id_cct);
             encuestaRealizada.put("id_random",id_random);
             encuestaRealizada.put("id_encuesta",id_encuesta);
-            encuestaRealizada.put("id_nivel_eductivo",id_nivel_educativo);
+            encuestaRealizada.put("id_nivel_educativo",id_nivel_educativo);
             encuestaRealizada.put("id_grado_escolar",id_grado_escolar);
             encuestaRealizada.put("detallesEncuesta",id_encuesta_array);
             insercionsatos.put(encuestaRealizada);
@@ -172,7 +188,6 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
             detalleEncuesta.put("id_anio",id_anio);
             detalleEncuesta.put("id_mes",id_mes);
             detalleEncuesta.put("id_nivel_educativo",id_nivel_educativo);
-            detalleEncuesta.put("id_grado_escolar",id_grado_escolar);
             detalleEncuesta.put("id_indicador",id_indicador);
             detalleEncuesta.put("id_respuesta",id_respuesta);
             detalleEncuesta.put("id_estatus_respuesta",id_estatus_respuesta);
