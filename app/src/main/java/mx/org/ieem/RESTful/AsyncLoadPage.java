@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -44,6 +45,7 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
     private String enviadode;
     DataBaseAppRed database;
     Context contextActual;
+    String op[];
 
     public AsyncLoadPage(Context context, ProgressBar progressBar, TextView txt, int count, Button btn, String enviadode) throws JSONException, IOException, CertificateException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
         this.progressBar = progressBar;
@@ -55,13 +57,9 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         database = new DataBaseAppRed(context);
         if (enviadode.equals("1")){
             // TODO Cambiar la url para la insercion por metodo post.
-            Log.e("JSON ENVIAR ENCUESTAS",getEncuestasJuveniles());
-
-
         }else{
             Log.e("JSON ENVIAR CIUDADANO","AQUI VA");
         }
-
     }
 
     @Override
@@ -70,20 +68,12 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         if(enviadode.equals("1"))
         {
             //Url de insercion de encuestas juveniles
+
+
             try {
                 sendPost(new URL("https://registro.ieem.org.mx:8443/redDigitalDpc/encuesta-juvenil/encuestas"),getEncuestasJuveniles());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (CertificateException e) {
-                e.printStackTrace();
-            } catch (KeyStoreException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (KeyManagementException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } catch (IOException | CertificateException | KeyStoreException | NoSuchAlgorithmException | KeyManagementException | JSONException e) {
+               e.printStackTrace();
             }
             for (; count <= params[0]; count++)
             {
@@ -123,7 +113,8 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         progressBar.setProgress(values[0]);
     }
 
-    public String getEncuestasJuveniles() throws JSONException {
+    public JSONArray getEncuestasJuveniles() throws JSONException
+    {
         Cursor encuestas = database.getEncuestasJuvenilesBD();
         int idcctColumn = encuestas.getColumnIndex("id_cct");
         int idrandomColumn = encuestas.getColumnIndex("id_random");
@@ -131,8 +122,11 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         int idniveleducativoColumn = encuestas.getColumnIndex("id_nivel_educativo");
         int idgradoescolarColumn = encuestas.getColumnIndex("id_grado_escolar");
 
+
         encuestas.moveToNext();
         JSONArray insercionsatos = new JSONArray();
+        int i = 0;
+        int j = 0;
         for(encuestas.moveToFirst(); !encuestas.isAfterLast(); encuestas.moveToNext())
         {
             JSONObject encuestaRealizada = new JSONObject();
@@ -149,8 +143,9 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
             encuestaRealizada.put("id_grado_escolar",id_grado_escolar);
             encuestaRealizada.put("detallesEncuesta",id_encuesta_array);
             insercionsatos.put(encuestaRealizada);
+
         }
-        return insercionsatos.toString();
+        return insercionsatos;
     }
 
     public JSONArray getDetalleEncuesta(int id_encuestas) throws JSONException
@@ -196,7 +191,7 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         return detallesDeEncuesta;
     }
 
-    public void sendPost(URL url, String post) throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, JSONException { // Metodo sendPOST() (TOP)
+    public void sendPost(URL url, JSONArray post) throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, JSONException { // Metodo sendPOST() (TOP)
 
         CertificateFactory cf = CertificateFactory.getInstance("X.509");                            // Se emplea para generar certificados.
         InputStream caInput = contextActual.getAssets().open("load-der.crt");              // Aloja el certificado que se encuentra dentro de el directorio Assets.
@@ -246,9 +241,28 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         // Configuracion de la conexion (BOTTOM)
 
         // POST
-        out = new OutputStreamWriter(urlConnection.getOutputStream());
-        out.write(post);
-        out.close();
+        DataOutputStream outs = new DataOutputStream(urlConnection.getOutputStream());
+
+        outs.write(post.toString().getBytes("UTF-8"));
+
+       //out.write("[");
+       //Log.e("Envio:","[");
+        //for (int i = 0; i < post.length();i++)
+        //{
+            //if( i == post.length()-1)
+          //  {
+            //    Log.e("Envio:",post.getJSONObject(i).toString());
+           //     out.write(post.getJSONObject(i).toString());
+       //     }else{
+       //         Log.e("Envio:",post.getJSONObject(i).toString()+",");
+       //         out.write(post.getJSONObject(i).toString()+",");
+       //     }
+
+       // }
+       // Log.e("Envio:","]");
+        //out.write("]");
+
+        outs.close();
         // POST
         // RESPONSE
 
