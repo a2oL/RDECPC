@@ -3,11 +3,19 @@ package mx.org.ieem.RESTful;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.util.JsonWriter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,12 +77,11 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         {
             //Url de insercion de encuestas juveniles
 
-
-            try {
-                sendPost(new URL("https://registro.ieem.org.mx:8443/redDigitalDpc/encuesta-juvenil/encuestas"),getEncuestasJuveniles());
-            } catch (IOException | CertificateException | KeyStoreException | NoSuchAlgorithmException | KeyManagementException | JSONException e) {
-               e.printStackTrace();
-            }
+            //try {
+             //   sendPost(new URL("https://registro.ieem.org.mx:8443/redDigitalDpc/encuesta-juvenil/encuestas"),getEncuestasJuveniles());
+            //} catch (IOException | CertificateException | KeyStoreException | NoSuchAlgorithmException | KeyManagementException | JSONException e) {
+            //   e.printStackTrace();
+            //}
             for (; count <= params[0]; count++)
             {
                 try {
@@ -200,6 +207,7 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         int HttpResult;                                                                             // Contiene el codigo de respuesta del servidor.
         String responseHttp;
 
+
         try
         { //Intenta generar el certificado (TOP)
             ca = cf.generateCertificate(caInput);
@@ -239,11 +247,12 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         urlConnection.setRequestProperty("Content-Type","application/json");
         urlConnection.connect();
         // Configuracion de la conexion (BOTTOM)
-
-        // POST
-        DataOutputStream outs = new DataOutputStream(urlConnection.getOutputStream());
-
-        outs.write(post.toString().getBytes("UTF-8"));
+        out = new OutputStreamWriter(urlConnection.getOutputStream());
+        DataOutputStream op = new DataOutputStream(urlConnection.getOutputStream());
+        //out.write(usuarioJM.toString());
+        //out.write(post);
+        out.close();
+       //outs.write(post.toString().getBytes("UTF-8"));
 
        //out.write("[");
        //Log.e("Envio:","[");
@@ -262,7 +271,7 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
        // Log.e("Envio:","]");
         //out.write("]");
 
-        outs.close();
+        //outs.close();
         // POST
         // RESPONSE
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -67,25 +68,33 @@ public class MainActivity extends AppCompatActivity {
 
         btnFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { Toast.makeText(getApplicationContext(), "Pagina de facebook", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://web.facebook.com/IEEMoficial"));
+                startActivity(browserIntent);
             }
         });
 
         btnTwiter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { Toast.makeText(getApplicationContext(), "Pagina de twitter", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/ieem_mx"));
+                startActivity(browserIntent);
             }
         });
 
         btnInstagram.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { Toast.makeText(getApplicationContext(), "Pagina de instagram", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/ieem_mx"));
+                startActivity(browserIntent);
             }
         });
 
         btnYoutube.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { Toast.makeText(getApplicationContext(), "Pagina de youtube", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/user/YoshiVoto"));
+                startActivity(browserIntent);
             }
         });
 
@@ -98,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
 
         btnDpc.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { Toast.makeText(getApplicationContext(), "Pagina de DPC", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ieem.org.mx/DPC/index.html"));
+                startActivity(browserIntent);
             }
         });
         // Click listeners de los botones definidos (BOTTOM)

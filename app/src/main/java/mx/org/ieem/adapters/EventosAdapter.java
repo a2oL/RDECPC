@@ -63,6 +63,7 @@ public class EventosAdapter extends BaseAdapter
         Drawable drawable = new BitmapDrawable(context.getResources(), decodedByte);
         imagen.setImageDrawable(drawable);
         texto.setText(ev.getNombre());
+
         return view;
     }
 }
