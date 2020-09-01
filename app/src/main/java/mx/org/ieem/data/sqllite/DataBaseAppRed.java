@@ -578,12 +578,12 @@ public class DataBaseAppRed
     }
 
     public Cursor getGradosCiudadanometroBD() {
-        Cursor dataCursor = querySQL("SELECT trdd_c_grado_escolar.id_grado_escolar as _id,trdd_c_grado_escolar.nombre,trdd_c_grado_escolar.siglas,trdd_c_grado_escolar.grado FROM "+TABLE_NAME_GRADO_ESCOLAR_CIUDADANOMETRO);
+        Cursor dataCursor = querySQL("SELECT trdd_c_grado_escolar.id_grado_escolar as _id,trdd_c_grado_escolar.nombre,trdd_c_grado_escolar.siglas,trdd_c_grado_escolar.grado FROM "+TABLE_NAME_NIED_GRES_CIUDADANOMETRO+" INNER JOIN "+TABLE_NAME_GRADO_ESCOLAR_CIUDADANOMETRO+" USING(id_grado_escolar) WHERE id_nivel_educativo = "+ actual_final.getId_nivel_educativo());
         return dataCursor;
     }
 
     public Cursor getGradosBD() {
-        Cursor dataCursor = querySQL("SELECT trdd_ej_grado_escolar.id_grado_escolar as _id,trdd_ej_grado_escolar.nombre,trdd_ej_grado_escolar.siglas,trdd_ej_grado_escolar.grado FROM "+TABLE_NAME_GRADO_ESCOLAR);
+        Cursor dataCursor = querySQL("SELECT trdd_ej_grado_escolar.id_grado_escolar as _id,trdd_ej_grado_escolar.nombre,trdd_ej_grado_escolar.siglas,trdd_ej_grado_escolar.grado FROM "+TABLE_NAME_NIED_GRES+" INNER JOIN "+TABLE_NAME_GRADO_ESCOLAR+" USING(id_grado_escolar) WHERE id_nivel_educativo = "+ actual_final.getId_nivel_educativo());
         return dataCursor;
     }
 

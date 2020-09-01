@@ -63,7 +63,8 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         this.enviadode = enviadode;
         this.contextActual = context;
         database = new DataBaseAppRed(context);
-        if (enviadode.equals("1")){
+        if (enviadode.equals("1"))
+        {
             // TODO Cambiar la url para la insercion por metodo post.
         }else{
             Log.e("JSON ENVIAR CIUDADANO","AQUI VA");

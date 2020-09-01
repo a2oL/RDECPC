@@ -4,6 +4,9 @@ package mx.org.ieem.RESTful;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 import mx.org.ieem.RESTful.JSONModels.UsuarioJM;
 import mx.org.ieem.data.sqllite.DataBaseAppRed;
@@ -44,6 +47,7 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
 
     private String stringEmail;                             // Guarda el valor de el email proporcionado por el usuario.
     private String stringContrasenia;                       // Guarda el valor de la contrasenia proporcionada por el usario.
+    private ProgressBar btnLogin;
     public static boolean bolLogeado = false;               // Nos dice si el usaurio sigue logueado o no.
     public static Context contextActual;                    // Contexto del activity que ejecuto la tarea en segundo plano (LoginActivity).
     public static String id_cct_final = "";                 // En caso de que exista el usuario en el servidor llenara esta variable con el valor ddel id_cct.
@@ -52,7 +56,13 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
     boolean booleanIsBdVacia;                               // Dice si la bd esta vacia para asi pedir las tablas al servidor
     DataBaseAppRed database;                                // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
 
-    public AsyncLogin(Context context) { this.contextActual = context;database = new DataBaseAppRed(context);}
+    public AsyncLogin(Context context, ProgressBar btn) { this.contextActual = context;database = new DataBaseAppRed(context);this.btnLogin = btn;}
+
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
 
     @Override
     protected Boolean doInBackground(String... strings)
@@ -81,6 +91,8 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         int HttpResult;                                                                             // Contiene el codigo de respuesta del servidor.
         URL url;                                                                                    // Contiene la url que proporciona el servicio.
         String responseHttp;
+
+
 
         try
           { //Intenta generar el certificado (TOP)
