@@ -122,6 +122,8 @@ public class QueryEncuestasJ
             "CONSTRAINT trdd_ej_detenc_crene_fk FOREIGN KEY (id_cct, id_random, id_encuesta, id_nivel_educativo) REFERENCES trdd_ej_encuesta (id_cct, id_random, id_encuesta, id_nivel_educativo)," +
             "CONSTRAINT trdd_ej_detenc_amneirer_fk FOREIGN KEY (id_anio, id_mes, id_nivel_educativo, id_indicador, id_respuesta, id_estatus_respuesta) REFERENCES trdd_ej_pregunta_respuesta (id_anio, id_mes, id_nivel_educativo, id_indicador, id_respuesta, id_estatus_respuesta));";
 
-
+    public static final String CDispositivos = "CREATE TABLE " + TABLE_NAME_DISPOSITIVOS + " (" +
+            COLUMN_NAME_ID_RANDOM_DISPOSITIVOS + " TEXT NOT NULL," +
+            "CONSTRAINT trdd_dispositivo_pk PRIMARY KEY (id_random));";
 
 }

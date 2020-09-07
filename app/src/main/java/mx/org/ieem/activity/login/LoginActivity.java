@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                             AsyncLogin as = (AsyncLogin) new AsyncLogin( getApplicationContext(), pbLogin );
                             as.execute(editTextEmail.getText().toString(), editTextContrasenia.getText().toString());
                             try { // Espera 1seg a que se reciba respuesta del AsyncLogin (TOP)
-                                as.get(6000, TimeUnit.MILLISECONDS);
+                                as.get(10000, TimeUnit.MILLISECONDS);
                                 if (bolLogeado) { // Si el usuario fue encontrado navega a SelectActivity (TOP)
                                     startActivity(intentUsuarioEncontrado);
                                 } // Si el usuario fue encontrado navega a SelectActivity (BOTTOM)

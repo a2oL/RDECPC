@@ -31,7 +31,7 @@ public class CiudadanometroActivity extends AppCompatActivity
     Button btnEnviar;                               // Aloja el elemento de la UI (button_Enviar_Ciudadanometro) del layout activity_Ciudadanometro que acciona el intentEnviar.
     Button btnLogout;                               // Aloja el elemento de la UI (button_Logout_Ciudadanometro) del layout activity_Ciudadanometro que acciona el intentLogout.
     Button btnRegresar;                             // Aloja el elemento de la UI (button_Regresar_Ciudadanometro) del layout activity_Ciudadanometro que acciona el intentRegresar.
-    TextView texto;
+    TextView texto;                                 // Aloja el elemento de la UI (textView_NumerodeCiudadanometro_Ciudadanometro) que mostrara cuantos Ciudadanometros se han realizado.
 
     Intent intentIniciar;                           // Intent que navegara desde CiudadanometroActivity hacia CalendarioAplicacionActivity.
     Intent intentEnviar;                            // Intent que navegara desde CiudadanometroActivity hacia LoadPageActivity.
@@ -65,12 +65,10 @@ public class CiudadanometroActivity extends AppCompatActivity
         Cursor dataCursor = database.getUltimoRegistroCiudadanometro();
         dataCursor.moveToNext();
         if(dataCursor.getCount() > 0)
-        {
+        { // Obtiene el el numero de encuestas realizadas localmente (TOP).
             ultimoRegistro = dataCursor.getInt(0);
-        }
-
+        } // Obtiene el el numero de encuestas realizadas localmente (BOTTOM).
         texto.setText("Ciudadanometros Realizados: " +  ultimoRegistro);
-
         // Click listeners de los botones definidos (TOP)
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +77,7 @@ public class CiudadanometroActivity extends AppCompatActivity
             }
         });
 
+        // Mostrara un mensaje de advertencia antes de enviar las encuestas a organo central (TOP).
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +101,9 @@ public class CiudadanometroActivity extends AppCompatActivity
 
             }
         });
+        // Mostrara un mensaje de advertencia antes de enviar las encuestas a organo central (BOTTOM).
 
+        // Logout del usuario (TOP).
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +112,7 @@ public class CiudadanometroActivity extends AppCompatActivity
                 startActivity(intentLogout);
             }
         });
+        // Logout del usuario (BOTTOM).
 
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,11 +124,12 @@ public class CiudadanometroActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    { // Verifica que el usuario aun este logueado (TOP).
         super.onResume();
         if (!bolLogeado)
         { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
             startActivity(intentLogout);
         } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
-    }
+    } // Verifica que el usuario aun este logueado (BOTTOM).
 }

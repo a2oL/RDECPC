@@ -23,6 +23,7 @@ import mx.org.ieem.data.sqllite.DataBaseAppRed;
 
 
 import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
+import static mx.org.ieem.RESTful.AsyncLogin.id_random_final;
 import static mx.org.ieem.activity.encuestas.MesEncuestaActivity.trddgradoescolar_actual_final;
 import static mx.org.ieem.activity.encuestas.MesEncuestaActivity.trddmes_actual_final;
 
@@ -145,7 +146,7 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
                               dataSource.InsertDetalleEncuesta
                               (
                                   id_cct_final,
-                                  "123654",
+                                  id_random_final,
                                   ultimoRegistro+1,
                                   "2020",
                                   trddmes_actual_final.getId_mes(),
@@ -159,7 +160,7 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
                       dataSource.InsertEncuesta
                           (
                                   id_cct_final,
-                                  "123654",
+                                  id_random_final,
                                   ultimoRegistro+1,
                                   actual_final.getId_nivel_educativo(),
                                   trddgradoescolar_actual_final.getId_grado_escolar()

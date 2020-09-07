@@ -84,6 +84,7 @@ public class CamposyTablasEncuestas
     public static final String COLUMN_NAME_ID_RESPUESTA_ENCUESTA = "id_respuesta";
     public static final String COLUMN_NAME_ID_ESTATUS_RESPUESTA_ENCUESTA = "id_estatus_respuesta";
 
-
+    public static final String TABLE_NAME_DISPOSITIVOS = "trdd_dispositivo";
+    public static final String COLUMN_NAME_ID_RANDOM_DISPOSITIVOS = "id_random";
 
 }

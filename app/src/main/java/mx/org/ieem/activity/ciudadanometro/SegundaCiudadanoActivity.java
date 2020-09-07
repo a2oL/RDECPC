@@ -107,15 +107,14 @@ public class SegundaCiudadanoActivity extends AppCompatActivity implements Adapt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-    {
+    { // LLena las vairables q=estaticas que contendran la edad, genero y escolaridad del realizador (TOP).
         cursor_EdadGeneroEscolaridad = (Cursor) spinnerEdad.getSelectedItem();
         edad_realicador_final_ciudadanometro = new trdd_c_realicador_edad(cursor_EdadGeneroEscolaridad.getInt(cursor_EdadGeneroEscolaridad.getColumnIndexOrThrow("_id")),cursor_EdadGeneroEscolaridad.getString(cursor_EdadGeneroEscolaridad.getColumnIndexOrThrow("nombre")));
         cursor_EdadGeneroEscolaridad = (Cursor) spinnerEres.getSelectedItem();
         genero_realicador_final_ciudadanometro = new trdd_c_realicador_genero(cursor_EdadGeneroEscolaridad.getInt(cursor_EdadGeneroEscolaridad.getColumnIndexOrThrow("_id")),cursor_EdadGeneroEscolaridad.getString(cursor_EdadGeneroEscolaridad.getColumnIndexOrThrow("nombre")));
         cursor_EdadGeneroEscolaridad = (Cursor) spinnerEscolaridad.getSelectedItem();
         escolaridad_realicador_final_ciudadanometro = new trdd_c_realicador_escolaridad(cursor_EdadGeneroEscolaridad.getInt(cursor_EdadGeneroEscolaridad.getColumnIndexOrThrow("_id")),cursor_EdadGeneroEscolaridad.getString(cursor_EdadGeneroEscolaridad.getColumnIndexOrThrow("nombre")));
-
-    }
+    } // LLena las vairables q=estaticas que contendran la edad, genero y escolaridad del realizador (BOTTOM).
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

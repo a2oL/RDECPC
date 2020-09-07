@@ -19,6 +19,8 @@ import mx.org.ieem.R;
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
 import static mx.org.ieem.RESTful.AsyncLogin.id_cct_final;
 import static mx.org.ieem.RESTful.AsyncLogin.bolLogeado;
+import static mx.org.ieem.RESTful.AsyncLogin.id_random_final;
+
 import mx.org.ieem.data.sqllite.DataBaseAppRed;
 import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
 
@@ -36,8 +38,11 @@ public class MainActivity extends AppCompatActivity {
     Intent intentSelect;                    // Intent que navegara desde el MainActivity a el SelectActivity.
     Intent intentEventos;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -129,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             bolLogeado = true;
             actual_final = new trdd_cct(usuario.getString(0),usuario.getString(1),usuario.getString(2),usuario.getString(3),usuario.getInt(4),usuario.getInt(5),usuario.getString(6));
             id_cct_final = actual_final.getId_cct();
+            id_random_final = ds.getIdRandomDispositivo();
             return  true;
         } // Si existe algun registro en la bd (BOTTOM)
         else

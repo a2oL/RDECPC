@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import mx.org.ieem.RESTful.JSONModels.ResponseLogin.ResponseLogin;
 import mx.org.ieem.data.sqllite.models.ciudadanometro.*;
 import mx.org.ieem.data.sqllite.models.encuestaj.*;
 
@@ -15,7 +16,7 @@ import static mx.org.ieem.data.sqllite.constants.encuestasj.CamposyTablasEncuest
 public class DataBaseFillAndUpdate {
 
     public DataBaseFillAndUpdate(String response, Context context) throws JSONException {
-        cargarRespuestaVersiones(response, context);
+        cargarRespuestaVersiones(response.toString(), context);
     }
 
     public void cargarRespuestaVersiones(String response, Context contextActual ) throws JSONException

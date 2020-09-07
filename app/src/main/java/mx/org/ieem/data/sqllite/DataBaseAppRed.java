@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import mx.org.ieem.data.sqllite.models.ciudadanometro.*;
 import mx.org.ieem.data.sqllite.models.encuestaj.*;
-import mx.org.ieem.data.sqllite.models.general.trdd_tipo_sistema_apk;
-import mx.org.ieem.data.sqllite.models.general.trdd_version_tabla;
 import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
 
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
@@ -22,7 +20,7 @@ public class DataBaseAppRed
     /** --------------------------------- Nombre de Base de Datos -------------------------------------**/
     public static final String DataBaseName = "DPCDataBase";
     /** --------------------------------- Version de Base de Datos ---------------------------------**/
-    public static final int version = 45;
+    public static final int version = 50;
 
     /** --------------------------------- Variables y Helpers ----------------------------------**/
     public DBHelper helper;
@@ -171,6 +169,15 @@ public class DataBaseAppRed
         values.put(COLUMN_NAME_ID_TMUNICIPIO, (actual.getId()));
         values.put(COLUMN_NAME_NAME_TMUNICIPIO, (actual.getNombre()));
         database.insert(TABLE_NAME_TMUNICIPIO,null,values);
+        close();
+    }
+
+    public void insertIdRandomDispositivo(String id_random)
+    {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_RANDOM_DISPOSITIVOS, (id_random));
+        database.insert(TABLE_NAME_DISPOSITIVOS,null,values);
         close();
     }
 
@@ -533,6 +540,16 @@ public class DataBaseAppRed
         return dataCursor;
     }
 
+    public Cursor getCiudadanometrosBD(){
+        Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_ENCUESTA_CIUDADANOMETRO);
+        return dataCursor;
+    }
+
+    public Cursor getDetallesCiudadanometrosBD(int id_encuesta){
+        Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_DETALLEENCUESTA_CIUDADANOMETRO + " WHERE trdd_c_detalle_encuesta.id_encuesta = "+id_encuesta);
+        return dataCursor;
+    }
+
     public Cursor getDetallesEncuestasBD(int id_encuesta){
         Cursor dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_DETALLE_ENCUESTA + " WHERE trdd_ej_detalle_encuesta.id_encuesta = "+id_encuesta);
         return dataCursor;
@@ -608,5 +625,17 @@ public class DataBaseAppRed
         return dataCursor;
     }
 
+    public String getIdRandomDispositivo(){
+        Cursor dataCursor = querySQL("SELECT trdd_dispositivo.id_random as _id FROM trdd_dispositivo");
+        dataCursor.moveToNext();
+
+        if(dataCursor.getCount() == 0)
+        {
+            return "vacio";
+        }else{
+            int indiceIdRandom = dataCursor.getColumnIndex("id_random");
+            return dataCursor.getString(0);
+        }
+    }
 
 }

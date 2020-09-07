@@ -15,8 +15,8 @@ public class UsuarioJM implements Serializable
     @SerializedName("contrasenia")
     @Expose
     private String contrasenia;
-    @SerializedName("id")
-    @Expose
+    //@SerializedName("id")
+    //@Expose
     private String id;
     @SerializedName("obtenerCatalogos")
     @Expose

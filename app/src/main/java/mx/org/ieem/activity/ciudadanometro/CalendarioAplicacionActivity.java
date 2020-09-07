@@ -34,24 +34,18 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
     Button btnRegresar;                                                                             // Aloja el elemento de la UI (button_Regresar_CalendarioAplicacion) del layout activity_calendario_aplicacion que acciona el intentRegresar.
     Button btnLogout;                                                                               // Aloja el elemento de la UI (button_Logout_CalendarioAplicacion) del layout activity_calendario_aplicacion que acciona el intentLogout.
     TextView textViewGrado;                                                                         // Aloja el elemento de la UI (textView_grado_calendario_aplicacion) del layout activity_calendario_aplicacion que solo servira para desaparecer el elemento en caso de padres o tutores.
-
     Intent intentPrimera;                                                                           // Intent que navegara desde CalendarioAplicacionActivity hacie PrimeraCiudadanoActivity.
     Intent intentRegresar;                                                                          // Intent que navegara desde CalendarioAplicacionActivity hacie CiudadanometroActivity.
     Intent intentLogout;                                                                            // Intent que navegara desde CalendarioAplicacionActivity hacie MainActivity.
-
-    Cursor cursor_AnioEjercicioGrado;                                      // Contiene el result set de querys realizados por los metodos cargarMeses() o cargarGrados().
-    SimpleCursorAdapter simpleCursorAdapter_AnioEjercicioGrado;            // Determina la manera en la que seran mostrados los datos del cursor_MesEncuesta.
-
-
+    Cursor cursor_AnioEjercicioGrado;                                                               // Contiene el result set de querys realizados por los metodos cargarMeses() o cargarGrados().
+    SimpleCursorAdapter simpleCursorAdapter_AnioEjercicioGrado;                                     // Determina la manera en la que seran mostrados los datos del cursor_MesEncuesta.
     DataBaseAppRed database;                                                                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
-
-
     String[] strAuxiliar;                                                                           // Auxiliar para poder cargar los anios ejercicio y grados a los spinners
     List<String> listAuxiliar = new ArrayList<>();                                                  // Auxiliar para mostrar los datos del strAuxiliar.
 
-    public static trdd_c_anio anio_final_ciudadanometro;                                                   // Contiene el anio de aplicacion del ciudadanometro.
-    public static trdd_c_realizador ejercicio_final_ciudadanometro;               // Contiene a quien sera aplicado el ciudadanometro.
-    public static trdd_c_grado_escolar grado_final_ciudadanometro;                                                  // Contierne el grado al que sera aplicado el ciudadanometro.
+    public static trdd_c_anio anio_final_ciudadanometro;                                            // Contiene el anio de aplicacion del ciudadanometro.
+    public static trdd_c_realizador ejercicio_final_ciudadanometro;                                 // Contiene a quien sera aplicado el ciudadanometro.
+    public static trdd_c_grado_escolar grado_final_ciudadanometro;                                  // Contierne el grado al que sera aplicado el ciudadanometro.
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -146,7 +140,7 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-    {
+    { // Selecciona el Anio, Ejercicio y grado de aplicacion del ciudadanometro (TOP).
         cursor_AnioEjercicioGrado = (Cursor) spinnerAnios.getSelectedItem();
         anio_final_ciudadanometro = new trdd_c_anio(cursor_AnioEjercicioGrado.getString(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("_id")));
         cursor_AnioEjercicioGrado = (Cursor) spinnerEjercicio.getSelectedItem();
@@ -154,6 +148,7 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
         cursor_AnioEjercicioGrado = (Cursor) spinnerGrado.getSelectedItem();
         grado_final_ciudadanometro = new trdd_c_grado_escolar(cursor_AnioEjercicioGrado.getInt(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("_id")),cursor_AnioEjercicioGrado.getString(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("nombre")),cursor_AnioEjercicioGrado.getString(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("siglas")),cursor_AnioEjercicioGrado.getString(cursor_AnioEjercicioGrado.getColumnIndexOrThrow("grado")));
 
+        // TODO Determinar con que se llenara el grdo en caso de que se seleccione Padres.
         if (!ejercicio_final_ciudadanometro.getNombre().contentEquals("Padres de familia o tutores"))
           {
               spinnerGrado.setVisibility(View.GONE);
@@ -164,7 +159,7 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
               spinnerGrado.setVisibility(View.VISIBLE);
               textViewGrado.setVisibility(View.VISIBLE);
           }
-    }
+    } // Selecciona el Anio, Ejercicio y grado de aplicacion del ciudadanometro (BOTTOM).
 
     @Override
     public void onNothingSelected(AdapterView<?> parent)

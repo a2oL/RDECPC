@@ -22,54 +22,57 @@ import mx.org.ieem.data.sqllite.DataBaseAppRed;
 
 public class PrimeraCiudadanoAdapter extends BaseAdapter {
 
-    Context context;
-    String[] questionsList;
-    LayoutInflater inflter;
+    Context context;                                                      // Contexto del que es llamado el adaptador en este caso desde PrimeraCiudadanoActivity.
+    String[] questionsList;                                               // Contiene la lista de preguntas que llegan del servidor.
+    LayoutInflater inflter;                                               // Layout que hospedara las preguntas y sus respuestas.
 
-    RadioGroup rgp;
-    Drawable image1,image2,image3;
-    DataBaseAppRed dataSource;
-    Cursor dataCursor;
+    RadioGroup rgp;                                                       // Contiene el radiogroup de el layout que mostrara las respuestas.
+    Drawable image1,image2,image3;                                        // Image1 contiene el drawable de carita naranja, Image2 contiene el drawable de carita verde, image3 Contiene el drawable de carita Morada no utilizada por el momento.
+    DataBaseAppRed dataSource;                                            // Instancia de la base de datos.
+    Cursor dataCursor;                                                    // Cursor para poder obtener registros de la bd.
 
-    public static ArrayList<String> selectedIdAnios;                 // Contiene las respuestas seleccionadas.
-    public static ArrayList<String> selectedIdPreguntas;                  // Contiene los indicadores de las respuestas.
-    public static ArrayList<String> selectedIdRespuesta;                // Contiene el id de la respuesta seleccionada.
-    public static ArrayList<String> selectedIdEstatusRespuesta;                    // Contiene el estatus de las respuestas seleccionadas.
-    public static ArrayList<String> selectedRespuesta;
+    public static ArrayList<String> selectedIdAnios;                      // Contiene las respuestas seleccionadas.
+    public static ArrayList<String> selectedIdPreguntas;                  // COntiene el id de la pregunta seleccionada
+    public static ArrayList<String> selectedIdRespuesta;                  // Contiene el id de la respuesta seleccionada.
+    public static ArrayList<String> selectedIdEstatusRespuesta;           // Contiene el estatus de las respuestas seleccionadas.
+    public static ArrayList<String> selectedRespuesta;                    // Contiene la respuesta seleccionada por el usuario.
 
-    String[] stringArrayIdAnios;                                     // Contiene las respuestas de las preguntas.
-    String[] stringArrayIdPreguntas;                              // Contiene el estatus de las respuestas de las preguntas.
-    String[] stringArrayIdRespuesta;                                   // Contiene el id de las respuestas de las preguntas.
-    String[] stringArrayIdEstatusRespuesta;                          // Contiene el indicador de las respuestas de las preguntas.
-    String[] stringArrayRespuesta;
+    String[] stringArrayIdAnios;                                          // Contiene las respuestas de las preguntas.
+    String[] stringArrayIdPreguntas;                                      // Contiene el estatus de las respuestas de las preguntas.
+    String[] stringArrayIdRespuesta;                                      // Contiene el id de las respuestas de las preguntas.
+    String[] stringArrayIdEstatusRespuesta;                               // Contiene el indicador de las respuestas de las preguntas.
+    String[] stringArrayRespuesta;                                        // COntiene las respuestas seleccionadas.
 
     public final boolean[][] isSelec = new boolean[50][50];
 
-    public PrimeraCiudadanoAdapter(Context applicationContext) {
+    public PrimeraCiudadanoAdapter(Context applicationContext)
+    {
+        // Inicializacion de las variables (TOP)
         this.context = applicationContext;
         this.questionsList = Preguntas();
-
         selectedIdAnios = new ArrayList<>();
         selectedIdPreguntas = new ArrayList<>();
         selectedIdRespuesta  = new ArrayList<>();
         selectedIdEstatusRespuesta = new ArrayList<>();
         selectedRespuesta = new ArrayList<>();
 
-        for(int r = 0; r< 50;r++)
-        {
-            for(int y = 0; y< 50; y++){
-                isSelec[r][y]=false;
+        for(int filas = 0 ; filas < 50 ; filas++)
+        {// Para repintar las respuestas seleccionadas cuando se haga scroll en la app (TOP).
+            for(int columnas = 0 ; columnas < 50 ; columnas++){
+                isSelec[filas][columnas] = false;
             }
-        }
+        }// Para repintar las respuestas seleccionadas cuando se haga scroll en la app (BOTTOM).
 
-        for (int i = 0; i < questionsList.length; i++) {
+        for (int i = 0; i < questionsList.length; i++)
+        {// Para determinar si una pregunta fue respondida o no (TOP).
             selectedIdAnios.add("Not Attempted");
             selectedIdPreguntas.add("Not Attempted");
             selectedIdRespuesta.add("Not Attempted");
             selectedIdEstatusRespuesta.add("Not Attempted");
             selectedRespuesta.add("Not Attempted");
-        }
+        }// Para determinar si una pregunta fue respondida o no (BOTTOM).
         inflter = (LayoutInflater.from(applicationContext));
+        // Inicializacion de las variables (BOTTOM)
     }
 
     @Override
@@ -88,16 +91,17 @@ public class PrimeraCiudadanoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int p, View view, ViewGroup parent) {
-        view = inflter.inflate(R.layout.list_preguntas_ciudadano, null);
-        TextView question = (TextView) view.findViewById(R.id.pregunta_preguntas_ciudadano);
+    public View getView(final int p, View view, ViewGroup parent)
+    {// Colocar todas las preguntas con sus respectivas respuestas (TOP).
+        view = inflter.inflate(R.layout.list_preguntas_ciudadano, null);                                    // Inicializacion del layout que mostrara las preguntas.
+        TextView question = (TextView) view.findViewById(R.id.pregunta_preguntas_ciudadano);                     // Elemento del layout que mostrara las preguntas.
+        final RadioButton[] rb = new RadioButton[questionsList.length];                                          // Radio buttons generados para las respuestas de cada pregunta
+        rgp= (RadioGroup) view.findViewById(R.id.radioGroupCiudadano);                                           // Inicializacion del radio group que contendra las respuestas de las preguntas
+        rgp.setOrientation(RadioGroup.HORIZONTAL);                                                               // Determina la horientzaion del radio group.
 
-        final RadioButton[] rb = new RadioButton[8];
-        rgp= (RadioGroup) view.findViewById(R.id.radioGroupCiudadano);
-        rgp.setOrientation(RadioGroup.HORIZONTAL);
+        Respuestas(questionsList[p]);                                                                            // Obtiene las respuestas de la pregunta seleccionada.
 
-        Respuestas(questionsList[p]);
-
+        // Inicializacion de las variables (TOP)
         image1  = ContextCompat.getDrawable(context.getApplicationContext(), R.drawable.btn_cara_naranja);
         image2  = ContextCompat.getDrawable(context.getApplicationContext(), R.drawable.btn_cara_verde);
         image3  = ContextCompat.getDrawable(context.getApplicationContext(), R.drawable.btn_nino_nina);
@@ -107,10 +111,9 @@ public class PrimeraCiudadanoAdapter extends BaseAdapter {
         int hh = image1.getIntrinsicHeight();
         int ww = image1.getIntrinsicWidth();
         image1.setBounds( 0, 0, ww, hh );
-
-
-        for (int i = 0; i < stringArrayRespuesta.length ; i++) {
-
+        // Inicializacion de las variables (BOTTOM)
+        for (int i = 0; i < stringArrayRespuesta.length ; i++)                                              // i representa el numero de iteraciones que se dara para cada respuesta.
+        {// Colocacion de las respuestas para cada pregunta (TOP).
             rb[i]  = new RadioButton(view.getContext());
             rb[i].setId(View.generateViewId());
             rb[i].setText(stringArrayRespuesta[i]);
@@ -141,20 +144,17 @@ public class PrimeraCiudadanoAdapter extends BaseAdapter {
             });
             rb[i].setChecked(isSelec[p][i]);
             rgp.addView(rb[i]);
-        }
-
-
+        } // Colocacion de las respuestas para cada pregunta (BOTTOM).
         question.setText(questionsList[p]);
         return view;
-    }
+    }// Colocar todas las preguntas con sus respectivas respuestas (BOTTOM).
 
     public String[] Preguntas()
     { // Preguntas (TOP)
-        dataSource = new DataBaseAppRed(context);
-        dataCursor=dataSource.getPreguntasCiudadanometroBD();
-
-        String[] stringArrayAuxiliarPreguntas = new String[dataCursor.getCount()];           // Auxiliar que contiene las preguntas de la bd.
-        int intAuxiliar2 = 0;                                                                 // Auxiliar para posicionar los elementos dentro del vetor de Strings.
+        dataSource = new DataBaseAppRed(context);                                                   // Se inicializa la instancia de la bd.
+        dataCursor=dataSource.getPreguntasCiudadanometroBD();                                       // Se obtienen las preguntas de la bd.
+        String[] stringArrayAuxiliarPreguntas = new String[dataCursor.getCount()];                  // Auxiliar que contiene las preguntas de la bd.
+        int intAuxiliar2 = 0;                                                                       // Auxiliar para posicionar los elementos dentro del vetor de Strings.
 
         if (dataCursor.getCount() > 0)
         { // Si existen preguntas en la bd (TOP)
@@ -176,12 +176,12 @@ public class PrimeraCiudadanoAdapter extends BaseAdapter {
         dataSource = new DataBaseAppRed(context);
         dataCursor=dataSource.getRespuestasCiudadanometroBD(pos);
 
-        String[] stringAuxiliarIdAnios = new String[dataCursor.getCount()];               // Auxiliar que contiene las respues que se encuentran en la bd.
-        String[] stringAuxiliarIdPreguntas = new String[dataCursor.getCount()];                  // Auxiliar que contiene el estatus de las respuestas de la bd.
-        String[] stringAuxiliarIdRespuesta = new String[dataCursor.getCount()];              // Auxiliar que contiene el id de la respuesta que esta en la bd.
-        String[] stringAuxiliarIdEstatusRespuesta = new String[dataCursor.getCount()];                // Auxiliar que contiene los indicadores de las respuestas de la bd.
-        String[] stringAuxiliarRespuesta = new String[dataCursor.getCount()];
-        int intAuxiliar = 0;                                                                 // Auxiliar para posicionar los elementos dentro del vetor de Strings.
+        String[] stringAuxiliarIdAnios = new String[dataCursor.getCount()];                         // Auxiliar que contiene el anio de las preguntas que esta en la bd.
+        String[] stringAuxiliarIdPreguntas = new String[dataCursor.getCount()];                     // Auxiliar que contiene el id de la pregunta que esta en la bd.
+        String[] stringAuxiliarIdRespuesta = new String[dataCursor.getCount()];                     // Auxiliar que contiene el id de la respuesta que esta en la bd.
+        String[] stringAuxiliarIdEstatusRespuesta = new String[dataCursor.getCount()];              // Auxiliar que contiene los estatus de las respuestas en la bd.
+        String[] stringAuxiliarRespuesta = new String[dataCursor.getCount()];                       // Auxiliar que contiene las respuestas en la bd.
+        int intAuxiliar = 0;                                                                        // Auxiliar para posicionar los elementos dentro del vetor de Strings.
 
         if (dataCursor.getCount() > 0)
         { // Si existen respuestas asociadas a la pregunta (TOP)

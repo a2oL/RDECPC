@@ -30,7 +30,7 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
     TextView textViewGrado;                         // En caso de que el ejercicio sea realizado por padres de familia o tutores sera el grtado seleccionado.
     TextView textViewGradoText;                     // Sirve para desaparecer el texview de grado en caso de que no sea realizado por padre de familia o tutores.
     Button btnGuardar;                              // Aloja el elemento de la UI (button_siguiente_first_ciudadano) del layout activity_primera_ciudadano que acciona el intentSiguiente.
-    PrimeraCiudadanoAdapter customAdapter;            // Adapatador de las preguntas y respuestas del ciudadanometro
+    PrimeraCiudadanoAdapter customAdapter;          // Adapatador de las preguntas y respuestas del ciudadanometro
     AlertDialog.Builder dialogoAuxiliar;            // Dialogo utilizado para informar si faltan preguntas por responder.
     Intent intentSiguiente;                         // Intent que navegara desde PrimeraCiudadanoActivity hacia SegundaCiudadanoActivity.
     Intent intentSalir;                             // Intent que navegara desde PrimeraCiudadanoActivity hacia CiudadanometroActivity.
@@ -47,7 +47,8 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig)
+    { // Si cambia la orientacion de la pantalla impide que las respuestas seleccionadas se pierdan (TOP).
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             setContentView(R.layout.activity_primera_ciudadano);
@@ -59,7 +60,7 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
             cargarAnioEjercicioGrado();
             cargarPreguntas();
         }
-    }
+    } // Si cambia la orientacion de la pantalla impide que las respuestas seleccionadas se pierdan (BOTTOM).
 
     /**
      * Método que coloca en pantalla el anio, publico objetivo y en su defecto el grado previamnete seleccionado

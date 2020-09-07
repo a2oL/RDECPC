@@ -35,6 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CCT);
         db.execSQL(CEncuesta);
         db.execSQL(CDetalleEncuesta);
+        db.execSQL(CDispositivos);
 
         // Creacion de las tablas de la base de datos DataBaseAppRed (TOP)
         db.execSQL(CiuGradoEscolar);
@@ -70,6 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PREGUNTA_RESPUESTA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ENCUESTA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_DETALLE_ENCUESTA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_DISPOSITIVOS);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_GRADO_ESCOLAR_CIUDADANOMETRO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_NIED_GRES_CIUDADANOMETRO);

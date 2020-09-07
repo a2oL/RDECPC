@@ -3,46 +3,35 @@ package mx.org.ieem.RESTful;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.util.JsonWriter;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.security.KeyManagementException;
-import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
-
-import mx.org.ieem.RESTful.JSONModels.UsuarioJM;
+import mx.org.ieem.RESTful.JSONModels.PostCiudadanometro.Ciudadanometro;
+import mx.org.ieem.RESTful.JSONModels.PostCiudadanometro.DetallesEncuestaC;
+import mx.org.ieem.RESTful.JSONModels.PostEncuestas.DetallesEncuestum;
+import mx.org.ieem.RESTful.JSONModels.PostEncuestas.EncuestasJuvenile;
+import mx.org.ieem.RESTful.Retrofit.RetrofitClient.RetrofitClient;
+import mx.org.ieem.RESTful.Retrofit.interfaces.APIService;
 import mx.org.ieem.data.sqllite.DataBaseAppRed;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
 {
@@ -53,7 +42,7 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
     private String enviadode;
     DataBaseAppRed database;
     Context contextActual;
-    String op[];
+
 
     public AsyncLoadPage(Context context, ProgressBar progressBar, TextView txt, int count, Button btn, String enviadode) throws JSONException, IOException, CertificateException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
         this.progressBar = progressBar;
@@ -63,45 +52,37 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         this.enviadode = enviadode;
         this.contextActual = context;
         database = new DataBaseAppRed(context);
-        if (enviadode.equals("1"))
-        {
-            // TODO Cambiar la url para la insercion por metodo post.
-        }else{
-            Log.e("JSON ENVIAR CIUDADANO","AQUI VA");
-        }
     }
 
     @Override
     protected String doInBackground(Integer... params)
     {
+        APIService apiService = null;
+        try {
+            apiService = RetrofitClient.getClient(contextActual).create(APIService.class);
+        } catch (CertificateException | IOException | KeyStoreException | NoSuchAlgorithmException | KeyManagementException e) {
+            e.printStackTrace();
+        }
         if(enviadode.equals("1"))
         {
-            //Url de insercion de encuestas juveniles
-
-            //try {
-             //   sendPost(new URL("https://registro.ieem.org.mx:8443/redDigitalDpc/encuesta-juvenil/encuestas"),getEncuestasJuveniles());
-            //} catch (IOException | CertificateException | KeyStoreException | NoSuchAlgorithmException | KeyManagementException | JSONException e) {
-            //   e.printStackTrace();
-            //}
-            for (; count <= params[0]; count++)
-            {
-                try {
-                    Thread.sleep(1000);
-                    publishProgress(count);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+            sendEncuestas(apiService);
+           // new Handler(Looper.getMainLooper()).post(new Runnable() {
+         //       @Override
+        //        public void run() {
+        //            Log.e("UI thread", getEncuestasJuveniles().toString());
+          //      }
+       //     });
+            animacionRetraso(params[0]);
         }else{
-            //Url de insercion de ciudadanometros
-            for (; count <= params[0]; count++) {
-                try {
-                    Thread.sleep(1000);
-                    publishProgress(count);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            sendCiudadanometros(apiService);
+            //Corre en el hilo de ui para poder ver el logcat
+            /*new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("UI thread", getCiudadanometros().toString());
                 }
-            }
+            });*/
+            animacionRetraso(params[0]);
         }
 
         return "Task Completed.";
@@ -121,167 +102,161 @@ public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
         progressBar.setProgress(values[0]);
     }
 
-    public JSONArray getEncuestasJuveniles() throws JSONException
+    public void animacionRetraso(int contadorRetraso){
+        for (; count <= contadorRetraso; count++)
+        {
+            try {
+                Thread.sleep(1000);
+                publishProgress(count);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void sendEncuestas(APIService apiService){
+        Call<List<EncuestasJuvenile>> call = null;
+        call = apiService.insertEncuestas(getEncuestasJuveniles());
+        call.enqueue(new Callback<List<EncuestasJuvenile>>() {
+            @Override
+            public void onResponse(Call<List<EncuestasJuvenile>> call, Response<List<EncuestasJuvenile>> response) {
+                Toast.makeText(contextActual, "Codigo de respuesta Encuestas Juveniles:"+response.toString(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<List<EncuestasJuvenile>> call, Throwable t) {
+                Toast.makeText(contextActual, "Respuesta Negativa Encuestas Juveniles:"+t.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void sendCiudadanometros(APIService apiService){
+        Call<List<Ciudadanometro>> call = null;
+        call = apiService.insertCiudadanometros(getCiudadanometros());
+        call.enqueue(new Callback<List<Ciudadanometro>>() {
+            @Override
+            public void onResponse(Call<List<Ciudadanometro>> call, Response<List<Ciudadanometro>> response) {
+                Toast.makeText(contextActual, "Codigo de respuesta Ciudadanometro:"+response.code(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<List<Ciudadanometro>> call, Throwable t) {
+                Toast.makeText(contextActual, "Respuesta de respuesta Ciudadanometro:"+t.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public List<EncuestasJuvenile> getEncuestasJuveniles()
     {
         Cursor encuestas = database.getEncuestasJuvenilesBD();
+        List<EncuestasJuvenile> encuestasRealizadas = new ArrayList<EncuestasJuvenile>();
         int idcctColumn = encuestas.getColumnIndex("id_cct");
         int idrandomColumn = encuestas.getColumnIndex("id_random");
         int idencuestaColumn = encuestas.getColumnIndex("id_encuesta");
         int idniveleducativoColumn = encuestas.getColumnIndex("id_nivel_educativo");
         int idgradoescolarColumn = encuestas.getColumnIndex("id_grado_escolar");
 
-
-        encuestas.moveToNext();
-        JSONArray insercionsatos = new JSONArray();
-        int i = 0;
-        int j = 0;
         for(encuestas.moveToFirst(); !encuestas.isAfterLast(); encuestas.moveToNext())
         {
-            JSONObject encuestaRealizada = new JSONObject();
             String id_cct = encuestas.getString(idcctColumn);
             String id_random = encuestas.getString(idrandomColumn);
             int id_encuesta = encuestas.getInt(idencuestaColumn);
             int id_nivel_educativo = encuestas.getInt(idniveleducativoColumn);
             int id_grado_escolar = encuestas.getInt(idgradoescolarColumn);
-            JSONArray id_encuesta_array = getDetalleEncuesta(encuestas.getInt(idencuestaColumn));
-            encuestaRealizada.put("id_cct",id_cct);
-            encuestaRealizada.put("id_random",id_random);
-            encuestaRealizada.put("id_encuesta",id_encuesta);
-            encuestaRealizada.put("id_nivel_educativo",id_nivel_educativo);
-            encuestaRealizada.put("id_grado_escolar",id_grado_escolar);
-            encuestaRealizada.put("detallesEncuesta",id_encuesta_array);
-            insercionsatos.put(encuestaRealizada);
-
+            List<DetallesEncuestum> id_encuesta_array = getDetalleEncuesta(encuestas.getInt(idencuestaColumn));
+            EncuestasJuvenile encuestaJuvenil = new EncuestasJuvenile(id_cct,id_random,id_encuesta,id_nivel_educativo,id_grado_escolar,id_encuesta_array);
+            encuestasRealizadas.add(encuestaJuvenil);
         }
-        return insercionsatos;
+        return encuestasRealizadas;
     }
 
-    public JSONArray getDetalleEncuesta(int id_encuestas) throws JSONException
+    public List<DetallesEncuestum> getDetalleEncuesta(int id_encuestas)
     {
         Cursor detalleencuestas = database.getDetallesEncuestasBD(id_encuestas);
+        List<DetallesEncuestum> detallesDeEncuesta = new ArrayList<DetallesEncuestum>();
         int idcctColumn = detalleencuestas.getColumnIndex("id_cct");
         int idrandomColumn = detalleencuestas.getColumnIndex("id_random");
         int idencuestaColumn = detalleencuestas.getColumnIndex("id_encuesta");
         int idanioColumn = detalleencuestas.getColumnIndex("id_anio");
         int idmesColumn = detalleencuestas.getColumnIndex("id_mes");
         int idniveleducativoColumn = detalleencuestas.getColumnIndex("id_nivel_educativo");
-        int idgradoescolarColumn = detalleencuestas.getColumnIndex("id_grado_escolar");
         int idindicadorColumn = detalleencuestas.getColumnIndex("id_indicador");
         int idrespuestaColumn = detalleencuestas.getColumnIndex("id_respuesta");
         int idestatusrespuestaColumn = detalleencuestas.getColumnIndex("id_estatus_respuesta");
 
-        JSONArray detallesDeEncuesta = new JSONArray();
-
         for(detalleencuestas.moveToFirst(); !detalleencuestas.isAfterLast(); detalleencuestas.moveToNext())
         {
-            JSONObject detalleEncuesta = new JSONObject();
             String id_cct = detalleencuestas.getString(idcctColumn);
             String id_random = detalleencuestas.getString(idrandomColumn);
             int id_encuesta = detalleencuestas.getInt(idencuestaColumn);
             String id_anio = detalleencuestas.getString(idanioColumn);
             int id_mes = detalleencuestas.getInt(idmesColumn);
             int id_nivel_educativo = detalleencuestas.getInt(idniveleducativoColumn);
-            int id_grado_escolar = detalleencuestas.getInt(idgradoescolarColumn);
             int id_indicador = detalleencuestas.getInt(idindicadorColumn);
             int id_respuesta = detalleencuestas.getInt(idrespuestaColumn);
             int id_estatus_respuesta = detalleencuestas.getInt(idestatusrespuestaColumn);
-            detalleEncuesta.put("id_cct",id_cct);
-            detalleEncuesta.put("id_random",id_random);
-            detalleEncuesta.put("id_encuesta",id_encuesta);
-            detalleEncuesta.put("id_anio",id_anio);
-            detalleEncuesta.put("id_mes",id_mes);
-            detalleEncuesta.put("id_nivel_educativo",id_nivel_educativo);
-            detalleEncuesta.put("id_indicador",id_indicador);
-            detalleEncuesta.put("id_respuesta",id_respuesta);
-            detalleEncuesta.put("id_estatus_respuesta",id_estatus_respuesta);
-            detallesDeEncuesta.put(detalleEncuesta);
+            DetallesEncuestum detallePorEncuesta = new DetallesEncuestum(id_cct,id_random,id_encuesta,id_anio,id_mes,id_nivel_educativo,id_indicador,id_respuesta,id_estatus_respuesta);
+            detallesDeEncuesta.add(detallePorEncuesta);
         }
         return detallesDeEncuesta;
     }
 
-    public void sendPost(URL url, JSONArray post) throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, JSONException { // Metodo sendPOST() (TOP)
+    public List<Ciudadanometro> getCiudadanometros()
+    {
+        Cursor ciudadanometros = database.getCiudadanometrosBD();
+        List<Ciudadanometro> ciudadanometrosRealizados = new ArrayList<Ciudadanometro>();
+        int idcctColumn = ciudadanometros.getColumnIndex("id_cct");
+        int idrandomColumn = ciudadanometros.getColumnIndex("id_random");
+        int idencuestaColumn = ciudadanometros.getColumnIndex("id_encuesta");
+        int idrealizadorColumn = ciudadanometros.getColumnIndex("id_realizador");
+        int idrealizadoredadColumn = ciudadanometros.getColumnIndex("id_realizador_edad");
+        int idrealizadorescolaridad = ciudadanometros.getColumnIndex("id_realizador_escolaridad");
+        int idrealizadorgenero = ciudadanometros.getColumnIndex("id_realizador_genero");
+        int idrealizadorgradesc = ciudadanometros.getColumnIndex("id_realizador_grad_esc");
+        int idrealizadornivedu = ciudadanometros.getColumnIndex("id_realizador_niv_edu");
 
-        CertificateFactory cf = CertificateFactory.getInstance("X.509");                            // Se emplea para generar certificados.
-        InputStream caInput = contextActual.getAssets().open("load-der.crt");              // Aloja el certificado que se encuentra dentro de el directorio Assets.
-        Certificate ca;                                                                             // Certificado creado a partir de load-der.crt.
-        OutputStreamWriter out;                                                                     // Datos que seran enviados por metodo POST.
-        int HttpResult;                                                                             // Contiene el codigo de respuesta del servidor.
-        String responseHttp;
+        for(ciudadanometros.moveToFirst(); !ciudadanometros.isAfterLast(); ciudadanometros.moveToNext())
+        {
+            String id_cct = ciudadanometros.getString(idcctColumn);
+            String id_random = ciudadanometros.getString(idrandomColumn);
+            int id_encuesta = ciudadanometros.getInt(idencuestaColumn);
+            int id_realizador = ciudadanometros.getInt(idrealizadorColumn);
+            int id_realizador_edad = ciudadanometros.getInt(idrealizadoredadColumn);
+            int id_realizador_escolaridad = ciudadanometros.getInt(idrealizadorescolaridad);
+            int id_realizador_genero = ciudadanometros.getInt(idrealizadorgenero);
+            int id_realizador_grad_esc = ciudadanometros.getInt(idrealizadorgradesc);
+            int id_realizador_niv_edu = ciudadanometros.getInt(idrealizadornivedu);
+            List<DetallesEncuestaC> id_ciudadanometro_array = getDetalleCiudadanometro(ciudadanometros.getInt(idencuestaColumn));
+            Ciudadanometro ciudadanometro = new Ciudadanometro(id_cct,id_random,id_encuesta,id_realizador,id_realizador_edad,id_realizador_escolaridad,id_realizador_genero,id_realizador_grad_esc,id_realizador_niv_edu,id_ciudadanometro_array);
+            ciudadanometrosRealizados.add(ciudadanometro);
+        }
+        return ciudadanometrosRealizados;
+    }
 
+    public List<DetallesEncuestaC> getDetalleCiudadanometro(int id_encuestap)
+    {
+        Cursor detalleciudadanometro = database.getDetallesCiudadanometrosBD(id_encuestap);
+        List<DetallesEncuestaC> detallesDeCiudadanometro = new ArrayList<DetallesEncuestaC>();
+        int idcctColumn = detalleciudadanometro.getColumnIndex("id_cct");
+        int idrandomColumn = detalleciudadanometro.getColumnIndex("id_random");
+        int idencuestaColumn = detalleciudadanometro.getColumnIndex("id_encuesta");
+        int idanioColumn = detalleciudadanometro.getColumnIndex("id_anio");
+        int idpreguntaColumn = detalleciudadanometro.getColumnIndex("id_pregunta");
+        int idrespuestaColumn = detalleciudadanometro.getColumnIndex("id_respuesta");
+        int idestatusrespuestaColumn = detalleciudadanometro.getColumnIndex("id_estatus_respuesta");
 
-        try
-        { //Intenta generar el certificado (TOP)
-            ca = cf.generateCertificate(caInput);
-            Log.e("ca=", ""+((X509Certificate) ca).getSubjectDN());
-        } //Intenta generar el certificado (BOTTOM)
-        finally
-        { // Cierra el inputStream (TOP)
-            caInput.close();
-        } // Cierra el inputStream (BOTTOM)
-
-        // Creacion del KeyStore con el certificado load-der.crt (TOP)
-        String keyStoreType = KeyStore.getDefaultType();
-        KeyStore keyStore = KeyStore.getInstance(keyStoreType);
-        keyStore.load(null, null);
-        keyStore.setCertificateEntry("ca", ca);
-        // Creacion del KeyStore con el certificado load-der.crt (BOTTOM)
-
-        // Creacion del TrustManager que confiara en lo que este en nuestro keystore (TOP)
-        String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
-        TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
-        tmf.init(keyStore);
-        // Creacion del TrustManager que confiara en lo que este en nuestro keystore (BOTTOM)
-
-        // Creacion de un SSLContext que usara nuestra TrustManager (TOP)
-        SSLContext context = SSLContext.getInstance("TLS");
-        context.init(null, tmf.getTrustManagers(), null);
-        // Creacion de un SSLContext que usara nuestra TrustManager (BOTTOM)
-
-        // Configuracion de la conexion (TOP)
-        HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
-        urlConnection.setRequestMethod("POST");
-        urlConnection.setDoInput(true);
-        urlConnection.setDoOutput(true);
-        urlConnection.setSSLSocketFactory(context.getSocketFactory());
-        urlConnection.setConnectTimeout(10000);
-        urlConnection.setReadTimeout(10000);
-        urlConnection.setRequestProperty("Content-Type","application/json");
-        urlConnection.connect();
-        // Configuracion de la conexion (BOTTOM)
-        out = new OutputStreamWriter(urlConnection.getOutputStream());
-        DataOutputStream op = new DataOutputStream(urlConnection.getOutputStream());
-        //out.write(usuarioJM.toString());
-        //out.write(post);
-        out.close();
-       //outs.write(post.toString().getBytes("UTF-8"));
-
-       //out.write("[");
-       //Log.e("Envio:","[");
-        //for (int i = 0; i < post.length();i++)
-        //{
-            //if( i == post.length()-1)
-          //  {
-            //    Log.e("Envio:",post.getJSONObject(i).toString());
-           //     out.write(post.getJSONObject(i).toString());
-       //     }else{
-       //         Log.e("Envio:",post.getJSONObject(i).toString()+",");
-       //         out.write(post.getJSONObject(i).toString()+",");
-       //     }
-
-       // }
-       // Log.e("Envio:","]");
-        //out.write("]");
-
-        //outs.close();
-        // POST
-        // RESPONSE
-
-        HttpResult =urlConnection.getResponseCode();
-        Log.e("CODE",String.valueOf(HttpResult));
-        if (HttpResult == 200)
-        { // Si los datos fueron insertados correctamente (TOP)
-
-        } // Si los datos fueron insertados correctamente (TOP)
-        // RESPONSE
-    } // Metodo sendPOST() (BOTTOM)
+        for(detalleciudadanometro.moveToFirst(); !detalleciudadanometro.isAfterLast(); detalleciudadanometro.moveToNext())
+        {
+            String id_cct = detalleciudadanometro.getString(idcctColumn);
+            String id_random = detalleciudadanometro.getString(idrandomColumn);
+            int id_encuesta = detalleciudadanometro.getInt(idencuestaColumn);
+            String id_anio = detalleciudadanometro.getString(idanioColumn);
+            String id_pregunta = detalleciudadanometro.getString(idpreguntaColumn);
+            int id_respuesta = detalleciudadanometro.getInt(idrespuestaColumn);
+            int id_estatus_respuesta = detalleciudadanometro.getInt(idestatusrespuestaColumn);
+            DetallesEncuestaC detallePorCiudadanometro = new DetallesEncuestaC(id_cct,id_random,id_encuesta,id_anio,id_pregunta,id_respuesta,id_estatus_respuesta);
+            detallesDeCiudadanometro.add(detallePorCiudadanometro);
+        }
+        return detallesDeCiudadanometro;
+    }
 }

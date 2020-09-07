@@ -34,30 +34,28 @@ public class CuartaCiudadanoActivity extends AppCompatActivity {
     Button btnFinalizar;                                // Aloja el elemento de la UI (button_finalizar_four_ciudadano) del activity_cuarta_ciudadano que preguntara si se desea finalizar o no la encuesta.
     Intent intentSi;                                    // Intent que navegara desde CuartaCiudadanoActivity hacia PrimeraCiudadanoActivity.
     Intent intentNo;                                    // Intent que navegara desde CuartaCiudadanoActivity hacia CalendarioAplicacionActivity.
-    DataBaseAppRed dataSource;
-    Cursor dataCursor;
-    int ultimoRegistro = 0;
+    DataBaseAppRed dataSource;                          // Instancia de la base de datos
+    Cursor dataCursor;                                  // Cursor multiproposito para consultas de bd
+    int ultimoRegistro = 0;                             // Variable que sera remplazada con el AUTO INCREMENT de la bd
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuarta_ciudadano);
-        dataSource = new DataBaseAppRed(getBaseContext());
-        dataCursor=dataSource.getUltimoRegistroCiudadanometro();
-        cargarNumeroEncuestasRealizadas();
-
         // Inicializacion de las variables (TOP)
         btnFinalizar = (Button)findViewById(R.id.button_finalizar_four_ciudadano);
         intentSi = new Intent(this, PrimeraCiudadanoActivity.class);
         intentNo = new Intent(this, CalendarioAplicacionActivity.class);
         final AlertDialog.Builder dialogo2 = new AlertDialog.Builder(this);
+        dataSource = new DataBaseAppRed(getBaseContext());
+        dataCursor=dataSource.getUltimoRegistroCiudadanometro();
+        cargarNumeroEncuestasRealizadas();
         // Inicializacion de las variables (BOTTOM)
 
         // Click listeners de los botones definidos (TOP)
         btnFinalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dialogo2.setTitle("Importante").setMessage("\nTus respuestas Fueron Guardadas\n\nDevuelve el dispositivo al aplicador!!!");
                 dialogo2.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
@@ -70,17 +68,19 @@ public class CuartaCiudadanoActivity extends AppCompatActivity {
             }
         });
         // Click listeners de los botones definidos (BOTTOM)
-
-
     }
 
     public void insertarEncuestaCiudadanometro(){
         for (int i = 0 ; i < selectedRespuesta.size() ; i++){
-            dataSource.InsertDetalleEncuestaCiudadanometro(actual_final.getId_cct(),"id_random",ultimoRegistro+1,selectedIdAnios.get(i),selectedIdPreguntas.get(i),Integer.valueOf(selectedIdRespuesta.get(i)),Integer.valueOf(selectedIdEstatusRespuesta.get(i)));
+            dataSource.InsertDetalleEncuestaCiudadanometro(actual_final.getId_cct(),dataSource.getIdRandomDispositivo(),ultimoRegistro+1,selectedIdAnios.get(i),selectedIdPreguntas.get(i),Integer.valueOf(selectedIdRespuesta.get(i)),Integer.valueOf(selectedIdEstatusRespuesta.get(i)));
         }
-        dataSource.InsertEncuestaCiudadanometro(actual_final.getId_cct(),"id_random",ultimoRegistro+1,ejercicio_final_ciudadanometro.getId_realizador(), actual_final.getId_nivel_educativo(),grado_final_ciudadanometro.getId_grado_escolar(),edad_realicador_final_ciudadanometro.getId_edad(),genero_realicador_final_ciudadanometro.getId_genero(),escolaridad_realicador_final_ciudadanometro.getId_escolaridad());
+        dataSource.InsertEncuestaCiudadanometro(actual_final.getId_cct(),dataSource.getIdRandomDispositivo(),ultimoRegistro+1,ejercicio_final_ciudadanometro.getId_realizador(), actual_final.getId_nivel_educativo(),grado_final_ciudadanometro.getId_grado_escolar(),edad_realicador_final_ciudadanometro.getId_edad(),genero_realicador_final_ciudadanometro.getId_genero(),escolaridad_realicador_final_ciudadanometro.getId_escolaridad());
     }
 
+    /**
+     * Metodo para saber que registro fue el ultimo, se sustituira pora el AUTO INCREMENT 
+     *
+     */
     public void cargarNumeroEncuestasRealizadas()
     {
         if (dataCursor.getCount() > 0)

@@ -4,16 +4,7 @@ package mx.org.ieem.RESTful;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
-
-import mx.org.ieem.RESTful.JSONModels.UsuarioJM;
-import mx.org.ieem.data.sqllite.DataBaseAppRed;
-
-import mx.org.ieem.data.sqllite.DataBaseFillAndUpdate;
-
-import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,10 +13,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 import java.io.OutputStreamWriter;
 import java.net.URL;
-
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -40,7 +29,12 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 
-import static mx.org.ieem.data.sqllite.constants.encuestasj.CamposyTablasEncuestas.*;
+import mx.org.ieem.RESTful.JSONModels.UsuarioJM;
+import mx.org.ieem.data.sqllite.DataBaseAppRed;
+import mx.org.ieem.data.sqllite.DataBaseFillAndUpdate;
+import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
+
+import static mx.org.ieem.data.sqllite.constants.encuestasj.CamposyTablasEncuestas.TABLE_NAME_CCT_GENERAL;
 
 
 public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
@@ -91,9 +85,6 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         int HttpResult;                                                                             // Contiene el codigo de respuesta del servidor.
         URL url;                                                                                    // Contiene la url que proporciona el servicio.
         String responseHttp;
-
-
-
         try
           { //Intenta generar el certificado (TOP)
               ca = cf.generateCertificate(caInput);
@@ -150,7 +141,7 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         HttpResult =urlConnection.getResponseCode();
         responseHttp = respuestaServidor(urlConnection); // Se carga la respuesta del servidor
         Log.e("RESPUESTA",responseHttp);
-        Log.e("CODE",String.valueOf(HttpResult));
+        Log.e("CODE", String.valueOf(HttpResult));
         if (HttpResult == 200)
           { // Si el Codigo de respuesta es 200 (Si existe el usuario) (TOP)
               cargarVersionYCctLogin(responseHttp);
@@ -171,14 +162,13 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         StringBuilder sb;                                                                           // Contiene la respuesta del servidor ya tratada.
         BufferedReader br;                                                                          // contiene la respuesta del servidor sin tratar.
         String line;                                                                                // Auxiliar para leer la respuesta del servidor.
-
         sb = new StringBuilder();
         br = new BufferedReader(new InputStreamReader(urlConnec.getInputStream(),"utf-8"));
         while ((line = br.readLine()) != null) {
             sb.append(line + "\n");
         }
         br.close();
-        Log.e("RESPONSE",sb.toString());
+        //Log.e("RESPONSE",sb.toString());
         return sb.toString();
     }
 
@@ -197,6 +187,15 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
         actual_final = new trdd_cct(id_cct,nombre,domicilio,email,id_municipio,id_nivel_educativo,contrasenia);
         ds.insertCctActual(actual_final);
         id_cct_final = actual_final.getId_cct();;
+        if(ds.getIdRandomDispositivo().equals("vacio"))
+        {
+            //TODO metodo que genere numero aleatorio
+            id_random_final = generarIdRandom();
+            ds.insertIdRandomDispositivo(id_random_final);
+        }
+        else{
+            id_random_final = ds.getIdRandomDispositivo();
+        }
 
         if(ds.checkTablas())
         {
@@ -206,9 +205,9 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
 
 
     public String generarIdRandom(){
-        String auxiliar = null;
         Random rnd = new Random();
         rnd.setSeed(System.currentTimeMillis());
+        String auxiliar = "";
         for (int i = 0 ; i < 8 ; i++)
         {
             int intAletorio = rnd.nextInt(9);
