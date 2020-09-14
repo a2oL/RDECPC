@@ -38,6 +38,7 @@
         <activity android:name=".activity.encuestas.PreguntasEncuestaActivity" android:configChanges="screenSize|orientation"/>
         <activity android:name=".activity.main.SelectActivity" />
         <activity android:name=".activity.eventos.EventosActivity" />
+        <activity android:name=".activity.reportes.ReportesActivity" />
     </application>
 
 </manifest>

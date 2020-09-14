@@ -70,7 +70,6 @@ public class LoadPageActivity extends AppCompatActivity
                 }else{
                     onAceptar2Click();
                 }
-
             }
         });
     }

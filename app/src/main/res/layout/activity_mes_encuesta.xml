@@ -19,46 +19,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <TextView
         android:id="@+id/textView_Informativo_Mes_Encuesta"
         android:layout_width="511dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         android:text="Estimado docente, antes de iniciar la aplicacion de la Encueta Infantil y Juvenil del Mes, llena los siguientes campos"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_EncuestaInfantiLogo_MesEncuestas" />
 
-    <Button
-        android:id="@+id/button_Iniciar_MesEncuesta"
+    <TextView
+        android:id="@+id/textView_NumerodeEncuestas_MesEncuesta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:background="@drawable/ic_btn_inicio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_Grado_MesEncuesta" />
-
-    <Spinner
-        android:id="@+id/spinner_Meses_MesEncuesta"
-        android:layout_width="304dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="532dp"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_Meses_MesEncuesta" />
-
-    <TextView
-        android:id="@+id/textView_Meses_MesEncuesta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:text="@string/mes_encuesta_mes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,22 +48,56 @@
         android:id="@+id/spinner_Grado_MesEncuesta"
         android:layout_width="304dp"
         android:layout_height="35dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Grados_MesEncuesta" />
 
     <TextView
+        android:id="@+id/textView_Meses_MesEncuesta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="224dp"
+        android:text="@string/mes_encuesta_mes"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/textView_Grados_MesEncuesta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/mes_encuesta_grado"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.167"
+        app:layout_constraintHorizontal_bias="0.247"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_Meses_MesEncuesta" />
+
+    <Spinner
+        android:id="@+id/spinner_Meses_MesEncuesta"
+        android:layout_width="304dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Meses_MesEncuesta" />
+
+    <Button
+        android:id="@+id/button_Iniciar_MesEncuesta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/ic_btn_inicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_Grado_MesEncuesta" />
 
     <ImageView
         android:id="@+id/imageView_EncuestaInfantiLogo_MesEncuestas"
@@ -101,18 +117,6 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/ic_btn_flecha_atras"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_NumerodeEncuestas_MesEncuesta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
-        android:textAlignment="center"
-        android:textColor="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import mx.org.ieem.RESTful.JSONModels.ResponseLogin.ResponseLogin;
 import mx.org.ieem.data.sqllite.models.ciudadanometro.*;
 import mx.org.ieem.data.sqllite.models.encuestaj.*;
+import mx.org.ieem.data.sqllite.models.eventos.trdd_estatus_concurso_o_evento;
 
 import static mx.org.ieem.data.sqllite.constants.ciudadanometro.CamposyTablasCiudadano.*;
 import static mx.org.ieem.data.sqllite.constants.encuestasj.CamposyTablasEncuestas.*;
@@ -25,6 +26,19 @@ public class DataBaseFillAndUpdate {
 
         JSONObject respuestaVersiones = new JSONObject(response);
 
+
+        if(respuestaVersiones.has(TABLE_NAME_ESTATUS_CONCURSO_O_EVENTO))
+        {
+            ds.deleteEstatusEventos();
+            JSONArray trdd_estatus_concurso_o_eventos = respuestaVersiones.getJSONArray(TABLE_NAME_ESTATUS_CONCURSO_O_EVENTO);
+            for (int i = 0 ; i < trdd_estatus_concurso_o_eventos.length();i++)
+            {
+                JSONObject estatusEvento = trdd_estatus_concurso_o_eventos.getJSONObject(i);
+                int id_municipio = estatusEvento.getInt("id_estatus_coneve");
+                String nombre = estatusEvento.getString("nombre");
+                ds.insertEstatusEvento(new trdd_estatus_concurso_o_evento(id_municipio,nombre));
+            }
+        }
 
         if (respuestaVersiones.has(TABLE_NAME_TMUNICIPIO))
         {

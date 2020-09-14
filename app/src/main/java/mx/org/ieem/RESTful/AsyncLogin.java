@@ -37,7 +37,8 @@ import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
 import static mx.org.ieem.data.sqllite.constants.encuestasj.CamposyTablasEncuestas.TABLE_NAME_CCT_GENERAL;
 
 
-public class AsyncLogin extends AsyncTask<String, Void, Boolean> {
+public class AsyncLogin extends AsyncTask<String, Void, Boolean>
+{
 
     private String stringEmail;                             // Guarda el valor de el email proporcionado por el usuario.
     private String stringContrasenia;                       // Guarda el valor de la contrasenia proporcionada por el usario.

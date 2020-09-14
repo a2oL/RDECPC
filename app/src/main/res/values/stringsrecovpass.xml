@@ -6,7 +6,7 @@
     <string name="text2_recov_pass">Instrucciones.</string>
     <string name="text3_recov_pass">1.	Digita la Clave de Centro de Trabajo (CCT) de tu escuela</string>
     <string name="text6_recov_pass">2.  Digita el correo electrónico oficial de tu escuela.</string>
-    <string name="text4_recov_pass">2.	Pulsa "enviar", y en breve recibirás en tu correo electrónico la clave de usuario y contraseña asignada a tu escuela para participar en la Red.</string>
+    <string name="text4_recov_pass">3.  Pulsa enviar y en breve recibirás en el correo electrónico oficial, la clave de usuario y contraseña asignada a tu escuela para participar en la Red.</string>
     <string name="text5_recov_pass">CCT:</string>
     <string name="text7_recov_pass">Correo electrónico:</string>
 </resources>

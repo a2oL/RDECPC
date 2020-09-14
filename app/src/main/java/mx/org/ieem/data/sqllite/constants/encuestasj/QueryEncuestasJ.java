@@ -126,4 +126,34 @@ public class QueryEncuestasJ
             COLUMN_NAME_ID_RANDOM_DISPOSITIVOS + " TEXT NOT NULL," +
             "CONSTRAINT trdd_dispositivo_pk PRIMARY KEY (id_random));";
 
+    public static final String CEstatusConcursosEventos = "CREATE TABLE " + TABLE_NAME_ESTATUS_CONCURSO_O_EVENTO + " (" +
+            COLUMN_NAME_ID_ESTATUS_CONEVE + " INTEGER NOT NULL," +
+            COLUMN_NAME_NOMBRE_ESTATUS_CONEVE + " TEXT NOT NULL, " +
+            "CONSTRAINT trdd_estconeve_pk PRIMARY KEY (id_estatus_coneve));";
+
+    public static final String CConcursosEventos = "CREATE TABLE " + TABLE_NAME_CONCURSO_O_EVENTO + " (" +
+            COLUMN_NAME_ID_CONEVE + " INTEGER NOT NULL," +
+            COLUMN_NAME_NOMBRE_CONEVE + " TEXT NOT NULL, " +
+            COLUMN_NAME_DESCRIPCION_CONEVE + " TEXT NOT NULL, " +
+            COLUMN_NAME_URL_CONEVE + " TEXT NOT NULL, " +
+            COLUMN_NAME_URL_IMAGE_CONEVE + " TEXT NOT NULL, " +
+            COLUMN_NAME_IDESTATUSCONEVE_CONEVE + " INTEGER NOT NULL, " +
+            "CONSTRAINT trdd_coneve_pk PRIMARY KEY (id_con_eve)," +
+            "CONSTRAINT trdd_coneve_ece_fk FOREIGN KEY (id_estatus_coneve) REFERENCES trdd_estatus_concurso_o_evento (id_estatus_coneve));";
+
+    public static final String CEstatusReportes = "CREATE TABLE " + TABLE_NAME_ESTATUS_REPORTE + " (" +
+            COLUMN_NAME_ID_ESTATUS_REPORTE + " INTEGER NOT NULL," +
+            COLUMN_NAME_NOMBRE_REPORTE + " TEXT NOT NULL, " +
+            "CONSTRAINT trdd_estatus_reporte_pk PRIMARY KEY (id_estatus_reporte));";
+
+    public static final String CReportes = "CREATE TABLE " + TABLE_NAME_REPORTES + " (" +
+            COLUMN_NAME_ID_REPORTES + " INTEGER NOT NULL," +
+            COLUMN_NAME_NOMBRE_REPORTES + " TEXT NOT NULL, " +
+            COLUMN_NAME_DESCRIPCION_REPORTES + " TEXT NOT NULL, " +
+            COLUMN_NAME_URL_REPORTES + " TEXT NOT NULL, " +
+            COLUMN_NAME_IDESTATUS_REPORTES + " INTEGER NOT NULL, " +
+            "CONSTRAINT trdd_reporte_pk PRIMARY KEY (id_reporte)," +
+            "CONSTRAINT trdd_reporte_estrep_fk FOREIGN KEY (id_estatus_reporte) REFERENCES trdd_estatus_reporte (id_estatus_reporte));";
+
+
 }

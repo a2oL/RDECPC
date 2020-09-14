@@ -5,9 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import mx.org.ieem.data.sqllite.models.ciudadanometro.*;
 import mx.org.ieem.data.sqllite.models.encuestaj.*;
 import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
+import mx.org.ieem.data.sqllite.models.eventos.trdd_concurso_o_evento;
+import mx.org.ieem.data.sqllite.models.eventos.trdd_estatus_concurso_o_evento;
+import mx.org.ieem.data.sqllite.models.reportes.trdd_reporte;
 
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
 import static mx.org.ieem.data.sqllite.constants.ciudadanometro.CamposyTablasCiudadano.*;
@@ -20,7 +25,7 @@ public class DataBaseAppRed
     /** --------------------------------- Nombre de Base de Datos -------------------------------------**/
     public static final String DataBaseName = "DPCDataBase";
     /** --------------------------------- Version de Base de Datos ---------------------------------**/
-    public static final int version = 50;
+    public static final int version = 52;
 
     /** --------------------------------- Variables y Helpers ----------------------------------**/
     public DBHelper helper;
@@ -172,6 +177,16 @@ public class DataBaseAppRed
         close();
     }
 
+    public void insertEstatusEvento(trdd_estatus_concurso_o_evento actual)
+    {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_ESTATUS_CONEVE, (actual.getId_estatus_coneve()));
+        values.put(COLUMN_NAME_NOMBRE_ESTATUS_CONEVE, (actual.getNombre()));
+        database.insert(TABLE_NAME_ESTATUS_CONCURSO_O_EVENTO,null,values);
+        close();
+    }
+
     public void insertIdRandomDispositivo(String id_random)
     {
         open();
@@ -300,6 +315,43 @@ public class DataBaseAppRed
         close();
     }
 
+    public void insertEvento(trdd_concurso_o_evento evento){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_CONEVE, evento.getId_con_eve());
+        values.put(COLUMN_NAME_NOMBRE_CONEVE, evento.getNombre());
+        values.put(COLUMN_NAME_DESCRIPCION_CONEVE, evento.getDescripcion());
+        values.put(COLUMN_NAME_URL_CONEVE, evento.getUrl());
+        values.put(COLUMN_NAME_URL_IMAGE_CONEVE, evento.getUrl_image());
+        values.put(COLUMN_NAME_IDESTATUSCONEVE_CONEVE, evento.getId_estatus_coneve());
+        database.insert(TABLE_NAME_CONCURSO_O_EVENTO,null,values);
+        close();
+    }
+
+    public void insertReporte(trdd_reporte evento){
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_REPORTES, evento.getId_reporte());
+        values.put(COLUMN_NAME_NOMBRE_REPORTES, evento.getNombre());
+        values.put(COLUMN_NAME_DESCRIPCION_REPORTES, evento.getDescripcion());
+        values.put(COLUMN_NAME_URL_REPORTES, evento.getUrl());
+        values.put(COLUMN_NAME_IDESTATUS_REPORTES, evento.getId_estatus_reporte());
+        database.insert(TABLE_NAME_REPORTES,null,values);
+        close();
+    }
+
+    public void updateEvento(trdd_concurso_o_evento evento)
+    {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_CONEVE, evento.getId_con_eve());
+        values.put(COLUMN_NAME_NOMBRE_CONEVE, evento.getNombre());
+        values.put(COLUMN_NAME_DESCRIPCION_CONEVE, evento.getDescripcion());
+        values.put(COLUMN_NAME_URL_CONEVE, evento.getUrl());
+        values.put(COLUMN_NAME_URL_IMAGE_CONEVE, evento.getUrl_image());
+        values.put(COLUMN_NAME_IDESTATUSCONEVE_CONEVE, evento.getId_estatus_coneve());
+        database.update(TABLE_NAME_CONCURSO_O_EVENTO, values, "id_con_eve = " + String.valueOf(evento.getId_con_eve()), null);
+    }
+
     public void insertNivelIndicador(trdd_ej_nivedu_ind niveduIndicador){
         open();
         ContentValues values = new ContentValues();
@@ -404,6 +456,18 @@ public class DataBaseAppRed
         close();
     }
 
+    public void deleteEventos(){
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_CONCURSO_O_EVENTO);
+        close();
+    }
+
+    public void deleteReportes(){
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_REPORTES);
+        close();
+    }
+
     public void deleteNivelEducativo(){
         open();
         database.execSQL("DELETE FROM "+TABLE_NAME_NIVEL_EDUCATIVO);
@@ -425,6 +489,12 @@ public class DataBaseAppRed
     public void deleteAniosMeses(){
         open();
         database.execSQL("DELETE FROM "+TABLE_NAME_MES_ANIO);
+        close();
+    }
+
+    public void deleteEstatusEventos(){
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_ESTATUS_CONCURSO_O_EVENTO);
         close();
     }
 
@@ -635,6 +705,54 @@ public class DataBaseAppRed
         }else{
             int indiceIdRandom = dataCursor.getColumnIndex("id_random");
             return dataCursor.getString(0);
+        }
+    }
+
+    public ArrayList<trdd_concurso_o_evento> cargarEventosConcursosBDR()
+    {
+        Cursor dataEventos = querySQL("SELECT * FROM trdd_concurso_o_evento");
+        ArrayList<trdd_concurso_o_evento> auxiliarEventos = new ArrayList<trdd_concurso_o_evento>();
+        for(dataEventos.moveToFirst(); !dataEventos.isAfterLast(); dataEventos.moveToNext())
+        {
+            final int id_con_eve = dataEventos.getInt(dataEventos.getColumnIndex(COLUMN_NAME_ID_CONEVE));
+            final String nombre = dataEventos.getString(dataEventos.getColumnIndex(COLUMN_NAME_NOMBRE_CONEVE));
+            final String descripcion = dataEventos.getString(dataEventos.getColumnIndex(COLUMN_NAME_DESCRIPCION_CONEVE));
+            final String url = dataEventos.getString(dataEventos.getColumnIndex(COLUMN_NAME_URL_CONEVE));
+            final String url_image = dataEventos.getString(dataEventos.getColumnIndex(COLUMN_NAME_URL_IMAGE_CONEVE));
+            final int id_estatus_coneve = dataEventos.getInt(dataEventos.getColumnIndex(COLUMN_NAME_IDESTATUSCONEVE_CONEVE));;
+            trdd_concurso_o_evento eventoBD = new trdd_concurso_o_evento(id_con_eve,nombre,descripcion,url,url_image,id_estatus_coneve);
+            auxiliarEventos.add(eventoBD);
+        }
+        return auxiliarEventos;
+    }
+
+    public ArrayList<trdd_reporte> cargarReportesBDR()
+    {
+        Cursor dataEventos = querySQL("SELECT * FROM trdd_reporte");
+        ArrayList<trdd_reporte> auxiliarEventos = new ArrayList<trdd_reporte>();
+        for(dataEventos.moveToFirst(); !dataEventos.isAfterLast(); dataEventos.moveToNext())
+        {
+            final int id_con_eve = dataEventos.getInt(dataEventos.getColumnIndex(COLUMN_NAME_ID_REPORTES));
+            final String nombre = dataEventos.getString(dataEventos.getColumnIndex(COLUMN_NAME_NOMBRE_REPORTES));
+            final String descripcion = dataEventos.getString(dataEventos.getColumnIndex(COLUMN_NAME_DESCRIPCION_REPORTES));
+            final String url = dataEventos.getString(dataEventos.getColumnIndex(COLUMN_NAME_URL_REPORTES));
+            final int id_estatus_coneve = dataEventos.getInt(dataEventos.getColumnIndex(COLUMN_NAME_IDESTATUS_REPORTES));;
+            trdd_reporte eventoBD = new trdd_reporte(id_con_eve,nombre,descripcion,url,id_estatus_coneve);
+            auxiliarEventos.add(eventoBD);
+        }
+        return auxiliarEventos;
+    }
+
+    public boolean existeEvento(int id_con_eve)
+    {
+        Cursor dataCursor = querySQL("SELECT trdd_concurso_o_evento.id_con_eve as _id FROM " + TABLE_NAME_CONCURSO_O_EVENTO + " WHERE trdd_concurso_o_evento.id_con_eve = "+ id_con_eve);
+        if(dataCursor.getCount() > 0 )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

@@ -110,7 +110,7 @@
         android:layout_marginTop="268dp"
         android:text="Numero de encuestas aplicadas"
         android:textAlignment="center"
-        android:textColor="#2196F3"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"

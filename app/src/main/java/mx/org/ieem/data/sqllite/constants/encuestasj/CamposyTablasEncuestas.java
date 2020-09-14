@@ -87,4 +87,28 @@ public class CamposyTablasEncuestas
     public static final String TABLE_NAME_DISPOSITIVOS = "trdd_dispositivo";
     public static final String COLUMN_NAME_ID_RANDOM_DISPOSITIVOS = "id_random";
 
+    public static final String TABLE_NAME_ESTATUS_CONCURSO_O_EVENTO = "trdd_estatus_concurso_o_evento";
+    public static final String COLUMN_NAME_ID_ESTATUS_CONEVE = "id_estatus_coneve";
+    public static final String COLUMN_NAME_NOMBRE_ESTATUS_CONEVE = "nombre";
+
+    public static final String TABLE_NAME_CONCURSO_O_EVENTO = "trdd_concurso_o_evento";
+    public static final String COLUMN_NAME_ID_CONEVE = "id_con_eve";
+    public static final String COLUMN_NAME_NOMBRE_CONEVE = "nombre";
+    public static final String COLUMN_NAME_DESCRIPCION_CONEVE = "descripcion";
+    public static final String COLUMN_NAME_URL_CONEVE = "url";
+    public static final String COLUMN_NAME_URL_IMAGE_CONEVE = "url_image";
+    public static final String COLUMN_NAME_IDESTATUSCONEVE_CONEVE = "id_estatus_coneve";
+
+    public static final String TABLE_NAME_ESTATUS_REPORTE = "trdd_estatus_reporte";
+    public static final String COLUMN_NAME_ID_ESTATUS_REPORTE = "id_estatus_reporte";
+    public static final String COLUMN_NAME_NOMBRE_REPORTE = "nombre";
+
+    public static final String TABLE_NAME_REPORTES = "trdd_reporte";
+    public static final String COLUMN_NAME_ID_REPORTES = "id_reporte";
+    public static final String COLUMN_NAME_NOMBRE_REPORTES = "nombre";
+    public static final String COLUMN_NAME_DESCRIPCION_REPORTES = "descripcion";
+    public static final String COLUMN_NAME_URL_REPORTES = "url";
+    public static final String COLUMN_NAME_IDESTATUS_REPORTES = "id_estatus_reporte";
+
+
 }

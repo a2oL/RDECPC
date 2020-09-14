@@ -18,25 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView_SitiosDeInteres_Main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
-        android:text="Sitios de Interes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/button_Dpc_Main"
         android:layout_width="171dp"
         android:layout_height="148dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="320dp"
         android:background="@drawable/logo_dpc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.897"
+        app:layout_constraintHorizontal_bias="0.745"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,74 +33,52 @@
         android:id="@+id/button_Eventos_Main"
         android:layout_width="179dp"
         android:layout_height="152dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="316dp"
         android:background="@drawable/ic_logo_eventos_y_concursos_vigentes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintHorizontal_bias="0.259"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView_RedesSociales_Main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Redes Sociales"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_Dpc_Main" />
-
     <Button
         android:id="@+id/button_Fb_Main"
-        android:layout_width="68dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="328dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="41dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="28dp"
         android:background="@drawable/ic_btn_facebook"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_RedesSociales_Main"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_Tw_Main" />
 
     <Button
         android:id="@+id/button_Yt_Main"
-        android:layout_width="68dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="38dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="28dp"
         android:background="@drawable/ic_youtube"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.002"
-        app:layout_constraintStart_toEndOf="@+id/button_Insta_Main"
-        app:layout_constraintTop_toBottomOf="@+id/textView_RedesSociales_Main"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintTop_toBottomOf="@+id/button_Insta_Main" />
 
     <Button
         android:id="@+id/button_Tw_Main"
-        android:layout_width="68dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="45dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="28dp"
         android:background="@drawable/ic_btn_twitter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_Fb_Main"
-        app:layout_constraintTop_toBottomOf="@+id/textView_RedesSociales_Main"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_Insta_Main"
-        android:layout_width="68dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="39dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="28dp"
         android:background="@drawable/ic_insta"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_Tw_Main"
-        app:layout_constraintTop_toBottomOf="@+id/textView_RedesSociales_Main"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_Fb_Main" />
 
     <ImageView
         android:id="@+id/imageView_LogoRedDigital_Main"
@@ -123,5 +90,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_logo_red" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_Main"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_EncuestasCiudadano_Main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

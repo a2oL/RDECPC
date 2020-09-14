@@ -134,7 +134,7 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
                    { // Revisa si falta responder alguna pregunta (TOP)
                         if (PreguntasEncuestaAdapter.selectedRespuestas.get(i).matches("Not Attempted"))
                           { // Si alguna pregunta no fue respondida cambia el estado de booleanPreguntasRespondidas (TOP)
-                              message = "La pregunta: "+(i + 1)+" No fue respondida";
+                              message = "¡La pregunta:"+(i + 1)+" no fue respondida!";
                               booleanPreguntasRespondidas= false;
                               break;
                           } // Si alguna pregunta no fue respondida cambia el estado de booleanPreguntasRespondidas (BOTTOM)
@@ -165,7 +165,8 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
                                   actual_final.getId_nivel_educativo(),
                                   trddgradoescolar_actual_final.getId_grado_escolar()
                           );
-                      dialogo2.setTitle("Importante").setMessage("Tus respuestas fueron Guardadas!!!\n\nRegresa la tableta al encargado.");
+                      dialogo2.setTitle("Importante").setMessage("¡GRACIAS!\n" +
+                              "Tus respuestas fueron guardadas correctamente, puedes devolver el dispositivo al encargado.\n");
                       dialogo2.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -181,13 +182,7 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
                   } // Si todas las preguntas fueron respondidas (BOTTOM)
                 else
                   { // SI faltan respuestas por responder (TOP)
-                    dialogo2.setTitle("Importante").setMessage(message+"\n\nDeseas responderla  o salir de la encuesta\n\n");
-                    dialogo2.setPositiveButton("Salir", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startActivity(intentSalirEncuesta);
-                        }
-                    });
+                    dialogo2.setTitle("Importante").setMessage(message);
                     dialogo2.setNegativeButton("Responderla", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

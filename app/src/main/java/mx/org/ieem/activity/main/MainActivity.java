@@ -2,15 +2,22 @@ package mx.org.ieem.activity.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import mx.org.ieem.RESTful.AsyncEventosConcursos;
 import mx.org.ieem.activity.eventos.EventosActivity;
 import mx.org.ieem.activity.login.LoginActivity;
 
@@ -34,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnYoutube;                      // Aloja el elemento de la UI (button_Yt_Main) del layout activity_main contendra enlace a pagina de YOUTUBE.
     Button btnEventos;                      // Aloja el elemento de la UI (button_Eventos_Main) del layout activity_main contendra enlace a pagina de EVENTOS Y CONCURSOS.
     Button btnDpc;                          // Aloja el elemento de la UI (button_Dpc_Main) del layout activity_main contendra enlace a minisitio DPC.
+    ProgressBar pb;
     Intent intentLogin;                     // Intent que navegara desde el MainActivity a el LoginActivity.
     Intent intentSelect;                    // Intent que navegara desde el MainActivity a el SelectActivity.
     Intent intentEventos;
@@ -54,9 +62,13 @@ public class MainActivity extends AppCompatActivity {
         btnYoutube = (Button)findViewById(R.id.button_Yt_Main);
         btnEventos = (Button)findViewById(R.id.button_Eventos_Main);
         btnDpc = (Button)findViewById(R.id.button_Dpc_Main);
+        pb = (ProgressBar)findViewById(R.id.progressBar_Main);
+        pb.setVisibility(View.GONE);
+
         intentLogin = new Intent(this, LoginActivity.class);
         intentSelect = new Intent(this, SelectActivity.class);
         intentEventos = new Intent(this, EventosActivity.class);
+
         // Inicializacion de las variables (BOTTOM)
 
         // Click listeners de los botones definidos (TOP)
@@ -106,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
         btnEventos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intentEventos);
+                new AsyncEventosConcursos(getApplicationContext(), MainActivity.this).execute();
+                pb.setVisibility(View.VISIBLE);
             }
         });
 
@@ -141,5 +154,12 @@ public class MainActivity extends AppCompatActivity {
         {
             return false;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        pb.setVisibility(View.GONE);
+
     }
 }

@@ -2,6 +2,7 @@ package mx.org.ieem.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -40,7 +41,9 @@ public class RecovPassActivity extends AppCompatActivity {
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Tus datos de acceso han sido enviados a tu correo", Toast.LENGTH_SHORT).show();
+                Toast msg = Toast.makeText(getApplicationContext(), "Tus datos de acceso han sido enviados a tu correo", Toast.LENGTH_LONG);
+                msg.setGravity(Gravity.CENTER, msg.getXOffset() / 2, msg.getYOffset() / 2);
+                msg.show();
             }
         });
         // Click listeners de los botones definidos (BOTTOM)

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/fondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -61,10 +62,10 @@
         android:id="@+id/button_EntrarEncuesta_Select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/ic_logo_encuesta_infantil"
         app:layout_constraintEnd_toStartOf="@+id/button_EntrarCiudadanometro_Select"
-        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Municipio_Select" />
 
@@ -72,7 +73,7 @@
         android:id="@+id/button_EntrarCiudadanometro_Select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="84dp"
         android:background="@drawable/ic_logo_ciudadanometro"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,11 +83,41 @@
         android:id="@+id/imageView_RedDigital_Select"
         android:layout_width="194dp"
         android:layout_height="135dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="140dp"
         android:src="@drawable/ic_logo_red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_EntrarCiudadanometro_Select" />
+
+    <Button
+        android:id="@+id/button_Home_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_btn_flecha_atras"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_reportes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="232dp"
+        android:text="Reportes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Municipio_Select" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_Select"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        app:layout_constraintEnd_toStartOf="@+id/button_EntrarCiudadanometro_Select"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toEndOf="@+id/button_EntrarEncuesta_Select"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Municipio_Select" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

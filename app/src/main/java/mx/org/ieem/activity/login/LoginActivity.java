@@ -77,10 +77,12 @@ public class LoginActivity extends AppCompatActivity {
                             as.execute(editTextEmail.getText().toString(), editTextContrasenia.getText().toString());
                             try { // Espera 1seg a que se reciba respuesta del AsyncLogin (TOP)
                                 as.get(10000, TimeUnit.MILLISECONDS);
-                                if (bolLogeado) { // Si el usuario fue encontrado navega a SelectActivity (TOP)
+                                if (bolLogeado)
+                                { // Si el usuario fue encontrado navega a SelectActivity (TOP)
                                     startActivity(intentUsuarioEncontrado);
                                 } // Si el usuario fue encontrado navega a SelectActivity (BOTTOM)
-                                else { // Mensaje de Error de usuario no encontrado (TOP)
+                                else
+                                    { // Mensaje de Error de usuario no encontrado (TOP)
                                     usarioEncontrado[0] = false;
                                 } // Mensaje de Error de usuario no encontrado (BOTTOM)
                             } // Espera 1seg a que se reciba respuesta del AsyncLogin (BOTTOM)

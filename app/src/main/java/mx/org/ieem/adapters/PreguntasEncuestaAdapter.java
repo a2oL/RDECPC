@@ -120,7 +120,12 @@ public class PreguntasEncuestaAdapter extends BaseAdapter
                     rb[i]  = new RadioButton(view.getContext());
                     rb[i].setId(View.generateViewId());
                     rb[i].setLeft(100);
-                    rb[i].setCompoundDrawables(null,null,dar[i],null);
+                    if(i <stringArrayRespuestas.length-1) {
+                        rb[i].setCompoundDrawables(null, null, dar[i], null);
+                    }else
+                    {
+                        rb[i].setText("   Otro...");
+                    }
                     final int finalI = i;
                     rb[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
