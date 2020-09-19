@@ -10,6 +10,7 @@ import mx.org.ieem.RESTful.JSONModels.ResponseLogin.ResponseLogin;
 import mx.org.ieem.data.sqllite.models.ciudadanometro.*;
 import mx.org.ieem.data.sqllite.models.encuestaj.*;
 import mx.org.ieem.data.sqllite.models.eventos.trdd_estatus_concurso_o_evento;
+import mx.org.ieem.data.sqllite.models.reportes.trdd_tipo_reporte;
 
 import static mx.org.ieem.data.sqllite.constants.ciudadanometro.CamposyTablasCiudadano.*;
 import static mx.org.ieem.data.sqllite.constants.encuestasj.CamposyTablasEncuestas.*;
@@ -37,6 +38,19 @@ public class DataBaseFillAndUpdate {
                 int id_municipio = estatusEvento.getInt("id_estatus_coneve");
                 String nombre = estatusEvento.getString("nombre");
                 ds.insertEstatusEvento(new trdd_estatus_concurso_o_evento(id_municipio,nombre));
+            }
+        }
+
+        if(respuestaVersiones.has(TABLE_NAME_TIPO_REPORTE))
+        {
+            ds.deleteTipoReporte();
+            JSONArray trdd_tipo_reporte = respuestaVersiones.getJSONArray(TABLE_NAME_TIPO_REPORTE);
+            for (int i = 0 ; i < trdd_tipo_reporte.length();i++)
+            {
+                JSONObject tipodeReporte = trdd_tipo_reporte.getJSONObject(i);
+                int id_tipo_reporte = tipodeReporte.getInt(COLUMN_NAME_ID_TIPO_REPORTE_TABLE);
+                String nombre = tipodeReporte.getString(COLUMN_NAME_NOMBRE_TIPO_REPORTE);
+                ds.insertTipoReporte(new trdd_tipo_reporte(id_tipo_reporte,nombre));
             }
         }
 

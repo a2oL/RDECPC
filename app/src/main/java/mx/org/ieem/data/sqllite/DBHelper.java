@@ -39,7 +39,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CEstatusConcursosEventos);
         db.execSQL(CConcursosEventos);
         db.execSQL(CEstatusReportes);
+        db.execSQL(CTipoReportes);
         db.execSQL(CReportes);
+
 
         // Creacion de las tablas de la base de datos DataBaseAppRed (TOP)
         db.execSQL(CiuGradoEscolar);
@@ -80,6 +82,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CONCURSO_O_EVENTO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ESTATUS_REPORTE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_REPORTES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_TIPO_REPORTE);
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_GRADO_ESCOLAR_CIUDADANOMETRO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_NIED_GRES_CIUDADANOMETRO);

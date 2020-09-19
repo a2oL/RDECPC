@@ -13,6 +13,7 @@ import mx.org.ieem.data.sqllite.models.encuestaj.trdd_cct;
 import mx.org.ieem.data.sqllite.models.eventos.trdd_concurso_o_evento;
 import mx.org.ieem.data.sqllite.models.eventos.trdd_estatus_concurso_o_evento;
 import mx.org.ieem.data.sqllite.models.reportes.trdd_reporte;
+import mx.org.ieem.data.sqllite.models.reportes.trdd_tipo_reporte;
 
 import static mx.org.ieem.RESTful.AsyncLogin.actual_final;
 import static mx.org.ieem.data.sqllite.constants.ciudadanometro.CamposyTablasCiudadano.*;
@@ -25,7 +26,7 @@ public class DataBaseAppRed
     /** --------------------------------- Nombre de Base de Datos -------------------------------------**/
     public static final String DataBaseName = "DPCDataBase";
     /** --------------------------------- Version de Base de Datos ---------------------------------**/
-    public static final int version = 52;
+    public static final int version = 53;
 
     /** --------------------------------- Variables y Helpers ----------------------------------**/
     public DBHelper helper;
@@ -187,6 +188,16 @@ public class DataBaseAppRed
         close();
     }
 
+    public void insertTipoReporte(trdd_tipo_reporte actual)
+    {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_ID_TIPO_REPORTE_TABLE, (actual.getId_tipo_reporte()));
+        values.put(COLUMN_NAME_NOMBRE_TIPO_REPORTE, (actual.getNombre()));
+        database.insert(TABLE_NAME_TIPO_REPORTE,null,values);
+        close();
+    }
+
     public void insertIdRandomDispositivo(String id_random)
     {
         open();
@@ -336,6 +347,7 @@ public class DataBaseAppRed
         values.put(COLUMN_NAME_DESCRIPCION_REPORTES, evento.getDescripcion());
         values.put(COLUMN_NAME_URL_REPORTES, evento.getUrl());
         values.put(COLUMN_NAME_IDESTATUS_REPORTES, evento.getId_estatus_reporte());
+        values.put(COLUMN_NAME_ID_TIPO_REPORTE,evento.getId_tipo_reporte());
         database.insert(TABLE_NAME_REPORTES,null,values);
         close();
     }
@@ -462,9 +474,9 @@ public class DataBaseAppRed
         close();
     }
 
-    public void deleteReportes(){
+    public void deleteReportes(int id_tipo_reporte){
         open();
-        database.execSQL("DELETE FROM "+TABLE_NAME_REPORTES);
+        database.execSQL("DELETE FROM "+TABLE_NAME_REPORTES+" WHERE id_tipo_reporte = "+id_tipo_reporte);
         close();
     }
 
@@ -495,6 +507,12 @@ public class DataBaseAppRed
     public void deleteEstatusEventos(){
         open();
         database.execSQL("DELETE FROM "+TABLE_NAME_ESTATUS_CONCURSO_O_EVENTO);
+        close();
+    }
+
+    public void deleteTipoReporte(){
+        open();
+        database.execSQL("DELETE FROM "+TABLE_NAME_TIPO_REPORTE);
         close();
     }
 
@@ -726,9 +744,9 @@ public class DataBaseAppRed
         return auxiliarEventos;
     }
 
-    public ArrayList<trdd_reporte> cargarReportesBDR()
+    public ArrayList<trdd_reporte> cargarReportesBDR(int id_tipo_reporte)
     {
-        Cursor dataEventos = querySQL("SELECT * FROM trdd_reporte");
+        Cursor dataEventos = querySQL("SELECT * FROM trdd_reporte WHERE id_tipo_reporte = "+id_tipo_reporte);
         ArrayList<trdd_reporte> auxiliarEventos = new ArrayList<trdd_reporte>();
         for(dataEventos.moveToFirst(); !dataEventos.isAfterLast(); dataEventos.moveToNext())
         {
@@ -737,7 +755,8 @@ public class DataBaseAppRed
             final String descripcion = dataEventos.getString(dataEventos.getColumnIndex(COLUMN_NAME_DESCRIPCION_REPORTES));
             final String url = dataEventos.getString(dataEventos.getColumnIndex(COLUMN_NAME_URL_REPORTES));
             final int id_estatus_coneve = dataEventos.getInt(dataEventos.getColumnIndex(COLUMN_NAME_IDESTATUS_REPORTES));;
-            trdd_reporte eventoBD = new trdd_reporte(id_con_eve,nombre,descripcion,url,id_estatus_coneve);
+            final int id_tipo_reportez = dataEventos.getInt(dataEventos.getColumnIndex(COLUMN_NAME_ID_TIPO_REPORTE));
+            trdd_reporte eventoBD = new trdd_reporte(id_con_eve,nombre,descripcion,url,id_estatus_coneve,id_tipo_reportez);
             auxiliarEventos.add(eventoBD);
         }
         return auxiliarEventos;

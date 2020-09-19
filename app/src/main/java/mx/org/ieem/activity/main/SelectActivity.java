@@ -32,7 +32,7 @@ public class SelectActivity extends AppCompatActivity{
     Intent intentLogout;                        // Intent que navegara desde  SelectActivity hacia MainActivity.
     Intent intentHome;                          // Intent que navegara desde SelectActivity hacia MainActivity Sin desloguear.
     DataBaseAppRed database;                    // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
-    ProgressBar pbSelect;
+
 
     Button btnReportes;
 
@@ -43,7 +43,7 @@ public class SelectActivity extends AppCompatActivity{
         setContentView(R.layout.activity_select);
         // Inicializacion de las variables (TOP).
 
-        btnReportes = (Button) findViewById(R.id.button_reportes);
+
 
         btnEncuesta = (Button) findViewById(R.id.button_EntrarEncuesta_Select);
         btnCiudadanometro = (Button) findViewById(R.id.button_EntrarCiudadanometro_Select);
@@ -57,14 +57,14 @@ public class SelectActivity extends AppCompatActivity{
         intentLogout = new Intent(this, MainActivity.class);
         intentHome = new Intent(this, MainActivity.class);
         database = new DataBaseAppRed(getBaseContext());
-        pbSelect = (ProgressBar)findViewById(R.id.progressBar_Select);
+
         // Inicializacion de las variables (BOTTOM).
 
         // Obtencion de datos del usuario actual (TOP).
         textViewNombreEscuela.setText("Escuela: " + actual_final.getNombre());
         textViewClaveEscuela.setText("Con clave de CCT: " + actual_final.getId_cct());
         textViewMunicipioEscuela.setText("Del municipio de: " + database.getMunicipio().getNombre());
-        pbSelect.setVisibility(View.GONE);
+
         // Obtencion de datos del usuario actual (BOTTOM).
 
         // Click listeners de los botones definidos (TOP).
@@ -96,20 +96,14 @@ public class SelectActivity extends AppCompatActivity{
         });
         // Click listeners de los botones definidos (BOTTOM).
 
-        btnReportes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pbSelect.setVisibility(View.VISIBLE);
-                new AsyncReportes(SelectActivity.this,getApplicationContext()).execute();
-            }
-        });
+
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
-        pbSelect.setVisibility(View.GONE);
+
         if (!bolLogeado)
         { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
             startActivity(intentLogout);

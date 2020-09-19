@@ -31,6 +31,6 @@ public interface APIService {
     Call<List<trdd_concurso_o_evento>> getEventos();
 
     @Headers("Content-Type: application/json")
-    @POST("/redDigitalDpc/reportes")
-    Call<List<trdd_reporte>> getReportes();
+    @POST("/redDigitalDpc/reportes/encuesta_juvenil")
+    Call<List<trdd_reporte>> getReportesEncuestas();
 }

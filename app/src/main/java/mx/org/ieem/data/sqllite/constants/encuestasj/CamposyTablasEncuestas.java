@@ -109,6 +109,13 @@ public class CamposyTablasEncuestas
     public static final String COLUMN_NAME_DESCRIPCION_REPORTES = "descripcion";
     public static final String COLUMN_NAME_URL_REPORTES = "url";
     public static final String COLUMN_NAME_IDESTATUS_REPORTES = "id_estatus_reporte";
+    public static final String COLUMN_NAME_ID_TIPO_REPORTE = "id_tipo_reporte";
+
+    public static final String TABLE_NAME_TIPO_REPORTE = "trdd_tipo_reporte";
+    public static final String COLUMN_NAME_ID_TIPO_REPORTE_TABLE = "id_tipo_reporte";
+    public static final String COLUMN_NAME_NOMBRE_TIPO_REPORTE = "nombre";
+
+
 
 
 }

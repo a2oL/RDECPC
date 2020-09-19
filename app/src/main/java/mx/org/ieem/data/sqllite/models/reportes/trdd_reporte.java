@@ -9,13 +9,15 @@ public class trdd_reporte implements Parcelable {
     private String descripcion;
     private String url;
     private int id_estatus_reporte;
+    private int id_tipo_reporte;
 
-    public trdd_reporte(int id_reporte, String nombre, String descripcion, String url, int id_estatus_reporte) {
+    public trdd_reporte(int id_reporte, String nombre, String descripcion, String url, int id_estatus_reporte, int id_tipo_reporte) {
         this.id_reporte = id_reporte;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.url = url;
         this.id_estatus_reporte = id_estatus_reporte;
+        this.id_tipo_reporte = id_tipo_reporte;
     }
 
     protected trdd_reporte(Parcel in) {
@@ -24,6 +26,7 @@ public class trdd_reporte implements Parcelable {
         descripcion = in.readString();
         url = in.readString();
         id_estatus_reporte = in.readInt();
+        id_tipo_reporte = in.readInt();
     }
 
     public static final Creator<trdd_reporte> CREATOR = new Creator<trdd_reporte>() {
@@ -78,6 +81,14 @@ public class trdd_reporte implements Parcelable {
         this.id_estatus_reporte = id_estatus_reporte;
     }
 
+    public int getId_tipo_reporte() {
+        return id_tipo_reporte;
+    }
+
+    public void setId_tipo_reporte(int id_tipo_reporte) {
+        this.id_tipo_reporte = id_tipo_reporte;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -90,5 +101,6 @@ public class trdd_reporte implements Parcelable {
         dest.writeString(descripcion);
         dest.writeString(url);
         dest.writeInt(id_estatus_reporte);
+        dest.writeInt(id_tipo_reporte);
     }
 }

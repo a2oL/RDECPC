@@ -27,30 +27,37 @@ public class AsyncReportes extends AsyncTask<String, Void, Boolean> {
 
     private Activity activity;
     private Context context;
+    private int reportesDe;
     DataBaseAppRed bd;
     Intent intentReportes;
     public static ArrayList<trdd_reporte> reportesaMostrar = new ArrayList<trdd_reporte>();
     private boolean hayReportes = false;
 
-    public AsyncReportes(Activity activity, Context context) {
+    public AsyncReportes(Activity activity, Context context, int reportesDe) {
         this.activity = activity;
         this.context = context;
+        this.reportesDe = reportesDe;
         bd = new DataBaseAppRed(context);
         intentReportes = new Intent(context, ReportesActivity.class);
     }
 
     @Override
     protected Boolean doInBackground(String... strings) {
-        APIService apiService = null;
-        try {
-            apiService = RetrofitClient.getClient(context).create(APIService.class);
-            getReportesServidor(apiService);
-            Thread.sleep(5000); // Tiempo que esperara la conexion
-            return true;
-        } catch (CertificateException | IOException | KeyStoreException | NoSuchAlgorithmException | KeyManagementException | InterruptedException e) {
-            e.printStackTrace();
+        if(reportesDe == 1) {
+            APIService apiService = null;
+            try {
+                apiService = RetrofitClient.getClient(context).create(APIService.class);
+                getReportesEncuestasServidor(apiService);
+                Thread.sleep(5000); // Tiempo que esperara la conexion
+                return true;
+            } catch (CertificateException | IOException | KeyStoreException | NoSuchAlgorithmException | KeyManagementException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            return false;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
     @Override
@@ -69,23 +76,23 @@ public class AsyncReportes extends AsyncTask<String, Void, Boolean> {
         }
     }
 
-    public void getReportesServidor(APIService apiService)
+    public void getReportesEncuestasServidor(APIService apiService)
     {
         final ArrayList<trdd_reporte>[] reportesdelServidor = new ArrayList[]{new ArrayList<trdd_reporte>()};
         Call<List<trdd_reporte>> call = null;
-        call = apiService.getReportes();
+        call = apiService.getReportesEncuestas();
         call.enqueue(new Callback<List<trdd_reporte>>() {
             @Override
             public void onResponse(Call<List<trdd_reporte>> call, Response<List<trdd_reporte>> response) {
                 reportesdelServidor[0] = (ArrayList<trdd_reporte>) response.body();
                 insertarReportesBD(reportesdelServidor[0]);
-                reportesaMostrar = bd.cargarReportesBDR();
+                reportesaMostrar = bd.cargarReportesBDR(reportesDe);
                 //Toast.makeText(context, "Mostrando reportes del servidor: "+reportesaMostrar.get(0).getDescripcion(), Toast.LENGTH_LONG).show();
                 hayReportes = true;
             }
             @Override
             public void onFailure(Call<List<trdd_reporte>> call, Throwable t) {
-                reportesaMostrar = bd.cargarReportesBDR();
+                reportesaMostrar = bd.cargarReportesBDR(reportesDe);
                 hayReportes = false;
             }
         });
@@ -93,7 +100,7 @@ public class AsyncReportes extends AsyncTask<String, Void, Boolean> {
 
     public void insertarReportesBD(ArrayList<trdd_reporte> eventosServicioBD)
     {
-        bd.deleteReportes();
+        bd.deleteReportes(reportesDe);
         for(int nEvento = 0 ; nEvento < eventosServicioBD.size() ; nEvento++)
         {
             trdd_reporte eventoNube = eventosServicioBD.get(nEvento);

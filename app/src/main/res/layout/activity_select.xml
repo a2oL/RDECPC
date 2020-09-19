@@ -98,26 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_reportes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="232dp"
-        android:text="Reportes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_Municipio_Select" />
 
-    <ProgressBar
-        android:id="@+id/progressBar_Select"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        app:layout_constraintEnd_toStartOf="@+id/button_EntrarCiudadanometro_Select"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toEndOf="@+id/button_EntrarEncuesta_Select"
-        app:layout_constraintTop_toBottomOf="@+id/textView_Municipio_Select" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

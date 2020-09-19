@@ -6,12 +6,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import mx.org.ieem.RESTful.AsyncReportes;
 import mx.org.ieem.activity.main.LoadPageActivity;
 
 import mx.org.ieem.activity.main.MainActivity;
@@ -29,12 +31,14 @@ public class EncuestasActivity extends AppCompatActivity {
     Button btnEnviar;                               // Aloja el elemento de la UI (button_Enviar_Encuestas) del layout activity_encuestas que acciona el intentEnviar.
     Button btnLogout;                               // Aloja el elemento de la UI (button_Logout_Encuestas) del layout activity_encuestas que acciona el intentLogout.
     Button btnRegresar;                             // Aloja el elemento de la UI (button_Regresar_Encuestas) del layout activity_encuestas que acciona el intentRegresar.
+    Button btnReportes;
     TextView textViewNumeroEncuestas;               // Aloja el elemento de la UI (textView_NumerodeEncuestas_Encuestas) del layout activity_encuestas que muestra el numero de encuestas aplicadas..
     Intent intentIniciar;                           // Intent que navegara desde EncuestasActivity hacia InfoEncuestaActivity.
     Intent intentEnviar;                            // Intent que navegara desde EncuestasActivity hacia LoadPageActivity.
     Intent intentLogout;                            // Intent que navegara desde EncuestasActivity hacia MainActivity.
     Intent intentRegresar;                          // Intent que navegara desde EncuestasActivity hacia  SelectActivity.
     DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
+    ProgressBar pbSelect;
 
     int ultimoRegistro = 0;
     @Override
@@ -42,19 +46,21 @@ public class EncuestasActivity extends AppCompatActivity {
     { // Creacion de la vista (TOP)
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encuestas);
-
         // Inicializacion de las variables (TOP)
         btnIniciar = (Button) findViewById(R.id.button_Iniciar_Encuestas);
         btnEnviar = (Button) findViewById(R.id.button_Enviar_Encuestas);
         btnLogout = (Button) findViewById(R.id.button_Logout_Encuestas);
         btnRegresar = (Button) findViewById(R.id.button_Regresar_Encuestas);
+        btnReportes = (Button) findViewById(R.id.btn_reportes_encuestas);
         textViewNumeroEncuestas = (TextView) findViewById(R.id.textView_NumerodeEncuestas_Encuestas);
         intentIniciar = new Intent(this, InfoEncuestaActivity.class);
         intentEnviar = new Intent(this, LoadPageActivity.class);
         intentLogout = new Intent(this, MainActivity.class);
         intentRegresar = new Intent(this, SelectActivity.class);
         final AlertDialog.Builder dialogo2 = new AlertDialog.Builder(this);
+        pbSelect = (ProgressBar)findViewById(R.id.progressBar_Select);
         database = new DataBaseAppRed(getBaseContext());
+        pbSelect.setVisibility(View.GONE);
 
         Cursor dataCursor = database.getUltimoRegistro();
         dataCursor.moveToNext();
@@ -115,11 +121,20 @@ public class EncuestasActivity extends AppCompatActivity {
         });
         // Click listeners de los botones definidos (BOTTOM)
 
+        btnReportes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pbSelect.setVisibility(View.VISIBLE);
+                new AsyncReportes(EncuestasActivity.this,getApplicationContext(),1).execute();
+            }
+        });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        pbSelect.setVisibility(View.GONE);
         if (!bolLogeado)
         { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
             startActivity(intentLogout);
