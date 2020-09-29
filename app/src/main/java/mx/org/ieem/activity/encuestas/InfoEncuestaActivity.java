@@ -72,8 +72,8 @@ public class InfoEncuestaActivity extends AppCompatActivity {
     {
         super.onResume();
         if (!bolLogeado)
-        { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
-            startActivity(intentLogout);
-        } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
+          { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
+              startActivity(intentLogout);
+          } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
     }
 }

@@ -42,9 +42,6 @@ public class SelectActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
         // Inicializacion de las variables (TOP).
-
-
-
         btnEncuesta = (Button) findViewById(R.id.button_EntrarEncuesta_Select);
         btnCiudadanometro = (Button) findViewById(R.id.button_EntrarCiudadanometro_Select);
         btnLogout = (Button) findViewById(R.id.button_Logout_Select);
@@ -57,14 +54,12 @@ public class SelectActivity extends AppCompatActivity{
         intentLogout = new Intent(this, MainActivity.class);
         intentHome = new Intent(this, MainActivity.class);
         database = new DataBaseAppRed(getBaseContext());
-
         // Inicializacion de las variables (BOTTOM).
 
         // Obtencion de datos del usuario actual (TOP).
         textViewNombreEscuela.setText("Escuela: " + actual_final.getNombre());
         textViewClaveEscuela.setText("Con clave de CCT: " + actual_final.getId_cct());
         textViewMunicipioEscuela.setText("Del municipio de: " + database.getMunicipio().getNombre());
-
         // Obtencion de datos del usuario actual (BOTTOM).
 
         // Click listeners de los botones definidos (TOP).
@@ -95,8 +90,6 @@ public class SelectActivity extends AppCompatActivity{
             }
         });
         // Click listeners de los botones definidos (BOTTOM).
-
-
     }
 
     @Override

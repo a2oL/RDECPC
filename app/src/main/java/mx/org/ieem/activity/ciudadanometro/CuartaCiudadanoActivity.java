@@ -84,12 +84,12 @@ public class CuartaCiudadanoActivity extends AppCompatActivity {
     public void cargarNumeroEncuestasRealizadas()
     {
         if (dataCursor.getCount() > 0)
-        {//Si existen registros de encuestas (TOP)
-            dataCursor.moveToNext();
-            if (dataCursor.getInt(0) != NULL)
-            { // Si encuentra algun registro se actualiza ultimoRegistro (TOP)
-                ultimoRegistro = dataCursor.getInt(0);
-            } // Si encuentra algun registro se actualiza ultimoRegistro (BOTTOM)
-        }//Si existen registros de encuestas (BOTTOM)
+          {//Si existen registros de encuestas (TOP)
+              dataCursor.moveToNext();
+              if (dataCursor.getInt(0) != NULL)
+                { // Si encuentra algun registro se actualiza ultimoRegistro (TOP)
+                    ultimoRegistro = dataCursor.getInt(0);
+                } // Si encuentra algun registro se actualiza ultimoRegistro (BOTTOM)
+          }//Si existen registros de encuestas (BOTTOM)
     }
 }

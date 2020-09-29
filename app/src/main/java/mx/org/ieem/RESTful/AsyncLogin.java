@@ -40,6 +40,9 @@ import static mx.org.ieem.data.sqllite.constants.encuestasj.CamposyTablasEncuest
 public class AsyncLogin extends AsyncTask<String, Void, Boolean>
 {
 
+    // Falta por documentar pero por lo mientras se tendra que quitar este login
+
+
     private String stringEmail;                             // Guarda el valor de el email proporcionado por el usuario.
     private String stringContrasenia;                       // Guarda el valor de la contrasenia proporcionada por el usario.
     private ProgressBar btnLogin;
@@ -76,9 +79,9 @@ public class AsyncLogin extends AsyncTask<String, Void, Boolean>
     } // Hilo en segundo plano (BOTTOM)
 
     public void sendPost(String id, String contrasenia) throws IOException, CertificateException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, JSONException { // Metodo sendPOST() (TOP)
-
-        String obtenerCatalogos = "true";
-        UsuarioJM usuarioJM = new UsuarioJM(id,contrasenia,obtenerCatalogos);                                        // Contiene un objeto de tipo UsuarioJM creado a partir del email y contrasena proporcionado por el usuario.
+        // TODO Cambiar variable obtenerCatalogos esta por default en true para probar bd.
+        String obtenerCatalogos = "true";                                                           // Variable que pedira o no los catalogos
+        UsuarioJM usuarioJM = new UsuarioJM(id,contrasenia,obtenerCatalogos);                       // Contiene un objeto de tipo UsuarioJM creado a partir del email y contrasena proporcionado por el usuario.
         CertificateFactory cf = CertificateFactory.getInstance("X.509");                            // Se emplea para generar certificados.
         InputStream caInput = contextActual.getAssets().open("load-der.crt");              // Aloja el certificado que se encuentra dentro de el directorio Assets.
         Certificate ca;                                                                             // Certificado creado a partir de load-der.crt.

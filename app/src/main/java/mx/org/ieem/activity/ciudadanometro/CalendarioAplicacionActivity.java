@@ -133,9 +133,9 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
     protected void onResume() {
         super.onResume();
         if (!bolLogeado)
-        { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
-            startActivity(intentLogout);
-        } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
+          { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
+              startActivity(intentLogout);
+          } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
     }
 
     @Override
@@ -150,15 +150,15 @@ public class CalendarioAplicacionActivity extends AppCompatActivity implements A
 
         // TODO Determinar con que se llenara el grdo en caso de que se seleccione Padres.
         if (!ejercicio_final_ciudadanometro.getNombre().contentEquals("Padres de familia o tutores"))
-          {
+          { // Si el ejercicio seleccionado fue diferente al de Padres de familia. (TOP)
               spinnerGrado.setVisibility(View.GONE);
               textViewGrado.setVisibility(View.GONE);
-          }
+          } // Si el ejercicio seleccionado fue diferente al de Padres de familia. (BOTTOM)
         else
-          {
+          { // De otro manera Escondera el Spinner de seleccion. (TOP)
               spinnerGrado.setVisibility(View.VISIBLE);
               textViewGrado.setVisibility(View.VISIBLE);
-          }
+          } // De otro manera Escondera el Spinner de seleccion. (BOTTOM)
     } // Selecciona el Anio, Ejercicio y grado de aplicacion del ciudadanometro (BOTTOM).
 
     @Override

@@ -20,32 +20,35 @@ import static mx.org.ieem.RESTful.AsyncEventosConcursos.eventosServidor;
 
 public class EventosActivity extends AppCompatActivity
 {
-    EventosAdapter customAdapter;
-    ListView listEventos;
-    Button atras;
+    EventosAdapter customAdapter;                                   // Contiene el Adaptador de los eventos que se mostraran.
+    ListView listEventos;                                           // Elemento de la UI que almacenara los objetos del servidor o de la BD para asi poder acceder a ellos.
+    Button atras;                                                   // Elemento de la UI que permitira regresar al MainActivity.
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventos);
 
+        // Inicializacion de variables. (TOP)
         atras = (Button) findViewById(R.id.button_regresar_eventos);
-
         customAdapter = new EventosAdapter(this);
         listEventos = (ListView)findViewById(R.id.listView_eventos);
         listEventos.setAdapter(customAdapter);
+        // Inicializacion de variables. (BOTTOM)
 
+        // Click listeners del activity. (TOP)
         listEventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (eventosServidor.get(position).getId_estatus_coneve() == 2)
-                {
-                    Toast.makeText(getApplicationContext(), "El evento deseado ha expirado intenta con otro", Toast.LENGTH_LONG).show();
-                }else
-                {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(eventosServidor.get(position).getUrl()));
-                    startActivity(browserIntent);
-                }
+                  { // Si el evento esta en estado inactivo. (TOP)
+                      Toast.makeText(getApplicationContext(), "El evento deseado ha expirado intenta con otro", Toast.LENGTH_LONG).show();
+                  } // Si el evento esta en estado inactivo. (BOTTOM)
+                else
+                  { // Si el evento esta en estado activo. (TOP)
+                      Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(eventosServidor.get(position).getUrl()));
+                      startActivity(browserIntent);
+                  } // Si el evento esta en estado activo. (BOTTOM)
             }
         });
 
@@ -56,6 +59,7 @@ public class EventosActivity extends AppCompatActivity
                 startActivity(browserIntent);
             }
         });
+        // Click listeners del activity. (BOTTOM)
     }
 
 

@@ -76,14 +76,11 @@
 
     <Button
         android:id="@+id/button_Logout_RecovPass"
-        android:layout_width="51dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/ic_btn_home"
+        android:layout_width="81dp"
+        android:layout_height="80dp"
+        android:background="@drawable/ic_btn_salir"
         android:textColor="#FDFCFC"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.031"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -134,14 +131,13 @@
 
     <ImageView
         android:id="@+id/imageView_Titulo_RecovPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="506dp"
+        android:layout_height="46dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/ic_tx_recuperar_usuario"
+        android:background="@drawable/ic_txt_recuperar_usuario_y_contrasenas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_RedDigital_RecovPass"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_RedDigital_RecovPass" />
 
     <TextView
         android:id="@+id/textView_DigitaCorreo_RecovPass"

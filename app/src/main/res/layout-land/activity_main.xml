@@ -23,7 +23,7 @@
         android:layout_width="171dp"
         android:layout_height="148dp"
         android:layout_marginTop="320dp"
-        android:background="@drawable/logo_dpc"
+        android:background="@drawable/ic_logo_dpc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.745"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:layout_width="179dp"
         android:layout_height="152dp"
         android:layout_marginTop="316dp"
-        android:background="@drawable/ic_logo_eventos_y_concursos_vigentes"
+        android:background="@drawable/ic_logo_eventos_y_concursos_vigentes_grande"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.259"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="28dp"
-        android:background="@drawable/ic_youtube"
+        android:background="@drawable/ic_btn_youtube"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_Insta_Main" />
 
@@ -76,7 +76,7 @@
         android:layout_height="34dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="28dp"
-        android:background="@drawable/ic_insta"
+        android:background="@drawable/ic_btn_instagram"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_Fb_Main" />
 

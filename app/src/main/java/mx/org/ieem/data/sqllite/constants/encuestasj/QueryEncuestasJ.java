@@ -154,8 +154,8 @@ public class QueryEncuestasJ
             COLUMN_NAME_IDESTATUS_REPORTES + " INTEGER NOT NULL, " +
             COLUMN_NAME_ID_TIPO_REPORTE+ " INTEGER NOT NULL,"+
             "CONSTRAINT trdd_reporte_pk PRIMARY KEY (id_reporte)," +
-            "CONSTRAINT trdd_reporte_tiprep_fk FOREIGN KEY (id_tipo_reporte) REFERENCES trdd_tipo_reporte (id_tipo_reporte)," +
-            "CONSTRAINT trdd_reporte_estrep_fk FOREIGN KEY (id_estatus_reporte) REFERENCES trdd_estatus_reporte (id_estatus_reporte));";
+            "CONSTRAINT trdd_reporte_estrep_fk FOREIGN KEY (id_estatus_reporte) REFERENCES trdd_estatus_reporte (id_estatus_reporte)," +
+            "CONSTRAINT trdd_reporte_tiprep_fk FOREIGN KEY (id_tipo_reporte) REFERENCES trdd_tipo_reporte (id_tipo_reporte));";
 
     public static final String CTipoReportes = "CREATE TABLE " + TABLE_NAME_TIPO_REPORTE + " (" +
             COLUMN_NAME_ID_TIPO_REPORTE_TABLE + " INTEGER NOT NULL," +

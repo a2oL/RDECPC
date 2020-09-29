@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/fondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -82,34 +83,29 @@
 
     <Button
         android:id="@+id/button_Regresar_CalendarioAplicacion"
-        android:layout_width="63dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="28dp"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
         android:background="@drawable/ic_btn_flecha_atras"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_Logout_CalendarioAplicacion"
-        android:layout_width="63dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/ic_btn_home"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_CiudadanometroLogo_CalendarioAplicacion"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:background="@drawable/ic_btn_salir"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView_CiudadanometroLogo_CalendarioAplicacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="124dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="288dp"
-        app:layout_constraintEnd_toStartOf="@+id/button_Regresar_CalendarioAplicacion"
+        app:layout_constraintEnd_toStartOf="@+id/button_Logout_CalendarioAplicacion"
+        app:layout_constraintStart_toEndOf="@+id/button_Regresar_CalendarioAplicacion"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_logo_ciudadanometro" />
+        app:srcCompat="@drawable/ic_logo_ciudadanometro_grande" />
 
     <TextView
         android:id="@+id/textView_EstimadoDocente_CalendarioAplicacion"

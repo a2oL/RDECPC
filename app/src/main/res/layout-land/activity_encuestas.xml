@@ -10,26 +10,24 @@
 
     <Button
         android:id="@+id/button_Enviar_Encuestas"
-        android:layout_width="78dp"
-        android:layout_height="57dp"
+        android:layout_width="180dp"
+        android:layout_height="49dp"
         android:layout_marginTop="200dp"
-        android:background="@drawable/ic_btn_naranja_tiempo"
+        android:background="@drawable/ic_btn_subir_resultados"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintHorizontal_bias="0.202"
         app:layout_constraintStart_toEndOf="@+id/textView_NumerodeEncuestas_Encuestas"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView_EncuestaInfantiLogo_Encuestas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="372dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/button_Logout_Encuestas"
+        android:layout_width="304dp"
+        android:layout_height="103dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintEnd_toStartOf="@+id/button_Logout_Encuestas"
+        app:layout_constraintStart_toEndOf="@+id/button_Regresar_Encuestas"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_logo_encuesta_infantil" />
+        app:srcCompat="@drawable/ic_logo_encuesta_infantil_grande" />
 
     <TextView
         android:id="@+id/textView_NumerodeEncuestas_Encuestas"
@@ -46,30 +44,25 @@
 
     <Button
         android:id="@+id/button_Regresar_Encuestas"
-        android:layout_width="73dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
         android:background="@drawable/ic_btn_flecha_atras"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.822"
-        app:layout_constraintStart_toEndOf="@+id/imageView_EncuestaInfantiLogo_Encuestas"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_Logout_Encuestas"
-        android:layout_width="73dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/ic_btn_home"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:background="@drawable/ic_btn_salir"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_InfoBoton_Encuestas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pulsa el boton para comenzar la encuesta"
+        android:text="Pulsa el boton iniciar para comenzar la encuesta"
         app:layout_constraintBottom_toTopOf="@+id/button_Iniciar_Encuestas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +107,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="108dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_EncuestaInfantiLogo_Encuestas" />

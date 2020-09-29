@@ -35,6 +35,9 @@ import retrofit2.Response;
 
 public class AsyncLoadPage extends AsyncTask<Integer, Integer, String>
 {
+
+    // No se documento de igual manera porque no se si este sera el aspecto final de la manera en la que se mandan las encuestas a organo central
+
     private ProgressBar progressBar;
     private TextView txt;
     private int count;

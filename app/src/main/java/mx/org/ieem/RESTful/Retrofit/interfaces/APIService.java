@@ -13,7 +13,6 @@ import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
-
 public interface APIService {
     @POST("/redDigitalDpc/login")
     Call<ResponseLogin> createUser(@Body UsuarioJM userJM);
@@ -33,4 +32,8 @@ public interface APIService {
     @Headers("Content-Type: application/json")
     @POST("/redDigitalDpc/reportes/encuesta_juvenil")
     Call<List<trdd_reporte>> getReportesEncuestas();
+
+    @Headers("Content-Type: application/json")
+    @POST("/redDigitalDpc/reportes/ciudadanometro")
+    Call<List<trdd_reporte>> getReportesCiudadanometro();
 }

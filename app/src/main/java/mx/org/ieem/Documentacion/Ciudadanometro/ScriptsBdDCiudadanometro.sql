@@ -22,7 +22,6 @@
 -- INSERT INTO trdd_nivel_educativo(id_nivel_educativo, nombre) VALUES(2,'Secundaria');
 
 
-
 CREATE TABLE trdd_c_grado_escolar(
     id_grado_escolar                                    NUMERIC(1),
     nombre                                              VARCHAR(35),

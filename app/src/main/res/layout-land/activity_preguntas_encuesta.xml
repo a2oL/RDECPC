@@ -52,14 +52,14 @@
 
     <ImageView
         android:id="@+id/imageView_EncuestaInfantiLogo_PreguntasEncuesta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="214dp"
+        android:layout_height="89dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_logo_encuesta_infantil" />
+        app:srcCompat="@drawable/ic_logo_encuesta_infantil_grande" />
 
     <ImageView
         android:id="@+id/imageView_Tabla_PreguntasEncuesta"

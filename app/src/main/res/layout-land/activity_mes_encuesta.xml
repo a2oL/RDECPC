@@ -7,23 +7,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <Button
         android:id="@+id/button_Logout_MesEncuesta"
-        android:layout_width="58dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/ic_btn_home"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_EncuestaInfantiLogo_MesEncuestas"
-        app:layout_constraintHorizontal_bias="0.116"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:background="@drawable/ic_btn_salir"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
     <TextView
         android:id="@+id/textView_Informativo_Mes_Encuesta"
-        android:layout_width="511dp"
-        android:layout_height="37dp"
+        android:layout_width="767dp"
+        android:layout_height="29dp"
         android:layout_marginTop="12dp"
         android:text="Estimado docente, antes de iniciar la aplicacion de la Encueta Infantil y Juvenil del Mes, llena los siguientes campos"
         android:textStyle="bold"
@@ -85,22 +81,20 @@
 
     <ImageView
         android:id="@+id/imageView_EncuestaInfantiLogo_MesEncuestas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="232dp"
+        android:layout_height="122dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="300dp"
-        app:layout_constraintEnd_toStartOf="@+id/button_Atras_MesEncuesta"
+        app:layout_constraintEnd_toStartOf="@+id/button_Logout_MesEncuesta"
+        app:layout_constraintStart_toEndOf="@+id/button_Atras_MesEncuesta"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_logo_encuesta_infantil" />
+        app:srcCompat="@drawable/ic_logo_encuesta_infantil_grande" />
 
     <Button
         android:id="@+id/button_Atras_MesEncuesta"
-        android:layout_width="58dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
         android:background="@drawable/ic_btn_flecha_atras"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

@@ -255,8 +255,8 @@ CREATE TABLE trdd_cct
   CONSTRAINT trdd_cct_niv_edu_fk FOREIGN KEY (id_nivel_educativo) REFERENCES trdd_nivel_educativo (id_nivel_educativo)
 );
 
-INSERT INTO trdd_cct (id_cct, nombre, domicilio, email, id_municipio, id_nivel_educativo) VALUES('primis', 'PRIMARIA AMADO NERVO', 'ESQUINA HERIBERTO HENRIQUEZ CON CEBORUCO','gvaldez@ieem.org.mx',1,1);
-INSERT INTO trdd_cct (id_cct, nombre, domicilio, email, id_municipio, id_nivel_educativo) VALUES('secun', 'SECUNDARIA TÉCNICA #49 SAMUEL RAMOS', 'PRIVADA DE TLALOC #100','gvaldez@ieem.org.mx',1,2);
+INSERT INTO trdd_cct (id_cct, nombre, domicilio, email, id_municipio, id_nivel_educativo) VALUES(1, 'PRIMARIA AMADO NERVO', 'ESQUINA HERIBERTO HENRIQUEZ CON CEBORUCO','gvaldez@ieem.org.mx',1,1);
+INSERT INTO trdd_cct (id_cct, nombre, domicilio, email, id_municipio, id_nivel_educativo) VALUES(2, 'SECUNDARIA TÉCNICA #49 SAMUEL RAMOS', 'PRIVADA DE TLALOC #100','gvaldez@ieem.org.mx',1,2);
 
 
 CREATE TABLE trdd_ej_encuesta(
@@ -285,17 +285,11 @@ CREATE TABLE trdd_ej_detalle_encuesta(
     CONSTRAINT trdd_ej_detenc_amneirer_fk FOREIGN KEY (id_anio, id_mes, id_nivel_educativo, id_indicador, id_respuesta, id_estatus_respuesta) REFERENCES trdd_ej_pregunta_respuesta (id_anio, id_mes, id_nivel_educativo, id_indicador, id_respuesta, id_estatus_respuesta)
 );
 
-CREATE TABLE trdd_dispositivo
-(
-    id_random                                            VARCHAR(12),
-  CONSTRAINT trdd_dispositivo_pk PRIMARY KEY (id_random)
-);
-
 CREATE TABLE trdd_estatus_concurso_o_evento
 (
     id_estatus_coneve                                   NUMERIC(1),
     nombre                                             VARCHAR(35),
- CONSTRAINT trdd_estconeve_pk PRIMARY KEY (id_estatus_coneve)
+ CONSTRAINT trdd_estconeve_pk PRIMARY KEY (id_estatus_coneve)   
 );
 
 INSERT INTO trdd_estatus_concurso_o_evento (id_estatus_coneve, nombre) VALUES(1, 'ACTIVO');
@@ -308,20 +302,34 @@ CREATE TABLE trdd_concurso_o_evento
  descripcion                                           VARCHAR(256),
  url                                                   VARCHAR(512),
  url_image                                             VARCHAR(512),
- id_estatus_coneve                                     NUMERIC,
+ id_estatus_coneve                                     NUMERIC(1),
  CONSTRAINT trdd_coneve_pk PRIMARY KEY (id_con_eve),
- CONSTRAINT trdd_coneve_ece_fk FOREIGN KEY (id_estatus_coneve) REFERENCES trdd_estatus_concurso_o_evento (id_estatus_coneve),
+ CONSTRAINT trdd_coneve_ece_fk FOREIGN KEY (id_estatus_coneve) REFERENCES trdd_estatus_concurso_o_evento (id_estatus_coneve)
 );
+
+INSERT INTO trdd_concurso_o_evento (id_con_eve, nombre, descripcion, url, url_image, id_estatus_coneve) VALUES(1, 'CONCURSO DE ACTIVO', 'ESTE CONCURSO PRUEBA LA FUNCIONALIDAD DEL SERVICIO', 'www.google.com', 'https://www.ieem.org.mx/img/TRANSPARENCIA_2018.png',1);
+INSERT INTO trdd_concurso_o_evento (id_con_eve, nombre, descripcion, url, url_image, id_estatus_coneve) VALUES(2, 'CONCURSO DE INACTIVO', 'ESTE CONCURSO PRUEBA LA FUNCIONALIDAD DEL SERVICIO', 'www.google.com', 'https://www.ieem.org.mx/img/TRANSPARENCIA_2018.png',2);
 
 CREATE TABLE trdd_estatus_reporte
 (
     id_estatus_reporte                                 NUMERIC(1),
     nombre                                             VARCHAR(35),
- CONSTRAINT trdd_estatus_reporte_pk PRIMARY KEY (id_estatus_reporte)
+ CONSTRAINT trdd_estatus_reporte_pk PRIMARY KEY (id_estatus_reporte)   
 );
 
 INSERT INTO trdd_estatus_reporte (id_estatus_reporte, nombre) VALUES(1, 'ACTIVO');
 INSERT INTO trdd_estatus_reporte (id_estatus_reporte, nombre) VALUES(2, 'INACTIVO');
+
+
+CREATE TABLE trdd_tipo_reporte
+(
+    id_tipo_reporte                                 NUMERIC(1),
+    nombre                                             VARCHAR(35),
+ CONSTRAINT trdd_tipo_reporte_pk PRIMARY KEY (id_tipo_reporte)
+);
+
+INSERT INTO trdd_tipo_reporte (id_tipo_reporte, nombre) VALUES(1, 'ENCUESTA JUVENIL');
+INSERT INTO trdd_tipo_reporte (id_tipo_reporte, nombre) VALUES(2, 'CIUDADANOMETRO');
 
 CREATE TABLE trdd_reporte
 (
@@ -329,14 +337,16 @@ CREATE TABLE trdd_reporte
  nombre                                                VARCHAR(128),
  descripcion                                           VARCHAR(256),
  url                                                   VARCHAR(512),
- id_estatus_reporte                                     NUMERIC(1),
+ id_estatus_reporte                                    NUMERIC(1),
+ id_tipo_reporte                                       NUMERIC(1),
  CONSTRAINT trdd_reporte_pk PRIMARY KEY (id_reporte),
- CONSTRAINT trdd_reporte_estrep_fk FOREIGN KEY (id_estatus_reporte) REFERENCES trdd_estatus_reporte (id_estatus_reporte)
+ CONSTRAINT trdd_reporte_estrep_fk FOREIGN KEY (id_estatus_reporte) REFERENCES trdd_estatus_reporte (id_estatus_reporte),
+ CONSTRAINT trdd_reporte_tiprep_fk FOREIGN KEY (id_tipo_reporte) REFERENCES trdd_tipo_reporte (id_tipo_reporte)
 );
 
-
-
-
+INSERT INTO trdd_reporte (id_reporte, nombre, descripcion, url, id_estatus_reporte, id_tipo_reporte) VALUES(1, 'REPORTE 1 ACTIVO EJ', 'PRIMER REPORTE ACTIVO', 'https://www.google.com', 1, 1);
+INSERT INTO trdd_reporte (id_reporte, nombre, descripcion, url, id_estatus_reporte, id_tipo_reporte) VALUES(2, 'REPORTE 2 ACTIVO CIU', 'SEGUNDO REPORTE ACTIVO', 'https://www.google.com',1, 2);
+INSERT INTO trdd_reporte (id_reporte, nombre, descripcion, url, id_estatus_reporte, id_tipo_reporte) VALUES(3, 'REPORTE 3 INACTIVO EJ', 'PRIMER REPORTE INACTIVO', 'https://www.google.com',2, 1);
 
 -- ELiminación de las tablas de la base de datos    
 DROP TABLE trdd_ej_detalle_encuesta;
@@ -353,4 +363,7 @@ DROP TABLE trdd_nivel_educativo;
 DROP TABLE trdd_ej_anio_mes;
 DROP TABLE trdd_ej_mes;
 DROP TABLE trdd_ej_anio;
-DROP TABLE trdd _municipio;
+DROP TABLE trdd_municipio;
+// concursos y eventos
+DROP TABLE trdd_concurso_o_evento;
+DROP TABLE trdd_estatus_concurso_o_evento;

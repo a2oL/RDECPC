@@ -23,10 +23,23 @@ import mx.org.ieem.RESTful.AsyncLoadPage;
 import mx.org.ieem.R;
 
 import static mx.org.ieem.R.drawable.ic_logo_ciudadanometro;
+import static mx.org.ieem.R.drawable.ic_logo_ciudadanometro_grande;
 import static mx.org.ieem.R.drawable.ic_logo_encuesta_infantil;
+import static mx.org.ieem.R.drawable.ic_logo_encuesta_infantil_grande;
 
 public class LoadPageActivity extends AppCompatActivity
 {
+
+
+
+
+
+
+    // Falta documentar ya que no se si sera el Aspecto final de la manera en que se enviaran los datos a Organo Central
+
+
+
+
     ImageView logo;
     Button btn;
     private ProgressBar progressBar;
@@ -48,10 +61,10 @@ public class LoadPageActivity extends AppCompatActivity
         enviadode =parametros.getString("enviadode");
         if (enviadode.equals("1"))
         {
-            logo.setImageResource(ic_logo_encuesta_infantil);
+            logo.setImageResource(ic_logo_encuesta_infantil_grande);
 
         }else{
-            logo.setImageResource(ic_logo_ciudadanometro);
+            logo.setImageResource(ic_logo_ciudadanometro_grande);
         }
         count =1;
         progressBar.setVisibility(View.VISIBLE);

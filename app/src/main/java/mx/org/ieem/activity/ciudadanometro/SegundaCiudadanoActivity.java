@@ -31,18 +31,12 @@ public class SegundaCiudadanoActivity extends AppCompatActivity implements Adapt
     Spinner spinnerEdad,spinnerEres,spinnerEscolaridad;                                             // Contiene los elemetnos de los spinners de seleccion de edad genero y escolaridad.
     Button btnGuardar;                                                                              // Aloja el elemento de la UI (button_Guardar_Segundaciudadano) del layout activity_segunda_ciudadano que acciona intentTercera.
     Intent intentTercera;                                                                           // Intent que navegara desde SegundaCiudadanoActivity hacie TerceraCiudadanoActivity.
-    String[] strAuxiliar;                                                                           // Auxiliar para poder cargar la edad genero y escolaridad a los spinners
-    List<String> listAuxiliar = new ArrayList<>();                                                  // Auxiliar para mostrar los datos del strAuxiliar.
-
-    Cursor cursor_EdadGeneroEscolaridad;                                      // Contiene el result set de querys realizados por los metodos cargarMeses() o cargarGrados().
-    SimpleCursorAdapter simpleCursorAdapter_EdadGeneroEscolaridad;            // Determina la manera en la que seran mostrados los datos del cursor_MesEncuesta.
-
-    DataBaseAppRed database;
-
-
-    public static trdd_c_realicador_edad edad_realicador_final_ciudadanometro;
-    public static trdd_c_realicador_genero genero_realicador_final_ciudadanometro;
-    public static trdd_c_realicador_escolaridad escolaridad_realicador_final_ciudadanometro;
+    Cursor cursor_EdadGeneroEscolaridad;                                                            // Contiene el result set de querys realizados por los metodos cargarMeses() o cargarGrados().
+    SimpleCursorAdapter simpleCursorAdapter_EdadGeneroEscolaridad;                                  // Determina la manera en la que seran mostrados los datos del cursor_MesEncuesta.
+    DataBaseAppRed database;                                                                        // Instancia de la bd.
+    public static trdd_c_realicador_edad edad_realicador_final_ciudadanometro;                      // Final que contendra la edad del realizador.
+    public static trdd_c_realicador_genero genero_realicador_final_ciudadanometro;                  // Final que contendra el genero del realizador.
+    public static trdd_c_realicador_escolaridad escolaridad_realicador_final_ciudadanometro;        // Final que contendra la escolaridad del realizador.
 
     static String stringEdadSeleccionado,stringEresSeleccionado,stringEscolaridadSeleccionado;      // Almacenan las respuestas seleccionadas
 

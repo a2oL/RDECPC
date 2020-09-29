@@ -31,16 +31,16 @@ public class EncuestasActivity extends AppCompatActivity {
     Button btnEnviar;                               // Aloja el elemento de la UI (button_Enviar_Encuestas) del layout activity_encuestas que acciona el intentEnviar.
     Button btnLogout;                               // Aloja el elemento de la UI (button_Logout_Encuestas) del layout activity_encuestas que acciona el intentLogout.
     Button btnRegresar;                             // Aloja el elemento de la UI (button_Regresar_Encuestas) del layout activity_encuestas que acciona el intentRegresar.
-    Button btnReportes;
+    Button btnReportes;                             // Aloja el elemento de la UI que permite acceder a el ReportesActivity.
     TextView textViewNumeroEncuestas;               // Aloja el elemento de la UI (textView_NumerodeEncuestas_Encuestas) del layout activity_encuestas que muestra el numero de encuestas aplicadas..
     Intent intentIniciar;                           // Intent que navegara desde EncuestasActivity hacia InfoEncuestaActivity.
     Intent intentEnviar;                            // Intent que navegara desde EncuestasActivity hacia LoadPageActivity.
     Intent intentLogout;                            // Intent que navegara desde EncuestasActivity hacia MainActivity.
     Intent intentRegresar;                          // Intent que navegara desde EncuestasActivity hacia  SelectActivity.
     DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
-    ProgressBar pbSelect;
+    ProgressBar pbSelect;                           // Elemnto de la UI que contiene la animacion al hacer click en el boton de reportes.
+    int ultimoRegistro = 0;                         // Almacena el ultimo registro de las encuestas encontrado en la bd.
 
-    int ultimoRegistro = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     { // Creacion de la vista (TOP)
@@ -64,10 +64,10 @@ public class EncuestasActivity extends AppCompatActivity {
 
         Cursor dataCursor = database.getUltimoRegistro();
         dataCursor.moveToNext();
-        if(dataCursor.getCount() > 0)
-        {
-            ultimoRegistro = dataCursor.getInt(0);
-        }
+        if (dataCursor.getCount() > 0)
+          { // Si existen registros en la BD. (TOP)
+              ultimoRegistro = dataCursor.getInt(0);
+          } // Si existen registros en la BD. (BOTTOM)
         // Inicializacion de las variables (BOTTOM)
 
         // Texto informativo de cuantas encuestas se han realizado
@@ -86,7 +86,7 @@ public class EncuestasActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                 Bundle parametros = new Bundle();               // Ocupada para enviar valor al LoadPageActivity.
-                parametros.putString("enviadode", "1");
+                parametros.putString("enviadode", "1");         // Envia un 1 para identificar las encuestas.
                 intentEnviar.putExtras(parametros);
                     dialogo2.setTitle("Importante").setMessage("Estas por enviar las Encuestas realizadas!!!\n\nEsto requiere conexión a internet.");
                     dialogo2.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
@@ -119,27 +119,24 @@ public class EncuestasActivity extends AppCompatActivity {
                 startActivity(intentRegresar);
             }
         });
-        // Click listeners de los botones definidos (BOTTOM)
 
         btnReportes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pbSelect.setVisibility(View.VISIBLE);
+                pbSelect.setVisibility(View.VISIBLE); // Muestra la animacion
                 new AsyncReportes(EncuestasActivity.this,getApplicationContext(),1).execute();
             }
         });
-
-    }
+        // Click listeners de los botones definidos (BOTTOM)
+    } // Creacion de la vista (BOTTOM)
 
     @Override
     protected void onResume() {
         super.onResume();
         pbSelect.setVisibility(View.GONE);
         if (!bolLogeado)
-        { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
-            startActivity(intentLogout);
-        } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
+          { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
+              startActivity(intentLogout);
+          } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
     }
-
-
-} // Creacion de la vista (BOTTOM)
+}

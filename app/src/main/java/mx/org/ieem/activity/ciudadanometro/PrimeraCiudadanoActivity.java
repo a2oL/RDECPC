@@ -50,16 +50,18 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig)
     { // Si cambia la orientacion de la pantalla impide que las respuestas seleccionadas se pierdan (TOP).
         super.onConfigurationChanged(newConfig);
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.activity_primera_ciudadano);
-            cargarAnioEjercicioGrado();
-            cargarPreguntas();
-        }
-        else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            setContentView(R.layout.activity_primera_ciudadano);
-            cargarAnioEjercicioGrado();
-            cargarPreguntas();
-        }
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+          { // Si cambio la orientacion a landscape. (TOP)
+              setContentView(R.layout.activity_primera_ciudadano);
+              cargarAnioEjercicioGrado();
+              cargarPreguntas();
+          } // Si cambio la orientacion a landscape. (BOTTOM)
+        else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+          { // Si cambio la orientacion a portrait. (TOP)
+              setContentView(R.layout.activity_primera_ciudadano);
+              cargarAnioEjercicioGrado();
+              cargarPreguntas();
+          } // Si cambio la orientacion a portrait. (BOTTOM)
     } // Si cambia la orientacion de la pantalla impide que las respuestas seleccionadas se pierdan (BOTTOM).
 
     /**
@@ -78,14 +80,14 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
         textViewAnio.setText(anio_final_ciudadanometro.getId_anio());
         textViewEjercicio.setText(ejercicio_final_ciudadanometro.getNombre());
         if (ejercicio_final_ciudadanometro.getNombre().equals("Padres de familia o tutores"))
-        { // Si el ejercicio es aplicado a padres de familia o tutores (TOP)
-            textViewGrado.setText(grado_final_ciudadanometro.getNombre());
-        } // Si el ejercicio es aplicado a padres de familia o tutores (BOTTOM)
+          { // Si el ejercicio es aplicado a padres de familia o tutores (TOP)
+              textViewGrado.setText(grado_final_ciudadanometro.getNombre());
+          } // Si el ejercicio es aplicado a padres de familia o tutores (BOTTOM)
         else
-        { // Sino el grado desaparece (TOP)
-            textViewGrado.setVisibility(View.GONE);
-            textViewGradoText.setVisibility(View.GONE);
-        } // Sino el grado desaparece (BOTTOM)
+          { // Sino el grado desaparece (TOP)
+              textViewGrado.setVisibility(View.GONE);
+              textViewGradoText.setVisibility(View.GONE);
+          } // Sino el grado desaparece (BOTTOM)
         // Poner en pantalla el anio, Publico objetivo y segun el caso el grado (BOTTOM)\
 
     } // cargarAnioEjercicioGrado() (BOTTOM)
@@ -146,7 +148,7 @@ public class PrimeraCiudadanoActivity extends AppCompatActivity {
                           }
                       });
                       dialogoAuxiliar.show();
-                } // Si falta por responder alguna pregunta (BOTTOM)
+                  } // Si falta por responder alguna pregunta (BOTTOM)
             }
         });
         // Inicializacion de las variables (BOTTOM)

@@ -11,7 +11,7 @@
         android:id="@+id/textView_enviado_load_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="284dp"
         android:text="Envió a Órgano Central"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -50,7 +50,7 @@
         android:id="@+id/textView_enviando_load_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="396dp"
+        android:layout_marginTop="468dp"
         android:text="Enviando Encuestas Aplicadas"
         android:textColor="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,8 +60,8 @@
 
     <ImageView
         android:id="@+id/imageView_logo_load_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

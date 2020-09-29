@@ -40,7 +40,7 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
     PreguntasEncuestaAdapter customAdapter;                  // Contiene el adaptador para mostrar las preguntas y respuestas de la encuesta.
     Intent intentSalirEncuesta;                              // Intent que navegara desde PreguntasEncuestaActivity hacia MesEncuestaActivity.
     Intent intentSeguirEncuesta;                             // Intent que navegara desde PreguntasEncuestaActivity hacia PreguntasEncuestaActivity.
-    Intent intentLogout;
+    Intent intentLogout;                                     // Intent que hara logout de la aplicacion.
 
     String message = "";                                     // Mensaje que dira que pregunta no ha sido respondida.
     int ultimoRegistro = 0;                                  // Contiene el numero del ultimo registro de encuesta.
@@ -75,9 +75,9 @@ public class PreguntasEncuestaActivity extends AppCompatActivity
     {
         super.onResume();
         if (!bolLogeado)
-        { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
-            startActivity(intentLogout);
-        } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
+          { // Si el usuario ya nio esta logueado no permite regresar a esta activity (TOP)
+              startActivity(intentLogout);
+          } // Si el usuario ya nio esta logueado no permite regresar a esta activity (BOTTOM)
     }
 
     /**

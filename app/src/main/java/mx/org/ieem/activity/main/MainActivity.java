@@ -41,19 +41,17 @@ public class MainActivity extends AppCompatActivity {
     Button btnYoutube;                      // Aloja el elemento de la UI (button_Yt_Main) del layout activity_main contendra enlace a pagina de YOUTUBE.
     Button btnEventos;                      // Aloja el elemento de la UI (button_Eventos_Main) del layout activity_main contendra enlace a pagina de EVENTOS Y CONCURSOS.
     Button btnDpc;                          // Aloja el elemento de la UI (button_Dpc_Main) del layout activity_main contendra enlace a minisitio DPC.
-    ProgressBar pb;
+    ProgressBar pb;                         // Aloja el elemto de la UI(progressBar_Main) que muestra el circulo girando al centro.
     Intent intentLogin;                     // Intent que navegara desde el MainActivity a el LoginActivity.
     Intent intentSelect;                    // Intent que navegara desde el MainActivity a el SelectActivity.
-    Intent intentEventos;
+    Intent intentEventos;                   // Intent que navegara desde el MainActivity a el EventosActivity.
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // Inicializacion de las variables (TOP)
         btnEncuestasCiudadano = (Button) findViewById(R.id.button_EncuestasCiudadano_Main);
         btnFacebook = (Button)findViewById(R.id.button_Fb_Main);
@@ -68,18 +66,20 @@ public class MainActivity extends AppCompatActivity {
         intentLogin = new Intent(this, LoginActivity.class);
         intentSelect = new Intent(this, SelectActivity.class);
         intentEventos = new Intent(this, EventosActivity.class);
-
         // Inicializacion de las variables (BOTTOM)
 
         // Click listeners de los botones definidos (TOP)
         btnEncuestasCiudadano.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(usuarioExiste()){
-                    startActivity(intentSelect);
-                }else {
-                    startActivity(intentLogin);
-                }
+                if (usuarioExiste())
+                  { // Si el usuario existe redirige a SelectActiviy. (TOP)
+                      startActivity(intentSelect);
+                  } // Si el usuario existe redirige a SelectActiviy. (BOTTOM)
+                else
+                  { // Si el usuario no existe redirige a LoginActiviy. (TOP)
+                      startActivity(intentLogin);
+                  } // Si el usuario no existe redirige a LoginActiviy. (BOTTOM)
             }
         });
 
@@ -142,24 +142,24 @@ public class MainActivity extends AppCompatActivity {
         DataBaseAppRed ds = new DataBaseAppRed(this);       // Instancia de la bd.
         Cursor usuario = ds.getUsuarioLogueado();                   // ResultSet de la consulta  a la bd.
         usuario.moveToNext();
-        if(usuario.getCount() > 0)
-        { // Si existe algun registro en la bd (TOP)
-            bolLogeado = true;
-            actual_final = new trdd_cct(usuario.getString(0),usuario.getString(1),usuario.getString(2),usuario.getString(3),usuario.getInt(4),usuario.getInt(5),usuario.getString(6));
-            id_cct_final = actual_final.getId_cct();
-            id_random_final = ds.getIdRandomDispositivo();
-            return  true;
-        } // Si existe algun registro en la bd (BOTTOM)
+        if (usuario.getCount() > 0)
+          { // Si existe algun registro en la bd (TOP)
+              bolLogeado = true;
+              actual_final = new trdd_cct(usuario.getString(0),usuario.getString(1),usuario.getString(2),usuario.getString(3),usuario.getInt(4),usuario.getInt(5),usuario.getString(6));
+              id_cct_final = actual_final.getId_cct();
+              id_random_final = ds.getIdRandomDispositivo();
+              return  true;
+          } // Si existe algun registro en la bd (BOTTOM)
         else
-        {
-            return false;
-        }
+          { // Si no existe regresa falso para iniciar el proceso de logueo. (TOP)
+              return false;
+          } // Si no existe regresa falso para iniciar el proceso de logueo. (BOTTOM)
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
-        pb.setVisibility(View.GONE);
-
+        pb.setVisibility(View.GONE); // Oculta el progressBar Ciurcular
     }
 }

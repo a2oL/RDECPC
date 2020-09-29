@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -17,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import mx.org.ieem.R;
+import mx.org.ieem.RESTful.AsyncReportes;
+import mx.org.ieem.activity.encuestas.EncuestasActivity;
 import mx.org.ieem.activity.main.LoadPageActivity;
 import mx.org.ieem.activity.main.MainActivity;
 import mx.org.ieem.activity.main.SelectActivity;
@@ -31,6 +34,7 @@ public class CiudadanometroActivity extends AppCompatActivity
     Button btnEnviar;                               // Aloja el elemento de la UI (button_Enviar_Ciudadanometro) del layout activity_Ciudadanometro que acciona el intentEnviar.
     Button btnLogout;                               // Aloja el elemento de la UI (button_Logout_Ciudadanometro) del layout activity_Ciudadanometro que acciona el intentLogout.
     Button btnRegresar;                             // Aloja el elemento de la UI (button_Regresar_Ciudadanometro) del layout activity_Ciudadanometro que acciona el intentRegresar.
+    Button btnReportes;
     TextView texto;                                 // Aloja el elemento de la UI (textView_NumerodeCiudadanometro_Ciudadanometro) que mostrara cuantos Ciudadanometros se han realizado.
 
     Intent intentIniciar;                           // Intent que navegara desde CiudadanometroActivity hacia CalendarioAplicacionActivity.
@@ -38,7 +42,7 @@ public class CiudadanometroActivity extends AppCompatActivity
     Intent intentLogout;                            // Intent que navegara desde CiudadanometroActivity hacia MainActivity.
     Intent intentRegresar;                          // Intent que navegara desde CiudadanometroActivity hacia  SelectActivity.
     DataBaseAppRed database;                        // Instancia de la base de datos utilizado para obtener el municipio de acuerdo a un objeto de tipo trdd_ej_cct.
-
+    ProgressBar pbSelect;
     int ultimoRegistro = 0;
 
     @Override
@@ -52,6 +56,7 @@ public class CiudadanometroActivity extends AppCompatActivity
         btnEnviar = (Button)findViewById(R.id.button_Enviar_Ciudadanometro);
         btnLogout = (Button)findViewById(R.id.button_Logout_Ciudadanometro);
         btnRegresar = (Button)findViewById(R.id.button_Regresar_Ciudadanometro);
+        btnReportes = (Button) findViewById(R.id.btn_Reportes_Ciudadanometro);
         texto = (TextView)findViewById(R.id.textView_NumerodeCiudadanometro_Ciudadanometro);
         intentIniciar = new Intent(this, CalendarioAplicacionActivity.class);
         intentEnviar = new Intent(this, LoadPageActivity.class);
@@ -59,6 +64,8 @@ public class CiudadanometroActivity extends AppCompatActivity
         intentRegresar = new Intent(this, SelectActivity.class);
         final AlertDialog.Builder dialogo2 = new AlertDialog.Builder(this);
         database = new DataBaseAppRed(getBaseContext());
+        pbSelect = (ProgressBar)findViewById(R.id.progressBar_Reportes_Ciudadanometro);
+        pbSelect.setVisibility(View.GONE);
         // Inicializacion de las variables (BOTTOM)
 
 
@@ -120,7 +127,17 @@ public class CiudadanometroActivity extends AppCompatActivity
                 startActivity(intentRegresar);
             }
         });
+
+        btnReportes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pbSelect.setVisibility(View.VISIBLE);
+                new AsyncReportes(CiudadanometroActivity.this,getApplicationContext(),2).execute();
+            }
+        });
+
         // Click listeners de los botones definidos (BOTTOM)
+
     }
 
     @Override

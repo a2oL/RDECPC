@@ -2,27 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/fondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <Button
         android:id="@+id/button_Logout_Select"
-        android:layout_width="63dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/ic_btn_home"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_Bienvenida_Select"
-        app:layout_constraintHorizontal_bias="0.109"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:background="@drawable/ic_btn_salir"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView_Bienvenida_Select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="383dp"
+        android:layout_height="98dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="276dp"
+        android:layout_marginEnd="288dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_txt_te_damos_la_bienvenida" />
@@ -31,9 +29,8 @@
         android:id="@+id/textView_Clave_Select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Escuela_Select" />
 
@@ -41,9 +38,8 @@
         android:id="@+id/textView_Escuela_Select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="160dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.376"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,28 +49,28 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.414"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Clave_Select" />
 
     <Button
         android:id="@+id/button_EntrarEncuesta_Select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_logo_encuesta_infantil"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ic_logo_encuesta_infantil_grande"
         app:layout_constraintEnd_toStartOf="@+id/button_EntrarCiudadanometro_Select"
-        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintHorizontal_bias="0.308"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Municipio_Select" />
 
     <Button
         android:id="@+id/button_EntrarCiudadanometro_Select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="112dp"
-        android:background="@drawable/ic_logo_ciudadanometro"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="136dp"
+        android:background="@drawable/ic_logo_ciudadanometro_grande"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Municipio_Select" />
 
@@ -82,7 +78,7 @@
         android:id="@+id/imageView_RedDigital_Select"
         android:layout_width="194dp"
         android:layout_height="135dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/ic_logo_red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,15 +86,11 @@
 
     <Button
         android:id="@+id/button_Home_select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
         android:background="@drawable/ic_btn_flecha_atras"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

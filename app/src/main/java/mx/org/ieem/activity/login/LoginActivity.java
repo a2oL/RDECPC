@@ -1,13 +1,10 @@
 package mx.org.ieem.activity.login;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import mx.org.ieem.R;
@@ -38,14 +34,13 @@ public class LoginActivity extends AppCompatActivity {
     Intent intentContraseniaOlvidada;                       // Intent que navegara desde LoginActivity hacia RecovPassActivity.
     Intent intentUsuarioEncontrado;                         // Intent que navegara desde LoginActivity hacie SelectActivity.
     Intent usuarioLogeado;                                  // Intent que navegara desde LoginActivity hacie MainActivity.
-    //AlertDialog.Builder dialogoUsuarioNoEncontrado;         // Dialogo de alerta de error de autenticacion
-    ProgressBar pbLogin;
+    ProgressBar pbLogin;                                    // Elemento de la UI que mostrara animacion despues de clickeado el boton Loguear.
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         // Inicializacion de las variables (TOP)
         btnLogin = (Button) findViewById(R.id.button_Iniciar_Login);
         btnContraseniaOlvidada = (Button) findViewById(R.id.button_UsuarioOlvidado_Login);
@@ -63,26 +58,24 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                final boolean hayinternet = isOnlineNet();
-                final boolean[] hayConexion = {true};
-                final boolean[] usarioEncontrado = {true};
-                pbLogin.setVisibility(View.VISIBLE);
+                final boolean hayinternet = isOnlineNet();          // Variable local que regresa un valor booleano deacuerdo a la existencia de conexion a internet
+                final boolean[] hayConexion = {true};               // Variable local que nos dice si tenemos acceso a internet.
+                final boolean[] usarioEncontrado = {true};          // Variable local que nos dice si el usaurio fue encontrado.
+                pbLogin.setVisibility(View.VISIBLE);                // Se encarga de mostrar el Progressbar En la UI.
                 new Thread(new Runnable()
-                {
+                { // Tarea Asincrona para realizar el proceso de logueo. (TOP)
                     @Override
                     public void run() {
                         if (hayinternet)
-                        {
-                            AsyncLogin as = (AsyncLogin) new AsyncLogin( getApplicationContext(), pbLogin );
+                        { // Si hay internet entonces. (TOP)
+                            AsyncLogin as = (AsyncLogin) new AsyncLogin(getApplicationContext(), pbLogin);
                             as.execute(editTextEmail.getText().toString(), editTextContrasenia.getText().toString());
                             try { // Espera 1seg a que se reciba respuesta del AsyncLogin (TOP)
                                 as.get(10000, TimeUnit.MILLISECONDS);
-                                if (bolLogeado)
-                                { // Si el usuario fue encontrado navega a SelectActivity (TOP)
+                                if (bolLogeado) { // Si el usuario fue encontrado navega a SelectActivity (TOP)
                                     startActivity(intentUsuarioEncontrado);
                                 } // Si el usuario fue encontrado navega a SelectActivity (BOTTOM)
-                                else
-                                    { // Mensaje de Error de usuario no encontrado (TOP)
+                                else { // Mensaje de Error de usuario no encontrado (TOP)
                                     usarioEncontrado[0] = false;
                                 } // Mensaje de Error de usuario no encontrado (BOTTOM)
                             } // Espera 1seg a que se reciba respuesta del AsyncLogin (BOTTOM)
@@ -92,38 +85,34 @@ public class LoginActivity extends AppCompatActivity {
                             catch (InterruptedException | ExecutionException e) {
                                 e.printStackTrace();
                             }
-                        }
-                        else{
-
-                            //
-                        }
-
+                        } // Si hay internet entonces. (BOTTOM)
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 if (!hayinternet)
-                                {
-                                    pbLogin.setVisibility(View.GONE);
-                                    Toast.makeText(LoginActivity.this, "No hay conexion a internet", Toast.LENGTH_SHORT).show();
-                                }else
-                                {
-                                    if(!hayConexion[0])
-                                    {
-                                        pbLogin.setVisibility(View.GONE);
-                                        Toast.makeText(LoginActivity.this, "Comprueba tu conexion a internet\n Servidor no responde", Toast.LENGTH_SHORT).show();
-                                    }else
-                                    {
-                                        if(!usarioEncontrado[0])
-                                        {
+                                  { // Si no hay conexion a internet ya sea datos celulares o WIFI. (TOP)
+                                      pbLogin.setVisibility(View.GONE);
+                                      Toast.makeText(LoginActivity.this, "No hay conexion a internet", Toast.LENGTH_SHORT).show();
+                                  } // Si no hay conexion a internet ya sea datos celulares o WIFI. (TOP)
+                                else
+                                  {
+                                      if (!hayConexion[0])
+                                        { // Si hay conexion a internet pero no hay acceso a internet. (TOP)
                                             pbLogin.setVisibility(View.GONE);
-                                            Toast.makeText(LoginActivity.this, "El usuario no fue encontrado", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginActivity.this, "Comprueba tu conexion a internet\n Servidor no responde", Toast.LENGTH_SHORT).show();
+                                        } // Si hay conexion a internet pero no hay acceso a internet. (BOTTOM)
+                                      else
+                                        {
+                                            if (!usarioEncontrado[0])
+                                              { // Si hay conexion a internet y acceso a internet pero no se encontro el usuario. (TOP)
+                                                  pbLogin.setVisibility(View.GONE);
+                                                  Toast.makeText(LoginActivity.this, "El usuario no fue encontrado", Toast.LENGTH_SHORT).show();
+                                              } // Si hay conexion a internet y acceso a internet pero no se encontro el usuario. (BOTTOM)
                                         }
-                                    }
-                                }
+                                  }
                             }
                         });
                     }
-
-
+                    // Tarea Asincrona para realizar el proceso de logueo. (BOTTOM)
                 }).start();
             }
         });
@@ -140,9 +129,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (bolLogeado){
-            startActivity(usuarioLogeado);
-        }
+        if (bolLogeado)
+          { // Si el usuario permanece logueado. (TOP)
+              startActivity(usuarioLogeado);
+          } // Si el usuario permanece logueado. (BOTTOM)
     }
 
     public Boolean isOnlineNet() {
@@ -151,16 +141,5 @@ public class LoginActivity extends AppCompatActivity {
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         Log.e("Is connected",Boolean.toString(isConnected));
         return isConnected;
-    }
-
-    public void mostrarMensaje(Context con,String title, String Message, String positiveMessage)
-    {
-        AlertDialog.Builder dialogoUsuarioNoEncontrado;
-         dialogoUsuarioNoEncontrado = new AlertDialog.Builder(con);
-         dialogoUsuarioNoEncontrado.setTitle(title).setMessage(Message).setCancelable(false).setPositiveButton(positiveMessage, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        }).show();
     }
 }

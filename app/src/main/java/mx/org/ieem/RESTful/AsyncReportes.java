@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -27,23 +28,23 @@ public class AsyncReportes extends AsyncTask<String, Void, Boolean> {
 
     private Activity activity;
     private Context context;
-    private int reportesDe;
+    private int tipoDeReporteABuscar;
     DataBaseAppRed bd;
     Intent intentReportes;
     public static ArrayList<trdd_reporte> reportesaMostrar = new ArrayList<trdd_reporte>();
     private boolean hayReportes = false;
 
-    public AsyncReportes(Activity activity, Context context, int reportesDe) {
+    public AsyncReportes(Activity activity, Context context, int tipoDeReporteABuscar) {
         this.activity = activity;
         this.context = context;
-        this.reportesDe = reportesDe;
+        this.tipoDeReporteABuscar = tipoDeReporteABuscar;
         bd = new DataBaseAppRed(context);
         intentReportes = new Intent(context, ReportesActivity.class);
     }
 
     @Override
     protected Boolean doInBackground(String... strings) {
-        if(reportesDe == 1) {
+        if(tipoDeReporteABuscar == 1) {
             APIService apiService = null;
             try {
                 apiService = RetrofitClient.getClient(context).create(APIService.class);
@@ -55,16 +56,33 @@ public class AsyncReportes extends AsyncTask<String, Void, Boolean> {
             }
             return false;
         }
-        else{
+        else if (tipoDeReporteABuscar == 2){
+            APIService apiService = null;
+            try {
+                apiService = RetrofitClient.getClient(context).create(APIService.class);
+                getReportesCiudadanometroServidor(apiService);
+                Thread.sleep(5000); // Tiempo que esperara la conexion
+                return true;
+            } catch (CertificateException | IOException | KeyStoreException | NoSuchAlgorithmException | KeyManagementException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }else
+        {
             return false;
         }
     }
+
+
 
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
         if(aBoolean)
         {
+            Bundle parametros = new Bundle();               // Ocupada para enviar valor al LoadPageActivity.
+            parametros.putInt("enviadode", tipoDeReporteABuscar);
+            intentReportes.putExtras(parametros);
             activity.startActivity(intentReportes);
             if(hayReportes)
             {
@@ -76,23 +94,44 @@ public class AsyncReportes extends AsyncTask<String, Void, Boolean> {
         }
     }
 
-    public void getReportesEncuestasServidor(APIService apiService)
-    {
-        final ArrayList<trdd_reporte>[] reportesdelServidor = new ArrayList[]{new ArrayList<trdd_reporte>()};
+    private void getReportesCiudadanometroServidor(APIService apiService) {
+        final ArrayList<trdd_reporte>[] reportesDelServidor = new ArrayList[]{new ArrayList<trdd_reporte>()};
         Call<List<trdd_reporte>> call = null;
-        call = apiService.getReportesEncuestas();
+        call = apiService.getReportesCiudadanometro();
         call.enqueue(new Callback<List<trdd_reporte>>() {
             @Override
             public void onResponse(Call<List<trdd_reporte>> call, Response<List<trdd_reporte>> response) {
-                reportesdelServidor[0] = (ArrayList<trdd_reporte>) response.body();
-                insertarReportesBD(reportesdelServidor[0]);
-                reportesaMostrar = bd.cargarReportesBDR(reportesDe);
+                reportesDelServidor[0] = (ArrayList<trdd_reporte>) response.body();
+                insertarReportesBD(reportesDelServidor[0]);
+                reportesaMostrar = bd.cargarReportesBDR(tipoDeReporteABuscar);
                 //Toast.makeText(context, "Mostrando reportes del servidor: "+reportesaMostrar.get(0).getDescripcion(), Toast.LENGTH_LONG).show();
                 hayReportes = true;
             }
             @Override
             public void onFailure(Call<List<trdd_reporte>> call, Throwable t) {
-                reportesaMostrar = bd.cargarReportesBDR(reportesDe);
+                reportesaMostrar = bd.cargarReportesBDR(tipoDeReporteABuscar);
+                hayReportes = false;
+            }
+        });
+    }
+
+    public void getReportesEncuestasServidor(APIService apiService)
+    {
+        final ArrayList<trdd_reporte>[] reportesDelServidor = new ArrayList[]{new ArrayList<trdd_reporte>()};
+        Call<List<trdd_reporte>> call = null;
+        call = apiService.getReportesEncuestas();
+        call.enqueue(new Callback<List<trdd_reporte>>() {
+            @Override
+            public void onResponse(Call<List<trdd_reporte>> call, Response<List<trdd_reporte>> response) {
+                reportesDelServidor[0] = (ArrayList<trdd_reporte>) response.body();
+                insertarReportesBD(reportesDelServidor[0]);
+                reportesaMostrar = bd.cargarReportesBDR(tipoDeReporteABuscar);
+                //Toast.makeText(context, "Mostrando reportes del servidor: "+reportesaMostrar.get(0).getDescripcion(), Toast.LENGTH_LONG).show();
+                hayReportes = true;
+            }
+            @Override
+            public void onFailure(Call<List<trdd_reporte>> call, Throwable t) {
+                reportesaMostrar = bd.cargarReportesBDR(tipoDeReporteABuscar);
                 hayReportes = false;
             }
         });
@@ -100,7 +139,7 @@ public class AsyncReportes extends AsyncTask<String, Void, Boolean> {
 
     public void insertarReportesBD(ArrayList<trdd_reporte> eventosServicioBD)
     {
-        bd.deleteReportes(reportesDe);
+        bd.deleteReportes(tipoDeReporteABuscar);
         for(int nEvento = 0 ; nEvento < eventosServicioBD.size() ; nEvento++)
         {
             trdd_reporte eventoNube = eventosServicioBD.get(nEvento);

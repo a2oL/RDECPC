@@ -20,13 +20,10 @@
 
     <Button
         android:id="@+id/button_Logout_InfoEncuesta"
-        android:layout_width="58dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/ic_btn_home"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_Encuesta_InfoEncuesta"
-        app:layout_constraintHorizontal_bias="0.141"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:background="@drawable/ic_btn_salir"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
@@ -99,22 +96,21 @@ Mediante la Encuesta Infantil y Juvenil del Mes se ofrece una forma sencilla de 
 
     <ImageView
         android:id="@+id/imageView_Encuesta_InfoEncuesta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="280dp"
-        app:layout_constraintEnd_toStartOf="@+id/button_Regresar_InfoEncuesta"
+        android:layout_width="307dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/button_Logout_InfoEncuesta"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toEndOf="@+id/button_Regresar_InfoEncuesta"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_logo_encuesta_infantil" />
+        app:srcCompat="@drawable/ic_logo_encuesta_infantil_grande" />
 
     <Button
         android:id="@+id/button_Regresar_InfoEncuesta"
-        android:layout_width="58dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
         android:background="@drawable/ic_btn_flecha_atras"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
