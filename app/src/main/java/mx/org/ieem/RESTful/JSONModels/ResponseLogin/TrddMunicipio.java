@@ -1,12 +1,12 @@
+
 package mx.org.ieem.RESTful.JSONModels.ResponseLogin;
 
+import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
-public class trdd_municipio {
+public class TrddMunicipio implements Serializable
+{
 
     @SerializedName("id_municipio")
     @Expose
@@ -14,6 +14,7 @@ public class trdd_municipio {
     @SerializedName("nombre")
     @Expose
     private String nombre;
+    private final static long serialVersionUID = -1044186113439099777L;
 
     public Integer getIdMunicipio() {
         return idMunicipio;
@@ -31,9 +32,4 @@ public class trdd_municipio {
         this.nombre = nombre;
     }
 
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-        //return "{\"id_municipio\":\""+idMunicipio+"\",\"nombre\":\""+nombre+"\"}";
-        //return new ToStringBuilder(this).append("idMunicipio", idMunicipio).append("nombre", nombre).toString();
-    }
 }

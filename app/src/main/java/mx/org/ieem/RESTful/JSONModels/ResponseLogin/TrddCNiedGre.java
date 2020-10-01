@@ -1,12 +1,12 @@
+
 package mx.org.ieem.RESTful.JSONModels.ResponseLogin;
 
+import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
-public class trdd_ej_nied_gres {
+public class TrddCNiedGre implements Serializable
+{
 
     @SerializedName("id_nivel_educativo")
     @Expose
@@ -14,6 +14,7 @@ public class trdd_ej_nied_gres {
     @SerializedName("id_grado_escolar")
     @Expose
     private Integer idGradoEscolar;
+    private final static long serialVersionUID = 5943757960454784715L;
 
     public Integer getIdNivelEducativo() {
         return idNivelEducativo;
@@ -29,12 +30,6 @@ public class trdd_ej_nied_gres {
 
     public void setIdGradoEscolar(Integer idGradoEscolar) {
         this.idGradoEscolar = idGradoEscolar;
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-        //return new ToStringBuilder(this).append("idNivelEducativo", idNivelEducativo).append("idGradoEscolar", idGradoEscolar).toString();
     }
 
 }

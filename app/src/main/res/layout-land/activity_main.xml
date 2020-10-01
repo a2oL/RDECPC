@@ -8,12 +8,10 @@
 
     <Button
         android:id="@+id/button_EncuestasCiudadano_Main"
-        android:layout_width="151dp"
-        android:layout_height="68dp"
+        android:layout_width="231dp"
+        android:layout_height="114dp"
         android:layout_marginTop="184dp"
-        android:backgroundTint="#673AB7"
-        android:text="Encuestas y Ciudadanometro"
-        android:textColor="#FFFFFF"
+        android:background="@drawable/ic_btn_mecanismos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

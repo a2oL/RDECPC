@@ -1,12 +1,12 @@
+
 package mx.org.ieem.RESTful.JSONModels.ResponseLogin;
 
+import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
-public class trdd_ej_pregunta {
+public class TrddEjPreguntaRespuestum implements Serializable
+{
 
     @SerializedName("id_anio")
     @Expose
@@ -20,9 +20,16 @@ public class trdd_ej_pregunta {
     @SerializedName("id_indicador")
     @Expose
     private Integer idIndicador;
-    @SerializedName("pregunta")
+    @SerializedName("id_respuesta")
     @Expose
-    private String pregunta;
+    private Integer idRespuesta;
+    @SerializedName("id_estatus_respuesta")
+    @Expose
+    private Integer idEstatusRespuesta;
+    @SerializedName("respuesta")
+    @Expose
+    private String respuesta;
+    private final static long serialVersionUID = -1219122543359699276L;
 
     public String getIdAnio() {
         return idAnio;
@@ -56,18 +63,28 @@ public class trdd_ej_pregunta {
         this.idIndicador = idIndicador;
     }
 
-    public String getPregunta() {
-        return pregunta;
+    public Integer getIdRespuesta() {
+        return idRespuesta;
     }
 
-    public void setPregunta(String pregunta) {
-        this.pregunta = pregunta;
+    public void setIdRespuesta(Integer idRespuesta) {
+        this.idRespuesta = idRespuesta;
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-        //return new ToStringBuilder(this).append("idAnio", idAnio).append("idMes", idMes).append("idNivelEducativo", idNivelEducativo).append("idIndicador", idIndicador).append("pregunta", pregunta).toString();
+    public Integer getIdEstatusRespuesta() {
+        return idEstatusRespuesta;
+    }
+
+    public void setIdEstatusRespuesta(Integer idEstatusRespuesta) {
+        this.idEstatusRespuesta = idEstatusRespuesta;
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
     }
 
 }

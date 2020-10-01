@@ -1,12 +1,12 @@
+
 package mx.org.ieem.RESTful.JSONModels.ResponseLogin;
 
+import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
-public class trdd_ej_anio_mes {
+public class TrddEjAnioMe implements Serializable
+{
 
     @SerializedName("id_anio")
     @Expose
@@ -14,6 +14,7 @@ public class trdd_ej_anio_mes {
     @SerializedName("id_mes")
     @Expose
     private Integer idMes;
+    private final static long serialVersionUID = -7783655593885725374L;
 
     public String getIdAnio() {
         return idAnio;
@@ -31,9 +32,4 @@ public class trdd_ej_anio_mes {
         this.idMes = idMes;
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-        //return new ToStringBuilder(this).append("idAnio", idAnio).append("idMes", idMes).toString();
-    }
 }

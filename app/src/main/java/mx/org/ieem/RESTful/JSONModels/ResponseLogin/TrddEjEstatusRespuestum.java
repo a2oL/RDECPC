@@ -1,12 +1,12 @@
+
 package mx.org.ieem.RESTful.JSONModels.ResponseLogin;
 
+import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
-public class trdd_ej_estatus_respuesta {
+public class TrddEjEstatusRespuestum implements Serializable
+{
 
     @SerializedName("id_estatus_respuesta")
     @Expose
@@ -14,6 +14,7 @@ public class trdd_ej_estatus_respuesta {
     @SerializedName("nombre")
     @Expose
     private String nombre;
+    private final static long serialVersionUID = 4769162972939595870L;
 
     public Integer getIdEstatusRespuesta() {
         return idEstatusRespuesta;
@@ -31,9 +32,4 @@ public class trdd_ej_estatus_respuesta {
         this.nombre = nombre;
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-        //return new ToStringBuilder(this).append("idEstatusRespuesta", idEstatusRespuesta).append("nombre", nombre).toString();
-    }
 }

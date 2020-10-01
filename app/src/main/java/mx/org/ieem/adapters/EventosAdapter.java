@@ -23,8 +23,6 @@ public class EventosAdapter extends BaseAdapter
     Context context;                                                    // Contiene el contexto de PreguntasEncuestaActivity.
     LayoutInflater inflter;
     AppCompatActivity appCompatActivity;                    // Utilizado para poder cargar elementos de la ui.
-
-
     public EventosAdapter(Context context) {
         this.context = context;
         inflter = (LayoutInflater.from(context));

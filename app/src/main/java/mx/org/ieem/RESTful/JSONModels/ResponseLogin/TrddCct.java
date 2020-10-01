@@ -1,12 +1,12 @@
+
 package mx.org.ieem.RESTful.JSONModels.ResponseLogin;
 
+import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
-public class trdd_cct {
+public class TrddCct implements Serializable
+{
 
     @SerializedName("id_cct")
     @Expose
@@ -26,6 +26,7 @@ public class trdd_cct {
     @SerializedName("id_nivel_educativo")
     @Expose
     private String idNivelEducativo;
+    private final static long serialVersionUID = 7372882886266778305L;
 
     public String getIdCct() {
         return idCct;
@@ -73,13 +74,6 @@ public class trdd_cct {
 
     public void setIdNivelEducativo(String idNivelEducativo) {
         this.idNivelEducativo = idNivelEducativo;
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-        //return "\"trdd_cct\":{\"id_cct\":\""+idCct+"\",\"domicilio\":\""+domicilio+"\",\"email\":\""+email+"\",\"nombre\":\""+nombre+"\",\"id_municipio\":\""+idMunicipio+"\",\"id_nivel_educativo\":\""+idNivelEducativo+"\"}";
-        //return new ToStringBuilder(this).append("idCct", idCct).append("domicilio", domicilio).append("email", email).append("nombre", nombre).append("idMunicipio", idMunicipio).append("idNivelEducativo", idNivelEducativo).toString();
     }
 
 }

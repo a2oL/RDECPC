@@ -94,10 +94,10 @@
 
     <Button
         android:id="@+id/btn_Reportes_Ciudadanometro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="138dp"
+        android:layout_height="49dp"
         android:layout_marginTop="384dp"
-        android:text="Reportes"
+        android:background="@drawable/ic_btn_reportes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toEndOf="@+id/button_Iniciar_Ciudadanometro"

@@ -1,275 +1,300 @@
+
 package mx.org.ieem.RESTful.JSONModels.ResponseLogin;
 
+import java.io.Serializable;
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
-import java.util.List;
-
-public class ResponseLogin {
+public class ResponseLogin implements Serializable
+{
 
     @SerializedName("trdd_cct")
     @Expose
-    private trdd_cct trddcct;
+    private TrddCct trddCct;
     @SerializedName("trdd_municipio")
     @Expose
-    private List<trdd_municipio> trddmunicipio = null;
+    private List<TrddMunicipio> trddMunicipio = null;
     @SerializedName("trdd_nivel_educativo")
     @Expose
-    private List<trdd_nivel_educativo> trddniveleducativo = null;
+    private List<TrddNivelEducativo> trddNivelEducativo = null;
+    @SerializedName("trdd_estatus_concurso_o_evento")
+    @Expose
+    private List<TrddEstatusConcursoOEvento> trddEstatusConcursoOEvento = null;
+    @SerializedName("trdd_estatus_reporte")
+    @Expose
+    private List<TrddEstatusReporte> trddEstatusReporte = null;
+    @SerializedName("trdd_tipo_reporte")
+    @Expose
+    private List<TrddTipoReporte> trddTipoReporte = null;
     @SerializedName("trdd_ej_anio")
     @Expose
-    private List<trdd_ej_anio> trddejanio = null;
+    private List<TrddEjAnio> trddEjAnio = null;
     @SerializedName("trdd_ej_mes")
     @Expose
-    private List<trdd_ej_mes> trddejmes = null;
+    private List<TrddEjMe> trddEjMes = null;
     @SerializedName("trdd_ej_anio_mes")
     @Expose
-    private List<trdd_ej_anio_mes> trddejaniomes = null;
+    private List<TrddEjAnioMe> trddEjAnioMes = null;
     @SerializedName("trdd_ej_grado_escolar")
     @Expose
-    private List<trdd_ej_grado_escolar> trddejgradoescolar = null;
+    private List<TrddEjGradoEscolar> trddEjGradoEscolar = null;
     @SerializedName("trdd_ej_nied_gres")
     @Expose
-    private List<trdd_ej_nied_gres> trddejniedgres = null;
+    private List<TrddEjNiedGre> trddEjNiedGres = null;
     @SerializedName("trdd_ej_indicador")
     @Expose
-    private List<trdd_ej_indicador> trddejindicador = null;
+    private List<TrddEjIndicador> trddEjIndicador = null;
     @SerializedName("trdd_ej_nivedu_ind")
     @Expose
-    private List<trdd_ej_nivedu_ind> trddejniveduind = null;
+    private List<TrddEjNiveduInd> trddEjNiveduInd = null;
     @SerializedName("trdd_ej_pregunta")
     @Expose
-    private List<trdd_ej_pregunta> trddEjPregunta = null;
+    private List<TrddEjPreguntum> trddEjPregunta = null;
     @SerializedName("trdd_ej_estatus_respuesta")
     @Expose
-    private List<trdd_ej_estatus_respuesta> trddEjEstatusRespuesta = null;
+    private List<TrddEjEstatusRespuestum> trddEjEstatusRespuesta = null;
     @SerializedName("trdd_ej_pregunta_respuesta")
     @Expose
-    private List<trdd_ej_pregunta_respuesta> trddEjPreguntaRespuesta = null;
+    private List<TrddEjPreguntaRespuestum> trddEjPreguntaRespuesta = null;
     @SerializedName("trdd_c_grado_escolar")
     @Expose
-    private List<trdd_c_grado_escolar> trddcgradoescolar = null;
+    private List<TrddCGradoEscolar> trddCGradoEscolar = null;
     @SerializedName("trdd_c_nied_gres")
     @Expose
-    private List<trdd_c_nied_gres> trddcniedgres = null;
+    private List<TrddCNiedGre> trddCNiedGres = null;
     @SerializedName("trdd_c_realizador")
     @Expose
-    private List<trdd_c_realizador> trddcrealizador = null;
+    private List<TrddCRealizador> trddCRealizador = null;
     @SerializedName("trdd_c_anio")
     @Expose
-    private List<trdd_c_anio> trddcanio = null;
+    private List<TrddCAnio> trddCAnio = null;
     @SerializedName("trdd_c_pregunta")
     @Expose
-    private List<trdd_c_pregunta> trddCPregunta = null;
+    private List<TrddCPreguntum> trddCPregunta = null;
     @SerializedName("trdd_c_estatus_respuesta")
     @Expose
-    private List<trdd_c_estatus_respuesta> trddCEstatusRespuesta = null;
+    private List<TrddCEstatusRespuestum> trddCEstatusRespuesta = null;
     @SerializedName("trdd_c_pregunta_respuesta")
     @Expose
-    private List<trdd_c_pregunta_respuesta> trddCPreguntaRespuesta = null;
+    private List<TrddCPreguntaRespuestum> trddCPreguntaRespuesta = null;
     @SerializedName("trdd_c_realicador_edad")
     @Expose
-    private List<trdd_c_realicador_edad> trddcrealicadoredad = null;
+    private List<TrddCRealicadorEdad> trddCRealicadorEdad = null;
     @SerializedName("trdd_c_realicador_genero")
     @Expose
-    private List<trdd_c_realicador_genero> trddcrealicadorgenero = null;
+    private List<TrddCRealicadorGenero> trddCRealicadorGenero = null;
     @SerializedName("trdd_c_realicador_escolaridad")
     @Expose
-    private List<trdd_c_realicador_escolaridad> trddcrealicadorescolaridad = null;
+    private List<TrddCRealicadorEscolaridad> trddCRealicadorEscolaridad = null;
+    private final static long serialVersionUID = 2433514689862641575L;
 
-    public trdd_cct getTrddcct() {
-        return trddcct;
+    public TrddCct getTrddCct() {
+        return trddCct;
     }
 
-    public void setTrddcct(trdd_cct trddcct) {
-        this.trddcct = trddcct;
+    public void setTrddCct(TrddCct trddCct) {
+        this.trddCct = trddCct;
     }
 
-    public List<trdd_municipio> getTrddmunicipio() {
-        return trddmunicipio;
+    public List<TrddMunicipio> getTrddMunicipio() {
+        return trddMunicipio;
     }
 
-    public void setTrddmunicipio(List<trdd_municipio> trddmunicipio) {
-        this.trddmunicipio = trddmunicipio;
+    public void setTrddMunicipio(List<TrddMunicipio> trddMunicipio) {
+        this.trddMunicipio = trddMunicipio;
     }
 
-    public List<trdd_nivel_educativo> getTrddniveleducativo() {
-        return trddniveleducativo;
+    public List<TrddNivelEducativo> getTrddNivelEducativo() {
+        return trddNivelEducativo;
     }
 
-    public void setTrddniveleducativo(List<trdd_nivel_educativo> trddniveleducativo) {
-        this.trddniveleducativo = trddniveleducativo;
+    public void setTrddNivelEducativo(List<TrddNivelEducativo> trddNivelEducativo) {
+        this.trddNivelEducativo = trddNivelEducativo;
     }
 
-    public List<trdd_ej_anio> getTrddejanio() {
-        return trddejanio;
+    public List<TrddEstatusConcursoOEvento> getTrddEstatusConcursoOEvento() {
+        return trddEstatusConcursoOEvento;
     }
 
-    public void setTrddejanio(List<trdd_ej_anio> trddejanio) {
-        this.trddejanio = trddejanio;
+    public void setTrddEstatusConcursoOEvento(List<TrddEstatusConcursoOEvento> trddEstatusConcursoOEvento) {
+        this.trddEstatusConcursoOEvento = trddEstatusConcursoOEvento;
     }
 
-    public List<trdd_ej_mes> getTrddejmes() {
-        return trddejmes;
+    public List<TrddEstatusReporte> getTrddEstatusReporte() {
+        return trddEstatusReporte;
     }
 
-    public void setTrddejmes(List<trdd_ej_mes> trddejmes) {
-        this.trddejmes = trddejmes;
+    public void setTrddEstatusReporte(List<TrddEstatusReporte> trddEstatusReporte) {
+        this.trddEstatusReporte = trddEstatusReporte;
     }
 
-    public List<trdd_ej_anio_mes> getTrddejaniomes() {
-        return trddejaniomes;
+    public List<TrddTipoReporte> getTrddTipoReporte() {
+        return trddTipoReporte;
     }
 
-    public void setTrddejaniomes(List<trdd_ej_anio_mes> trddejaniomes) {
-        this.trddejaniomes = trddejaniomes;
+    public void setTrddTipoReporte(List<TrddTipoReporte> trddTipoReporte) {
+        this.trddTipoReporte = trddTipoReporte;
     }
 
-    public List<trdd_ej_grado_escolar> getTrddejgradoescolar() {
-        return trddejgradoescolar;
+    public List<TrddEjAnio> getTrddEjAnio() {
+        return trddEjAnio;
     }
 
-    public void setTrddejgradoescolar(List<trdd_ej_grado_escolar> trddejgradoescolar) {
-        this.trddejgradoescolar = trddejgradoescolar;
+    public void setTrddEjAnio(List<TrddEjAnio> trddEjAnio) {
+        this.trddEjAnio = trddEjAnio;
     }
 
-    public List<trdd_ej_nied_gres> getTrddejniedgres() {
-        return trddejniedgres;
+    public List<TrddEjMe> getTrddEjMes() {
+        return trddEjMes;
     }
 
-    public void setTrddejniedgres(List<trdd_ej_nied_gres> trddejniedgres) {
-        this.trddejniedgres = trddejniedgres;
+    public void setTrddEjMes(List<TrddEjMe> trddEjMes) {
+        this.trddEjMes = trddEjMes;
     }
 
-    public List<trdd_ej_indicador> getTrddejindicador() {
-        return trddejindicador;
+    public List<TrddEjAnioMe> getTrddEjAnioMes() {
+        return trddEjAnioMes;
     }
 
-    public void setTrddejindicador(List<trdd_ej_indicador> trddejindicador) {
-        this.trddejindicador = trddejindicador;
+    public void setTrddEjAnioMes(List<TrddEjAnioMe> trddEjAnioMes) {
+        this.trddEjAnioMes = trddEjAnioMes;
     }
 
-    public List<trdd_ej_nivedu_ind> getTrddejniveduind() {
-        return trddejniveduind;
+    public List<TrddEjGradoEscolar> getTrddEjGradoEscolar() {
+        return trddEjGradoEscolar;
     }
 
-    public void setTrddejniveduind(List<trdd_ej_nivedu_ind> trddejniveduind) {
-        this.trddejniveduind = trddejniveduind;
+    public void setTrddEjGradoEscolar(List<TrddEjGradoEscolar> trddEjGradoEscolar) {
+        this.trddEjGradoEscolar = trddEjGradoEscolar;
     }
 
-    public List<trdd_ej_pregunta> getTrddEjPregunta() {
+    public List<TrddEjNiedGre> getTrddEjNiedGres() {
+        return trddEjNiedGres;
+    }
+
+    public void setTrddEjNiedGres(List<TrddEjNiedGre> trddEjNiedGres) {
+        this.trddEjNiedGres = trddEjNiedGres;
+    }
+
+    public List<TrddEjIndicador> getTrddEjIndicador() {
+        return trddEjIndicador;
+    }
+
+    public void setTrddEjIndicador(List<TrddEjIndicador> trddEjIndicador) {
+        this.trddEjIndicador = trddEjIndicador;
+    }
+
+    public List<TrddEjNiveduInd> getTrddEjNiveduInd() {
+        return trddEjNiveduInd;
+    }
+
+    public void setTrddEjNiveduInd(List<TrddEjNiveduInd> trddEjNiveduInd) {
+        this.trddEjNiveduInd = trddEjNiveduInd;
+    }
+
+    public List<TrddEjPreguntum> getTrddEjPregunta() {
         return trddEjPregunta;
     }
 
-    public void setTrddEjPregunta(List<trdd_ej_pregunta> trddEjPregunta) {
+    public void setTrddEjPregunta(List<TrddEjPreguntum> trddEjPregunta) {
         this.trddEjPregunta = trddEjPregunta;
     }
 
-    public List<trdd_ej_estatus_respuesta> getTrddEjEstatusRespuesta() {
+    public List<TrddEjEstatusRespuestum> getTrddEjEstatusRespuesta() {
         return trddEjEstatusRespuesta;
     }
 
-    public void setTrddEjEstatusRespuesta(List<trdd_ej_estatus_respuesta> trddEjEstatusRespuesta) {
+    public void setTrddEjEstatusRespuesta(List<TrddEjEstatusRespuestum> trddEjEstatusRespuesta) {
         this.trddEjEstatusRespuesta = trddEjEstatusRespuesta;
     }
 
-    public List<trdd_ej_pregunta_respuesta> getTrddEjPreguntaRespuesta() {
+    public List<TrddEjPreguntaRespuestum> getTrddEjPreguntaRespuesta() {
         return trddEjPreguntaRespuesta;
     }
 
-    public void setTrddEjPreguntaRespuesta(List<trdd_ej_pregunta_respuesta> trddEjPreguntaRespuesta) {
+    public void setTrddEjPreguntaRespuesta(List<TrddEjPreguntaRespuestum> trddEjPreguntaRespuesta) {
         this.trddEjPreguntaRespuesta = trddEjPreguntaRespuesta;
     }
 
-    public List<trdd_c_grado_escolar> getTrddcgradoescolar() {
-        return trddcgradoescolar;
+    public List<TrddCGradoEscolar> getTrddCGradoEscolar() {
+        return trddCGradoEscolar;
     }
 
-    public void setTrddcgradoescolar(List<trdd_c_grado_escolar> trddcgradoescolar) {
-        this.trddcgradoescolar = trddcgradoescolar;
+    public void setTrddCGradoEscolar(List<TrddCGradoEscolar> trddCGradoEscolar) {
+        this.trddCGradoEscolar = trddCGradoEscolar;
     }
 
-    public List<trdd_c_nied_gres> getTrddcniedgres() {
-        return trddcniedgres;
+    public List<TrddCNiedGre> getTrddCNiedGres() {
+        return trddCNiedGres;
     }
 
-    public void setTrddcniedgres(List<trdd_c_nied_gres> trddcniedgres) {
-        this.trddcniedgres = trddcniedgres;
+    public void setTrddCNiedGres(List<TrddCNiedGre> trddCNiedGres) {
+        this.trddCNiedGres = trddCNiedGres;
     }
 
-    public List<trdd_c_realizador> getTrddcrealizador() {
-        return trddcrealizador;
+    public List<TrddCRealizador> getTrddCRealizador() {
+        return trddCRealizador;
     }
 
-    public void setTrddcrealizador(List<trdd_c_realizador> trddcrealizador) {
-        this.trddcrealizador = trddcrealizador;
+    public void setTrddCRealizador(List<TrddCRealizador> trddCRealizador) {
+        this.trddCRealizador = trddCRealizador;
     }
 
-    public List<trdd_c_anio> getTrddcanio() {
-        return trddcanio;
+    public List<TrddCAnio> getTrddCAnio() {
+        return trddCAnio;
     }
 
-    public void setTrddcanio(List<trdd_c_anio> trddcanio) {
-        this.trddcanio = trddcanio;
+    public void setTrddCAnio(List<TrddCAnio> trddCAnio) {
+        this.trddCAnio = trddCAnio;
     }
 
-    public List<trdd_c_pregunta> getTrddCPregunta() {
+    public List<TrddCPreguntum> getTrddCPregunta() {
         return trddCPregunta;
     }
 
-    public void setTrddCPregunta(List<trdd_c_pregunta> trddCPregunta) {
+    public void setTrddCPregunta(List<TrddCPreguntum> trddCPregunta) {
         this.trddCPregunta = trddCPregunta;
     }
 
-    public List<trdd_c_estatus_respuesta> getTrddCEstatusRespuesta() {
+    public List<TrddCEstatusRespuestum> getTrddCEstatusRespuesta() {
         return trddCEstatusRespuesta;
     }
 
-    public void setTrddCEstatusRespuesta(List<trdd_c_estatus_respuesta> trddCEstatusRespuesta) {
+    public void setTrddCEstatusRespuesta(List<TrddCEstatusRespuestum> trddCEstatusRespuesta) {
         this.trddCEstatusRespuesta = trddCEstatusRespuesta;
     }
 
-    public List<trdd_c_pregunta_respuesta> getTrddCPreguntaRespuesta() {
+    public List<TrddCPreguntaRespuestum> getTrddCPreguntaRespuesta() {
         return trddCPreguntaRespuesta;
     }
 
-    public void setTrddCPreguntaRespuesta(List<trdd_c_pregunta_respuesta> trddCPreguntaRespuesta) {
+    public void setTrddCPreguntaRespuesta(List<TrddCPreguntaRespuestum> trddCPreguntaRespuesta) {
         this.trddCPreguntaRespuesta = trddCPreguntaRespuesta;
     }
 
-    public List<trdd_c_realicador_edad> getTrddcrealicadoredad() {
-        return trddcrealicadoredad;
+    public List<TrddCRealicadorEdad> getTrddCRealicadorEdad() {
+        return trddCRealicadorEdad;
     }
 
-    public void setTrddcrealicadoredad(List<trdd_c_realicador_edad> trddcrealicadoredad) {
-        this.trddcrealicadoredad = trddcrealicadoredad;
+    public void setTrddCRealicadorEdad(List<TrddCRealicadorEdad> trddCRealicadorEdad) {
+        this.trddCRealicadorEdad = trddCRealicadorEdad;
     }
 
-    public List<trdd_c_realicador_genero> getTrddcrealicadorgenero() {
-        return trddcrealicadorgenero;
+    public List<TrddCRealicadorGenero> getTrddCRealicadorGenero() {
+        return trddCRealicadorGenero;
     }
 
-    public void setTrddcrealicadorgenero(List<trdd_c_realicador_genero> trddcrealicadorgenero) {
-        this.trddcrealicadorgenero = trddcrealicadorgenero;
+    public void setTrddCRealicadorGenero(List<TrddCRealicadorGenero> trddCRealicadorGenero) {
+        this.trddCRealicadorGenero = trddCRealicadorGenero;
     }
 
-    public List<trdd_c_realicador_escolaridad> getTrddcrealicadorescolaridad() {
-        return trddcrealicadorescolaridad;
+    public List<TrddCRealicadorEscolaridad> getTrddCRealicadorEscolaridad() {
+        return trddCRealicadorEscolaridad;
     }
 
-    public void setTrddcrealicadorescolaridad(List<trdd_c_realicador_escolaridad> trddcrealicadorescolaridad) {
-        this.trddcrealicadorescolaridad = trddcrealicadorescolaridad;
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-        //return new ReflectionToStringBuilder(this, new RecursiveToStringStyle()).toString();
-        //return "{"+trddcct.toString()+",\"trdd_municipio\":"+trddmunicipio.toString()+",\"trdd_nivel_educativo\":"+trddniveleducativo.toString()+"}";
-        //return new ToStringBuilder(this).append(trddcct).append("\"trdd_municipio\"",trddmunicipio).append(trddniveleducativo).append(trddejanio).append(trddejmes).append(trddejaniomes).append(trddejgradoescolar).append(trddejniedgres).append(trddejindicador).append(trddejniveduind).append(trddEjPregunta).append(trddEjEstatusRespuesta).append(trddEjPreguntaRespuesta).append(trddcgradoescolar).append(trddcniedgres).append(trddcrealizador).append(trddcanio).append(trddCPregunta).append(trddCEstatusRespuesta).append(trddCPreguntaRespuesta).append(trddcrealicadoredad).append(trddcrealicadorgenero).append(trddcrealicadorescolaridad).toString();
+    public void setTrddCRealicadorEscolaridad(List<TrddCRealicadorEscolaridad> trddCRealicadorEscolaridad) {
+        this.trddCRealicadorEscolaridad = trddCRealicadorEscolaridad;
     }
 
 }
